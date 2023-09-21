@@ -16,6 +16,11 @@ public class MainActivity extends AppCompatActivity {
         Button startButton = findViewById(R.id.startbutton);
         Button exitButton = findViewById(R.id.exitbutton);
 
+        // insert next screen
+        // startButton.setOnClickListener(v -> {
+            // Intent game = new Intent()
+        // });
+
         exitButton.setOnClickListener(v -> {
             Intent exit = new Intent(Intent.ACTION_MAIN);
             exit.addCategory(Intent.CATEGORY_HOME);
