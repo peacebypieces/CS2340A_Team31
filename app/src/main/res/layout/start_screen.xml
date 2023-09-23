@@ -4,35 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GameStartActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
+        android:id="@+id/startTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="sans-serif-black"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
         android:text="@string/Cosmic_Crawlers"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#BBBB69"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/startbutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/startbutton"
         android:layout_width="124dp"
         android:layout_height="69dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="-900dp"
         android:layout_marginEnd="160dp"
         android:text="@string/start"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/exitbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/startTitle" />
 
     <Button
         android:id="@+id/exitbutton"
@@ -40,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginEnd="160dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/exit"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
