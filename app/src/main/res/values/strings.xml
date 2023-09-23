@@ -20,4 +20,6 @@
     <string name="Medium">Medium</string>
     <string name="Easy">Easy</string>
     <string name="Cosmic_Crawlers">Cosmic Crawlers</string>
+    <string name='lose'>You Lose!</string>
+    <string name="win">You Win!</string>
 </resources>
