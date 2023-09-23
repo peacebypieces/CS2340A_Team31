@@ -2,9 +2,7 @@ package com.example.cs2340a_team31;
 
 public class Player {
     private float x,y;
-
     public float health;
-
     public Player(String difficulty){
 
         this.x = 0;
