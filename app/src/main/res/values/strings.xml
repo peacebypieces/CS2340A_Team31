@@ -1,5 +1,23 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CS2340A_Team31</string>
     <string name="start">Start</string>
     <string name="exit">Quit</string>
+    <string name="textview">TextView</string>
+    <string name="push_hint_text" />
+    <string name="top_descriptor" />
+    <string name="sprite1" />
+    <string name="sprite2" />
+    <string name="sprite3" />
+    <string name="char1" tools:ignore="Typos">char1</string>
+    <string name="char3">char3</string>
+    <string name="char2">char2</string>
+    <string name="Configuration">Configuration</string>
+    <string name="name">Name</string>
+    <string name="Char3">Char 3</string>
+    <string name="Char2">Char 2</string>
+    <string name="Char1">Char 1</string>
+    <string name="Hard">Hard</string>
+    <string name="Medium">Medium</string>
+    <string name="Easy">Easy</string>
+    <string name="Cosmic_Crawlers">Cosmic Crawlers</string>
 </resources>
