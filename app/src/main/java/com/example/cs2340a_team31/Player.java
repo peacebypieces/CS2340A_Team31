@@ -24,7 +24,7 @@ public class Player {
      * Name: getPlayer()
      * @return the instance of the player
      */
-    public static Player getPlayer(){
+    public static Player getPlayer() {
         if (player == null) {
             synchronized (Player.class) {
                 if (player == null) {

@@ -13,7 +13,7 @@
         android:fontFamily="sans-serif-black"
         android:shadowColor="#000000"
         android:shadowRadius="5"
-        android:text="game configuration"
+        android:text="@string/config_screen_title"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#BBBB69"
@@ -28,7 +28,6 @@
     <EditText
         android:id="@+id/nameInput"
         android:layout_width="258dp"
-        android:labelFor="@id/nameInput"
         android:layout_height="80dp"
         android:autofillHints=""
         android:ems="10"
@@ -89,19 +88,19 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="black" />
+            android:text="@string/char1name" />
 
         <RadioButton
             android:id="@+id/char2"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="green" />
+            android:text="@string/char2name" />
 
         <RadioButton
             android:id="@+id/char3"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:text="pink" />
+            android:text="@string/char3name" />
     </RadioGroup>
 
     <RadioGroup

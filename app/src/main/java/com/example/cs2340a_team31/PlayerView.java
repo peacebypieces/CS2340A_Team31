@@ -2,12 +2,13 @@ package com.example.cs2340a_team31;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 
 public class PlayerView extends View {
-    private float x, y;
+    private float x;
+    private float y;
 
-    public PlayerView(Context context, float x, float y){
+    // TODO fix to include given imageView
+    public PlayerView(Context context, float x, float y) {
         super(context);
         this.x = x;
         this.y = y;
