@@ -16,9 +16,9 @@ public class GameConfigActivity extends AppCompatActivity {
     private EditText playerNameEditText;
     private RadioGroup difficultyRadioGroup;
     private RadioGroup characterRadioGroup;
-    private double startingHealth = 0.0;
-    private double enemyDamage = 0.0;
-    private String selectedCharacter = "";
+    private int startingHealth = 0;
+    private int enemyDamage = 0;
+    private String selectedCharacter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,37 +28,35 @@ public class GameConfigActivity extends AppCompatActivity {
         Button startButton = findViewById(R.id.startbutton2);
         difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
         characterRadioGroup = findViewById(R.id.characterRadioGroup);
-        this.startingHealth = 100.0;
-        this.enemyDamage = 20.0;
-        this.selectedCharacter = "Character 1";
+        this.startingHealth = 100;
+        this.enemyDamage = 20;
 
-        ImageView imageView = findViewById(R.id.imageView);
-        imageView.bringToFront();
         startButton.setOnClickListener(v -> {
             String playerName = playerNameEditText.getText().toString().trim();
 
-            int selectedRadioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
-            RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
-
-            int selectedCharacterId = characterRadioGroup.getCheckedRadioButtonId();
-            RadioButton selectedCharacterRadioButton = findViewById(selectedCharacterId);
-
             if (!playerName.isEmpty()) {
-                if (selectedRadioButton.getId() == R.id.radioMedium) {
+                if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radioMedium) {
                     startingHealth = 80;
                     enemyDamage = 25;
-                } else if (selectedRadioButton.getId() == R.id.radioHard) {
+                } else if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radioHard) {
                     startingHealth = 60;
                     enemyDamage = 30;
                 }
-                selectedCharacter = selectedCharacterRadioButton.getText().toString();
+
+                if (characterRadioGroup.getCheckedRadioButtonId() == R.id.char1) {
+                    selectedCharacter = "char1";
+                } else if (characterRadioGroup.getCheckedRadioButtonId() == R.id.char2) {
+                    selectedCharacter = "char2";
+                } else {
+                    selectedCharacter = "char3";
+                }
+
                 Intent intent = new Intent(GameConfigActivity.this, GameActivity.class);
                 intent.putExtra("PLAYER_NAME", playerName);
                 intent.putExtra("STARTING_HEALTH", startingHealth);
                 intent.putExtra("ENEMY_DAMAGE", enemyDamage);
                 intent.putExtra("SELECTED_CHARACTER", selectedCharacter);
                 startActivity(intent);
-                finish();
             } else {
                 // Player's name is empty or only contains whitespaces
                 Toast.makeText(GameConfigActivity.this, "Please enter a valid name", Toast.LENGTH_SHORT).show();

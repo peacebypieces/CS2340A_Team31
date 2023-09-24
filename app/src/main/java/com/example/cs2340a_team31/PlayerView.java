@@ -1,9 +1,14 @@
 package com.example.cs2340a_team31;
 
-public class PlayerView {
+import android.content.Context;
+import android.view.View;
+import android.widget.ImageView;
+
+public class PlayerView extends View {
     private float x, y;
 
-    public PlayerView(float x, float y){
+    public PlayerView(Context context, float x, float y){
+        super(context);
         this.x = x;
         this.y = y;
     }
