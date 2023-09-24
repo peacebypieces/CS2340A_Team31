@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>10.12.2</checkstyleVersion>
+    <checkstyleVersion>10.3.4</checkstyleVersion>
     <scanScope>JavaOnly</scanScope>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds" />
@@ -9,6 +9,7 @@
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="06884f3a-dd6d-40c7-af09-fcdb608fc402" type="PROJECT_RELATIVE" scope="All" description="Main Checkstyle">$PROJECT_DIR$/../../College/Fall 2023/Objects and Design/CS-checkstyle.xml</ConfigurationLocation>
       </list>
     </option>
   </component>

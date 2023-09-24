@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class GameStartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         // insert next screen
         startButton.setOnClickListener(v -> {
-            Intent game = new Intent(MainActivity.this, GameConfig.class);
+            Intent game = new Intent(GameStartActivity.this, GameConfigActivity.class);
             startActivity(game);
             finish();
         });

@@ -5,18 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/configTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="sans-serif-black"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
+        android:text="@string/config_screen_title"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#BBBB69"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nameInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="258dp"
+        android:layout_height="80dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/configTitle" />
 
     <RadioGroup
         android:id="@+id/difficultyRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="293dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="275dp"
         android:layout_marginBottom="294dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/nameInput">
 
         <RadioButton
             android:id="@+id/radioEasy"
@@ -40,127 +71,85 @@
 
     <RadioGroup
         android:id="@+id/characterRadioGroup"
-        android:layout_width="261dp"
-        android:layout_height="144dp"
-        android:layout_marginTop="571dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="275dp"
+        android:layout_marginBottom="200dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toEndOf="@id/difficultyRadioGroup"
+        app:layout_constraintTop_toBottomOf="@id/nameInput">
 
         <RadioButton
             android:id="@+id/char1"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/Char1" />
+            android:checked="true"
+            android:text="@string/char1name" />
 
         <RadioButton
             android:id="@+id/char2"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/Char2" />
+            android:text="@string/char2name" />
 
         <RadioButton
             android:id="@+id/char3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Char3" />
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="@string/char3name" />
     </RadioGroup>
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="258dp"
-        android:labelFor="@id/editTextText"
-        android:layout_height="80dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="190dp"
-        android:layout_marginEnd="101dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="text"
-        android:text="@string/name"
+    <RadioGroup
+        android:id="@+id/characterImageRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="275dp"
+        android:layout_marginBottom="350dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/difficultyRadioGroup"
+        app:layout_constraintTop_toBottomOf="@id/nameInput">
+
+        <ImageView
+            android:id="@+id/characterImg1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="char1pic"
+            android:src="@drawable/char1"  />
+
+        <ImageView
+            android:id="@+id/characterImg2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="char2pic"
+            android:src="@drawable/char2" />
+
+        <ImageView
+            android:id="@+id/characterImg3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="char3pic"
+            android:src="@drawable/char3" />
+    </RadioGroup>
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/startbutton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="630dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="158dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/Configuration"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="76dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="483dp"
-        android:layout_marginEnd="299dp"
-        android:layout_marginBottom="178dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="visible"
-        android:contentDescription="@string/char1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/ic_launcher_background" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="76dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="483dp"
-        android:layout_marginEnd="171dp"
-        android:layout_marginBottom="178dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/char2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/ic_launcher_background" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="76dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="292dp"
-        android:layout_marginTop="483dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="178dp"
-        android:contentDescription="@string/char3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintVertical_bias="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
