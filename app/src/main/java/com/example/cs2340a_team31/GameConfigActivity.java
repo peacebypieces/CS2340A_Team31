@@ -15,6 +15,7 @@ public class GameConfigActivity extends AppCompatActivity {
     private RadioGroup characterRadioGroup;
     private int startingHealth = 0;
     private int enemyDamage = 0;
+    private int score = 0;
     private String selectedCharacter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class GameConfigActivity extends AppCompatActivity {
                 intent.putExtra("STARTING_HEALTH", startingHealth);
                 intent.putExtra("ENEMY_DAMAGE", enemyDamage);
                 intent.putExtra("SELECTED_CHARACTER", selectedCharacter);
+                intent.putExtra("SCORE", score);
                 startActivity(intent);
             } else {
                 // Player's name is empty or only contains whitespaces

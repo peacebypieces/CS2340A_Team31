@@ -38,12 +38,15 @@ public class GameActivity extends AppCompatActivity {
         String playername = getIntent().getStringExtra("PLAYER_NAME");
         int startHealth  = getIntent().getIntExtra("STARTING_HEALTH", 100);
         int enemydamage = getIntent().getIntExtra("ENEMY_DAMAGE", 20);
+        int scoreValue = getIntent().getIntExtra("SCORE",100);
+
         String selectedCharacter = getIntent().getStringExtra("SELECTED_CHARACTER");
 
         // Updates components on game screen
         playerName.append(playername);
-        playerHealth.append("" + startHealth);
-        enemyDamage.append("" + enemydamage);
+        playerHealth.append(" " + startHealth);
+        enemyDamage.append(" " + enemydamage);
+        score.append(" " + scoreValue);
         switch (selectedCharacter) {
         case "char1":
             playerIcon.setImageDrawable(getResources().
