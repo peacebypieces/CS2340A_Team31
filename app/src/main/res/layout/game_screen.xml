@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/endbutton"
@@ -67,4 +67,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerHealthDisplay"
         app:layout_constraintVertical_bias="0.075" />
+
+    <TextView
+        android:id="@+id/scoreDisplay"
+        android:layout_width="75dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="76dp"
+        android:text="@string/score"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enemyDamageDisplay"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
