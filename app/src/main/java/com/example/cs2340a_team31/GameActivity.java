@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
         TextView playerName = findViewById(R.id.playerName);
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
+        TextView score = findViewById(R.id.scoreDisplay);
         //TODO Change this to use playerView variable instead
         ImageView playerIcon = findViewById(R.id.playerCharacter);
 
