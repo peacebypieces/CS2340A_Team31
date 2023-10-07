@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameActivity extends AppCompatActivity {
     private PlayerView playerView;
     private Player player;
@@ -17,6 +20,7 @@ public class GameActivity extends AppCompatActivity {
 
     private int screenWidth;
     private int screenHeight;
+    private Timer scoreTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
         String playername = getIntent().getStringExtra("PLAYER_NAME");
         int startHealth  = getIntent().getIntExtra("STARTING_HEALTH", 100);
         int enemydamage = getIntent().getIntExtra("ENEMY_DAMAGE", 20);
-        int scoreValue = getIntent().getIntExtra("SCORE",100);
+        final int[] scoreValue = {getIntent().getIntExtra("SCORE", 100)};
 
         String selectedCharacter = getIntent().getStringExtra("SELECTED_CHARACTER");
 
@@ -46,7 +50,6 @@ public class GameActivity extends AppCompatActivity {
         playerName.append(playername);
         playerHealth.append(" " + startHealth);
         enemyDamage.append(" " + enemydamage);
-        score.append(" " + scoreValue);
         switch (selectedCharacter) {
         case "char1":
             playerIcon.setImageDrawable(getResources().
@@ -67,5 +70,25 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+
+        // score timer that counts down
+        scoreTimer = new Timer();
+        scoreTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(scoreValue[0] > 0){
+                            scoreValue[0]--;
+                        }
+
+                        score.setText("Score: " + scoreValue[0]);
+                    }
+                });
+            }
+        }, 0, 1000); // Check every second
     }
 }
