@@ -32,6 +32,9 @@ public class GameConfigActivity extends AppCompatActivity {
         this.startingHealth = 100;
         this.enemyDamage = 20;
 
+        // easy mode score
+        score = 100;
+
         startButton.setOnClickListener(v -> {
             String playerName = playerNameEditText.getText().toString().trim();
 
@@ -40,9 +43,11 @@ public class GameConfigActivity extends AppCompatActivity {
                 if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radioMedium) {
                     startingHealth = 80;
                     enemyDamage = 25;
+                    score = 200;
                 } else if (difficultyRadioGroup.getCheckedRadioButtonId() == R.id.radioHard) {
                     startingHealth = 60;
                     enemyDamage = 30;
+                    score = 300;
                 }
 
                 // sets selected character
