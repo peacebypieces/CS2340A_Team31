@@ -37,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
         TextView score = findViewById(R.id.scoreDisplay);
         //TODO Change this to use playerView variable instead
         ImageView playerIcon = findViewById(R.id.playerCharacter);
+        Button restartButton = findViewById(R.id.restartBtn);
 
         // Retrieves saved variables from config screen
         String playername = getIntent().getStringExtra("PLAYER_NAME");
@@ -70,7 +71,6 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
 
         // score timer that counts down
         scoreTimer = new Timer();
