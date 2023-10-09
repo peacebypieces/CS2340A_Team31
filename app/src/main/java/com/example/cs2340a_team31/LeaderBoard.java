@@ -1,12 +1,14 @@
 package com.example.cs2340a_team31;
+import java.util.Arrays;
 
 public class LeaderBoard {
     private volatile static LeaderBoard leaderboard;
 
-    private Player[] players;
+    private LeaderBoardPlayer[] players;
 
-    private LeaderBoard() {}
-
+    private LeaderBoard() {
+        players = new LeaderBoardPlayer[10];
+    }
 
     public static LeaderBoard getleaderboard() {
         if (leaderboard == null) {
@@ -18,6 +20,7 @@ public class LeaderBoard {
         }
         return leaderboard;
     }
+
 
 
 
