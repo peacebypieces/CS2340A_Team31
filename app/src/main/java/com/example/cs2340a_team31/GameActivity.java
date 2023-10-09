@@ -65,10 +65,5 @@ public class GameActivity extends AppCompatActivity {
             finish();
         });
 
-        restartButton.setOnClickListener(v -> {
-            Intent intent = new Intent(GameActivity.this, GameStartActivity.class);
-            startActivity(intent);
-            finish();
-        });
     }
 }
