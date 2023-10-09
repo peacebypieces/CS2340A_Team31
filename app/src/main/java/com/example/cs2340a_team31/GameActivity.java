@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameActivity extends AppCompatActivity {
     private PlayerView playerView;
     private Player player;
@@ -17,6 +20,7 @@ public class GameActivity extends AppCompatActivity {
 
     private int screenWidth;
     private int screenHeight;
+    private Timer scoreTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
         TextView playerName = findViewById(R.id.playerName);
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
+        TextView score = findViewById(R.id.scoreDisplay);
         //TODO Change this to use playerView variable instead
         ImageView playerIcon = findViewById(R.id.playerCharacter);
         Button restartButton = findViewById(R.id.restartBtn);
@@ -38,12 +43,14 @@ public class GameActivity extends AppCompatActivity {
         String playername = getIntent().getStringExtra("PLAYER_NAME");
         int startHealth  = getIntent().getIntExtra("STARTING_HEALTH", 100);
         int enemydamage = getIntent().getIntExtra("ENEMY_DAMAGE", 20);
+        final int[] scoreValue = {getIntent().getIntExtra("SCORE", 100)};
+
         String selectedCharacter = getIntent().getStringExtra("SELECTED_CHARACTER");
 
         // Updates components on game screen
         playerName.append(playername);
-        playerHealth.append("" + startHealth);
-        enemyDamage.append("" + enemydamage);
+        playerHealth.append(" " + startHealth);
+        enemyDamage.append(" " + enemydamage);
         switch (selectedCharacter) {
         case "char1":
             playerIcon.setImageDrawable(getResources().
@@ -65,5 +72,23 @@ public class GameActivity extends AppCompatActivity {
             finish();
         });
 
+        // score timer that counts down
+        scoreTimer = new Timer();
+        scoreTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(scoreValue[0] > 0){
+                            scoreValue[0]--;
+                        }
+
+                        score.setText("Score: " + scoreValue[0]);
+                    }
+                });
+            }
+        }, 0, 1000); // Check every second
     }
 }
