@@ -1,11 +1,16 @@
 package com.example.cs2340a_team31;
 
-public class LeaderBoardPlayer implements Comparable<LeaderBoardPlayer>{
+import org.w3c.dom.CDATASection;
+
+public class LeaderBoardPlayer {
     private String name;
     private String date_time;
     private int score;
 
-    public LeaderBoardPlayer() {
+    public LeaderBoardPlayer(String name, String date_time, int score) {
+        this.name = name;
+        this.date_time = date_time;
+        this.score = score;
     }
 
 
@@ -33,8 +38,11 @@ public class LeaderBoardPlayer implements Comparable<LeaderBoardPlayer>{
         return score;
     }
 
+    /*
     @Override
     public int compareTo(LeaderBoardPlayer leaderBoardPlayer) {
         return (leaderBoardPlayer.getScore());
     }
+
+     */
 }

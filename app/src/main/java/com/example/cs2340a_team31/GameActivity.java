@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -69,6 +71,13 @@ public class GameActivity extends AppCompatActivity {
         endButton.setOnClickListener(v -> {
             Intent intent = new Intent(GameActivity.this, GameEndActivity.class);
             startActivity(intent);
+            String currentTime = Calendar.getInstance().getTime().toString();
+            Player player = Player.getPlayer();
+            player.setName(playername);
+            player.setScore(scoreValue[0]);
+            player.setDate_time(currentTime);
+
+
             finish();
         });
 
