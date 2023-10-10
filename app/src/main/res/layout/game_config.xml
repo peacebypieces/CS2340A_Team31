@@ -122,21 +122,21 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="char1pic"
-            android:src="@drawable/char1"  />
+            android:src="@drawable/astrokitty_green"  />
 
         <ImageView
             android:id="@+id/characterImg2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="char2pic"
-            android:src="@drawable/char2" />
+            android:src="@drawable/astrokitty_blue" />
 
         <ImageView
             android:id="@+id/characterImg3"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="char3pic"
-            android:src="@drawable/char3" />
+            android:src="@drawable/astrokitty_pink" />
     </RadioGroup>
 
 
