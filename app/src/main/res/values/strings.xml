@@ -22,8 +22,8 @@
     <string name="Cosmic_Crawlers">Cosmic Crawlers</string>
     <string name='lose'>You Lose!</string>
     <string name="win">You Win!</string>
-    <string name="char1name">black</string>
-    <string name="char2name">green</string>
+    <string name="char1name">green</string>
+    <string name="char2name">blue</string>
     <string name="char3name">pink</string>
     <string name="config_screen_title">game configuration</string>
     <string name="enemy_damage">Enemy Damage:</string>
