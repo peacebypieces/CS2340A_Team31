@@ -9,6 +9,10 @@ public class Player {
     private double health;
     private static Player player;
 
+    private String name;
+    private String date_time;
+    private int score;
+
     /*
      * @param x x-coordinate of player (default 0.0)
      * @param y y-coordinate of player (default 0.0)
@@ -73,5 +77,29 @@ public class Player {
 
     public void setX(double x) {
         this.x = x;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setDate_time(String date) {
+        this.date_time = date;
+    }
+
+    public String getDate_time() {
+        return this.date_time;
     }
 }
