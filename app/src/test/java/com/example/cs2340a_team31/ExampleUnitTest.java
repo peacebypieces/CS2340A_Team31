@@ -16,14 +16,33 @@ import com.example.cs2340a_team31.views.GameConfigActivity;
  */
 public class ExampleUnitTest {
 
-    @Before
-    public void setup(){
-        Player player = Player.getPlayer();
+    private Player player;
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyPlayerName() {
+        String name = " ";
+        player = Player.getPlayer();
+
+        // check that name is not valid
+        assertFalse(player.validateName(name));
+
+        // set name to empty space
+        player.setName(name);
     }
 
     @Test
-    public void validatePlayerName(){
-        player.setName
+    public void testValidName() {
+        String name = "Spaceman";
+        player = Player.getPlayer();
+
+        // check that name is valid
+        assertTrue(player.validateName(name));
+
+        // set name to empty space
+        player.setName(name);
+        
+        // see if names are equal
+        assertEquals(name, player.getName());
     }
 
 }
