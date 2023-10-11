@@ -80,7 +80,7 @@ public class Player {
     }
 
     public void setName(String name) {
-        if(validateName(name)){
+        if (validateName(name)) {
             this.name = name;
         } else {
             throw new IllegalArgumentException("Name cannot be blank");
