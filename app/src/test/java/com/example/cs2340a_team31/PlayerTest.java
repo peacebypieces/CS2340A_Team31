@@ -1,26 +1,44 @@
 package com.example.cs2340a_team31;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 import com.example.cs2340a_team31.model.Player;
-import com.example.cs2340a_team31.views.GameActivity;
-import com.example.cs2340a_team31.views.GameConfigActivity;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-public class ExampleUnitTest {
+public class PlayerTest {
 
     private Player player;
 
+    @Test
+    public void testInitialization() {
+        player = Player.getPlayer();
+
+        assertEquals(0.0,player.getX(),0);
+        assertEquals(0.0,player.getY(),0);
+        assertEquals(5.0,player.getMovementSpeed(),0);
+    }
+
+    @Test
+    public void testSetterAndGetterMethods() {
+        player = Player.getPlayer();
+
+        player.setX(5.0);
+        assertEquals(5.0, player.getX(),0);
+
+        player.setY(23.0);
+        assertEquals(23.0,player.getY(),0);
+
+        player.setScore(43);
+        assertEquals(43,player.getScore(),0);
+
+        player.setName("IAmAName");
+        assertEquals("IAmAName",player.getName());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testEmptyPlayerName() {
-        String name = " ";
+        String name = "       ";
         player = Player.getPlayer();
 
         // check that name is not valid
@@ -38,9 +56,9 @@ public class ExampleUnitTest {
         // check that name is valid
         assertTrue(player.validateName(name));
 
-        // set name to empty space
+        // set name
         player.setName(name);
-        
+
         // see if names are equal
         assertEquals(name, player.getName());
     }
