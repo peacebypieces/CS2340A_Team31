@@ -1,4 +1,4 @@
-package com.example.cs2340a_team31;
+package com.example.cs2340a_team31.viewmodels;
 
 import android.content.Context;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.example.cs2340a_team31;
+package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cs2340a_team31.R;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Comparator;
-
+import com.example.cs2340a_team31.model.*;
+import com.example.cs2340a_team31.viewmodels.*;
 public class GameEndActivity extends AppCompatActivity {
 
         @Override

@@ -1,4 +1,4 @@
-package com.example.cs2340a_team31;
+package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import com.example.cs2340a_team31.model.*;
+import com.example.cs2340a_team31.viewmodels.*;
+import com.example.cs2340a_team31.R;
 
 public class GameActivity extends AppCompatActivity {
     private PlayerView playerView;
