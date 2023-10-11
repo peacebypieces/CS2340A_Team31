@@ -1,10 +1,11 @@
-package com.example.cs2340a_team31;
+package com.example.cs2340a_team31.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import com.example.cs2340a_team31.R;
 
 public class GameStartActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.cs2340a_team31;
+package com.example.cs2340a_team31.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import com.example.cs2340a_team31.R;
 
 public class GameConfigActivity extends AppCompatActivity {
 

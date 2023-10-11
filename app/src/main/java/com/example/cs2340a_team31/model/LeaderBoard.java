@@ -1,4 +1,4 @@
-package com.example.cs2340a_team31;
+package com.example.cs2340a_team31.model;
 import java.util.Arrays;
 import android.util.Log;
 
