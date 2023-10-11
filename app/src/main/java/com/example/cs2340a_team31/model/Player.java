@@ -80,7 +80,11 @@ public class Player {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(validateName(name)){
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Name cannot be blank");
+        }
     }
 
     public String getName() {
@@ -101,5 +105,16 @@ public class Player {
 
     public String getDate_time() {
         return this.date_time;
+    }
+
+    public boolean validateName(String name) {
+        name = name.trim();
+
+        if(name.isEmpty()){
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
