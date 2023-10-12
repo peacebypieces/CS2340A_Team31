@@ -3,7 +3,7 @@ import java.util.Arrays;
 import android.util.Log;
 
 public class LeaderBoard {
-    private volatile static LeaderBoard leaderboard;
+    private static volatile LeaderBoard leaderboard;
 
     private LeaderBoardPlayer[] players;
     private int playerSize;
@@ -27,8 +27,8 @@ public class LeaderBoard {
     public void add(LeaderBoardPlayer player) {
         if (this.playerSize + 1 > players.length) { //over flow
             LeaderBoardPlayer[] temp = new LeaderBoardPlayer[this.players.length + 1];
-            for (int i =0 ; i < this.players.length; i++) {
-                temp [i] = players[i];
+            for (int i = 0; i < this.players.length; i++) {
+                temp[i] = players[i];
             }
             players = temp;
         }

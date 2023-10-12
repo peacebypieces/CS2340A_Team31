@@ -12,7 +12,7 @@ public class Player {
     private static Player player;
 
     private String name;
-    private String date_time;
+    private String dateTime;
     private int score;
     private String difficulty;
 
@@ -87,7 +87,7 @@ public class Player {
 
     public void setName(String name) {
         if (validateName(name)) {
-            this.name = name.replaceAll("\\s","");
+            this.name = name.replaceAll("\\s", "");
         } else {
             throw new IllegalArgumentException("Name cannot be blank");
         }
@@ -105,27 +105,22 @@ public class Player {
         return this.score;
     }
 
-    public void setDate_time(String date) {
-        this.date_time = date;
+    public void setDateTime(String date) {
+        this.dateTime = date;
     }
 
-    public String getDate_time() {
-        return this.date_time;
+    public String getDateTime() {
+        return this.dateTime;
     }
 
     public boolean validateName(String name) {
         name = name.trim();
 
-        if(name.isEmpty() || name == null){
-            return false;
-        } else {
-            return true;
-        }
-
+        return !name.isEmpty() && name != null;
     }
 
     public void setDifficulty(String name) {
-        if (name.equals("Easy")){
+        if (name.equals("Easy")) {
             this.health = 100;
             this.score = 100;
         } else if (name.equals("Medium")) {
