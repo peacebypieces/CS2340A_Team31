@@ -1,5 +1,7 @@
 package com.example.cs2340a_team31.model;
 
+import java.util.NoSuchElementException;
+
 public class Player {
 
     private double x;
@@ -12,6 +14,7 @@ public class Player {
     private String name;
     private String date_time;
     private int score;
+    private String difficulty;
 
     /*
      * @param x x-coordinate of player (default 0.0)
@@ -62,6 +65,9 @@ public class Player {
     public void setHealth(double health) {
         this.health = health;
     }
+    public double getHealth() {
+        return this.health;
+    }
 
     public double getY() {
         return y;
@@ -81,7 +87,7 @@ public class Player {
 
     public void setName(String name) {
         if (validateName(name)) {
-            this.name = name;
+            this.name = name.replaceAll("\\s","");
         } else {
             throw new IllegalArgumentException("Name cannot be blank");
         }
@@ -110,11 +116,26 @@ public class Player {
     public boolean validateName(String name) {
         name = name.trim();
 
-        if(name.isEmpty()){
+        if(name.isEmpty() || name == null){
             return false;
         } else {
             return true;
         }
 
+    }
+
+    public void setDifficulty(String name) {
+        if (name.equals("Easy")){
+            this.health = 100;
+            this.score = 100;
+        } else if (name.equals("Medium")) {
+            this.health = 80;
+            this.score = 200;
+        } else if (name.equals("Hard")) {
+            this.health = 60;
+            this.score = 300;
+        } else {
+            throw new NoSuchElementException("Difficulty wasn't given");
+        }
     }
 }
