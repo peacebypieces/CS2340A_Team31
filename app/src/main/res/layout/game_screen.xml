@@ -5,7 +5,7 @@
     android:id="@+id/gameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context=".views.GameActivity">
 
     <View
         android:id="@+id/gameView"
@@ -19,18 +19,18 @@
         android:id="@+id/endbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
         android:layout_marginBottom="16dp"
-        android:text="End Game"
+        android:text="Next Room"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/playerCharacter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="100dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@+id/endbutton"
@@ -43,6 +43,8 @@
         android:layout_height="wrap_content"
         android:text="@string/player_name"
         android:textSize="25sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/playerCharacter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +57,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/health"
         android:textSize="25sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -66,6 +70,8 @@
         android:layout_height="wrap_content"
         android:text="@string/enemy_damage"
         android:textSize="25sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerHealthDisplay"
@@ -78,6 +84,8 @@
         android:layout_marginTop="76dp"
         android:text="@string/score"
         android:textSize="25sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

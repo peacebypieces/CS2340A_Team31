@@ -1,21 +1,19 @@
 package com.example.cs2340a_team31.model;
 
-import org.w3c.dom.CDATASection;
-
 public class LeaderBoardPlayer {
     private String name;
-    private String date_time;
+    private String dateTime;
     private int score;
 
-    public LeaderBoardPlayer(String name, String date_time, int score) {
+    public LeaderBoardPlayer(String name, String dateTime, int score) {
         this.name = name;
-        this.date_time = date_time;
+        this.dateTime = dateTime;
         this.score = score;
     }
 
 
-    public void setDate_time(String date_time) {
-        this.date_time = date_time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setName(String name) {
@@ -26,8 +24,8 @@ public class LeaderBoardPlayer {
         this.score = score;
     }
 
-    public String getDate_time() {
-        return date_time;
+    public String getDateTime() {
+        return dateTime;
     }
 
     public String getName() {
