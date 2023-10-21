@@ -46,7 +46,9 @@ public class GameActivity extends AppCompatActivity {
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         TextView score = findViewById(R.id.scoreDisplay);
-        ImageView playerIcon = findViewById(R.id.playerCharacter);
+
+        playerView = new PlayerView(this,(float) 200, (float) 200);
+        gameLayout.addView(playerView);
 
         // Retrieves saved variables from config screen
         String playername = getIntent().getStringExtra("PLAYER_NAME");
@@ -62,15 +64,15 @@ public class GameActivity extends AppCompatActivity {
         enemyDamage.append(" " + enemydamage);
         switch (selectedCharacter) {
         case "char1":
-            playerIcon.setImageDrawable(getResources().
+            playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_green, getApplicationContext().getTheme()));
             break;
         case "char2":
-            playerIcon.setImageDrawable(getResources().
+            playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_blue, getApplicationContext().getTheme()));
             break;
         default:
-            playerIcon.setImageDrawable(getResources().
+            playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_pink, getApplicationContext().getTheme()));
         }
 
@@ -127,26 +129,27 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+        Player player = Player.getPlayer();
+
         playerX = (float) player.getX();
         playerY = (float) player.getY();
 
         switch(keyCode){
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                playerX -= 50;
+                playerX -= player.getMovementSpeed();
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                playerX += 50;
+                playerX += player.getMovementSpeed();
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                playerY += 50;
+                playerY += player.getMovementSpeed();
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                playerY -= 50;
+                playerY -= player.getMovementSpeed();
                 break;
         }
 
         playerView.updatePosition(playerX,playerY);
-        // add collision check here
         return true;
     }
 }
