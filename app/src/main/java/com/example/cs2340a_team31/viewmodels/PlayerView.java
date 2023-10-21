@@ -18,8 +18,8 @@ public class PlayerView extends AppCompatImageView {
     }
 
     public void updatePosition(float newX, float newY) {
-        x = newX;
-        y = newY;
+        this.setX(newX);
+        this.setY(newY);
     }
     public float getX() {
         return x;
