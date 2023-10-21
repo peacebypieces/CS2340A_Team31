@@ -137,19 +137,24 @@ public class GameActivity extends AppCompatActivity {
         switch(keyCode){
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 playerX -= player.getMovementSpeed();
+                player.setX(playerX);
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
                 playerX += player.getMovementSpeed();
+                player.setX(playerX);
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 playerY += player.getMovementSpeed();
+                player.setY(playerY);
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
                 playerY -= player.getMovementSpeed();
+                player.setY(playerY);
                 break;
         }
 
         playerView.updatePosition(playerX,playerY);
         return true;
     }
+
 }
