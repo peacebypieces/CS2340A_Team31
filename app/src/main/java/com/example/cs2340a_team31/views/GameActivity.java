@@ -2,6 +2,7 @@ package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.example.cs2340a_team31.viewmodels.*;
 import com.example.cs2340a_team31.R;
 
 public class GameActivity extends AppCompatActivity {
+    private float playerX;
+    private float playerY;
     private PlayerView playerView;
     private Player player;
 
@@ -43,8 +46,9 @@ public class GameActivity extends AppCompatActivity {
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         TextView score = findViewById(R.id.scoreDisplay);
-        //TODO Change this to use playerView variable instead
-        ImageView playerIcon = findViewById(R.id.playerCharacter);
+
+        playerView = new PlayerView(this,(float) 200, (float) 200);
+        gameLayout.addView(playerView);
 
         // Retrieves saved variables from config screen
         String playername = getIntent().getStringExtra("PLAYER_NAME");
@@ -60,15 +64,15 @@ public class GameActivity extends AppCompatActivity {
         enemyDamage.append(" " + enemydamage);
         switch (selectedCharacter) {
         case "char1":
-            playerIcon.setImageDrawable(getResources().
+            playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_green, getApplicationContext().getTheme()));
             break;
         case "char2":
-            playerIcon.setImageDrawable(getResources().
+            playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_blue, getApplicationContext().getTheme()));
             break;
         default:
-            playerIcon.setImageDrawable(getResources().
+            playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_pink, getApplicationContext().getTheme()));
         }
 
@@ -121,4 +125,37 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 0, 1000); // Check every second
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        Player player = Player.getPlayer();
+
+        playerX = (float) player.getX();
+        playerY = (float) player.getY();
+
+        switch(keyCode){
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                playerX -= player.getMovementSpeed();
+                player.setX(playerX);
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                playerX += player.getMovementSpeed();
+                player.setX(playerX);
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                playerY += player.getMovementSpeed();
+                player.setY(playerY);
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                playerY -= player.getMovementSpeed();
+                player.setY(playerY);
+                break;
+        }
+
+        playerView.updatePosition(playerX,playerY);
+        // check collisions here
+        return true;
+    }
+
 }

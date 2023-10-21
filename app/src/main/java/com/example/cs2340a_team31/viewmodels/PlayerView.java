@@ -3,7 +3,10 @@ package com.example.cs2340a_team31.viewmodels;
 import android.content.Context;
 import android.view.View;
 
-public class PlayerView extends View {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+
+public class PlayerView extends AppCompatImageView {
     private float x;
     private float y;
 
@@ -15,8 +18,8 @@ public class PlayerView extends View {
     }
 
     public void updatePosition(float newX, float newY) {
-        x = newX;
-        y = newY;
+        this.setX(newX);
+        this.setY(newY);
     }
     public float getX() {
         return x;
