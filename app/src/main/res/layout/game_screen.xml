@@ -27,25 +27,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageView
-        android:id="@+id/playerCharacter"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="100dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toTopOf="@+id/endbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/playerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/player_name"
-        android:textSize="25sp"
         android:textColor="@color/red"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/playerCharacter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
