@@ -2,6 +2,7 @@ package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.example.cs2340a_team31.viewmodels.*;
 import com.example.cs2340a_team31.R;
 
 public class GameActivity extends AppCompatActivity {
+    private float playerX;
+    private float playerY;
     private PlayerView playerView;
     private Player player;
 
@@ -43,7 +46,6 @@ public class GameActivity extends AppCompatActivity {
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         TextView score = findViewById(R.id.scoreDisplay);
-        //TODO Change this to use playerView variable instead
         ImageView playerIcon = findViewById(R.id.playerCharacter);
 
         // Retrieves saved variables from config screen
@@ -120,5 +122,31 @@ public class GameActivity extends AppCompatActivity {
                 });
             }
         }, 0, 1000); // Check every second
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        playerX = (float) player.getX();
+        playerY = (float) player.getY();
+
+        switch(keyCode){
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                playerX -= 50;
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                playerX += 50;
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                playerY += 50;
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                playerY -= 50;
+                break;
+        }
+
+        playerView.updatePosition(playerX,playerY);
+        // add collision check here
+        return true;
     }
 }
