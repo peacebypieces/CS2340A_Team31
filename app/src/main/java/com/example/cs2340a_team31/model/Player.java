@@ -24,7 +24,7 @@ public class Player {
     private Player() {
         this.x = 0.0;
         this.y = 0.0;
-        this.movementSpeed = 5.0;
+        this.movementSpeed = 25.0;
     }
 
     /*
