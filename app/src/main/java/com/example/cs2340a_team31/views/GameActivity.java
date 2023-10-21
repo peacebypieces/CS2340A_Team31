@@ -154,6 +154,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         playerView.updatePosition(playerX,playerY);
+        // check collisions here
         return true;
     }
 
