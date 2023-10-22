@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +13,14 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.example.cs2340a_team31.model.*;
+import com.example.cs2340a_team31.strategypattern.MoveDownStrategy;
+import com.example.cs2340a_team31.strategypattern.MoveLeftStrategy;
+import com.example.cs2340a_team31.strategypattern.MoveRightStrategy;
+import com.example.cs2340a_team31.strategypattern.MoveUpStrategy;
 import com.example.cs2340a_team31.viewmodels.*;
 import com.example.cs2340a_team31.R;
 
 public class GameActivity extends AppCompatActivity {
-    private float playerX;
-    private float playerY;
     private PlayerView playerView;
     private Player player;
 
@@ -38,8 +39,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_screen);
         gameLayout = findViewById(R.id.gameLayout);
         gameLayout.setBackgroundResource(R.drawable.room1);
-        //screenWidth = getResources().getDisplayMetrics().widthPixels;
-        //screenHeight = getResources().getDisplayMetrics().heightPixels;
+        screenWidth = getResources().getDisplayMetrics().widthPixels;
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
 
         Button endButton = findViewById(R.id.endbutton);
         TextView playerName = findViewById(R.id.playerName);
@@ -129,31 +130,25 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        Player player = Player.getPlayer();
-
-        playerX = (float) player.getX();
-        playerY = (float) player.getY();
+        player = Player.getPlayer();
 
         switch(keyCode){
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                playerX -= player.getMovementSpeed();
-                player.setX(playerX);
+                player.setMovementStrategy(new MoveLeftStrategy());
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                playerX += player.getMovementSpeed();
-                player.setX(playerX);
+                player.setMovementStrategy(new MoveRightStrategy());
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                playerY += player.getMovementSpeed();
-                player.setY(playerY);
+                player.setMovementStrategy(new MoveDownStrategy());
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                playerY -= player.getMovementSpeed();
-                player.setY(playerY);
+                player.setMovementStrategy(new MoveUpStrategy());
                 break;
         }
 
-        playerView.updatePosition(playerX,playerY);
+        player.move();
+        playerView.updatePosition((float) player.getX(),(float) player.getY());
         // check collisions here
         return true;
     }

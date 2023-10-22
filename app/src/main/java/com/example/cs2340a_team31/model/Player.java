@@ -1,8 +1,11 @@
 package com.example.cs2340a_team31.model;
 
+import com.example.cs2340a_team31.strategypattern.MovementStrategy;
+
 import java.util.NoSuchElementException;
 
 public class Player {
+    private MovementStrategy movementStrategy;
 
     private double x;
     private double y;
@@ -42,20 +45,14 @@ public class Player {
         return player;
     }
 
-    public void moveUp() {
-        setY(Math.max(0, getY() - movementSpeed));
+    public void setMovementStrategy(MovementStrategy strategy) {
+        this.movementStrategy = strategy;
     }
 
-    public void moveDown() {
-        setY(Math.min(getY() + movementSpeed, 720));
-    }
-
-    public void moveLeft() {
-        setX(Math.max(0, getX() - movementSpeed));
-    }
-
-    public void moveRight() {
-        setX(Math.min(getX() + movementSpeed, 720));
+    public void move() {
+        if (movementStrategy != null) {
+            movementStrategy.move();
+        }
     }
 
     public double getMovementSpeed() {
