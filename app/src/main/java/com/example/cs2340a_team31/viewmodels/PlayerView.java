@@ -4,22 +4,23 @@ import android.content.Context;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.example.cs2340a_team31.model.PlayerObserver;
 
-public class PlayerView extends AppCompatImageView {
+
+public class PlayerView implements PlayerObserver {
     private float x;
     private float y;
 
     // TODO fix to include given imageView
-    public PlayerView(Context context, float x, float y, String selectedCharacter) {
-        super(context);
-        this.x = x;
-        this.y = y;
+    public PlayerView() {
+        this.x = 0;
+        this.y = 0;
 
     }
 
-    public void updatePosition(float newX, float newY) {
-        this.setX(newX);
-        this.setY(newY);
+    public void onPlayerPositionChanged(float x, float y) {
+        this.x = x;
+        this.y =y;
     }
     public float getX() {
         return x;
