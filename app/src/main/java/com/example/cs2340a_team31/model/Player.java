@@ -1,6 +1,6 @@
 package com.example.cs2340a_team31.model;
 
-import com.example.cs2340a_team31.strategypattern.MovementStrategy;
+import com.example.cs2340a_team31.model.strategypattern.MovementStrategy;
 
 import java.util.NoSuchElementException;
 
@@ -9,6 +9,10 @@ public class Player {
 
     private double x;
     private double y;
+
+    private double width;
+
+    private double height;
     private double movementSpeed;
 
     private double health;
@@ -27,6 +31,8 @@ public class Player {
     private Player() {
         this.x = 0.0;
         this.y = 0.0;
+        this.width = 0;
+        this.height = 0;
         this.movementSpeed = 25.0;
     }
 
@@ -49,9 +55,9 @@ public class Player {
         this.movementStrategy = strategy;
     }
 
-    public void move() {
+    public void move(float x) {
         if (movementStrategy != null) {
-            movementStrategy.move();
+            movementStrategy.move(x);
         }
     }
 
@@ -64,6 +70,16 @@ public class Player {
     }
     public double getHealth() {
         return this.health;
+    }
+
+    public void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setSize(double w, double h) {
+        this.width = w;
+        this.height = h;
     }
 
     public double getY() {
@@ -79,6 +95,22 @@ public class Player {
     }
 
     public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double y) {
+        this.y = y;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double x) {
         this.x = x;
     }
 
