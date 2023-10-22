@@ -2,10 +2,14 @@ package com.example.cs2340a_team31.model;
 
 import com.example.cs2340a_team31.model.strategypattern.MovementStrategy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Player {
+public class Player implements PlayerSubject {
     private MovementStrategy movementStrategy;
+
+    private List<PlayerObserver> observers = new ArrayList<>();
 
     private double x;
     private double y;
@@ -160,6 +164,27 @@ public class Player {
             this.score = 300;
         } else {
             throw new NoSuchElementException("Difficulty wasn't given");
+        }
+    }
+
+
+
+    // Other player-related methods and logic here...
+
+    @Override
+    public void addObserver(PlayerObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(PlayerObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (PlayerObserver observer : observers) {
+            observer.onPlayerPositionChanged((float) x, (float) y);
         }
     }
 }

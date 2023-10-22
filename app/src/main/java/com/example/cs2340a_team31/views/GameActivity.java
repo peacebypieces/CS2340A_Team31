@@ -167,8 +167,12 @@ public class GameActivity extends AppCompatActivity {
         Log.d("My app:", "doorW: " + door.getWidth());
         Log.d("My app:", "doorH: " + door.getHeight());
 
+        PlayerView playerview = new PlayerView();
+        player.addObserver(playerview); // Tracks the observer
         playerView.setX((float) player.getX());
         playerView.setY((float) player.getY());
+
+        player.notifyObservers();
 
         checkDoorCollision();
         // check collisions here
