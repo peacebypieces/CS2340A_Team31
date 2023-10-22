@@ -19,6 +19,7 @@ public class GameEndActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.end_screen);
 
+
         //declaring leaderboard Textviews
         TextView leaderBoard1 = findViewById(R.id.leaderBoard1);
         TextView leaderBoard2 = findViewById(R.id.leaderBoard2);
