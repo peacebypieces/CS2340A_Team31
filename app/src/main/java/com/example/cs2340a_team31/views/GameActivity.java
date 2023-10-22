@@ -58,6 +58,10 @@ public class GameActivity extends AppCompatActivity {
         gameView = findViewById(R.id.gameView);
         screenWidth = gameView.getResources().getDisplayMetrics().widthPixels;
         screenHeight = gameView.getResources().getDisplayMetrics().heightPixels;
+        Log.d("My app:", "Height: " + screenHeight);
+        Log.d("My app:", "Width: " + screenWidth);
+
+
 
         TextView playerName = findViewById(R.id.playerName);
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
