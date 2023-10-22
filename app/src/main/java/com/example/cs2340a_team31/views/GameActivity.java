@@ -13,6 +13,10 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.example.cs2340a_team31.model.*;
+import com.example.cs2340a_team31.strategypattern.MoveDownStrategy;
+import com.example.cs2340a_team31.strategypattern.MoveLeftStrategy;
+import com.example.cs2340a_team31.strategypattern.MoveRightStrategy;
+import com.example.cs2340a_team31.strategypattern.MoveUpStrategy;
 import com.example.cs2340a_team31.viewmodels.*;
 import com.example.cs2340a_team31.R;
 
@@ -130,19 +134,20 @@ public class GameActivity extends AppCompatActivity {
 
         switch(keyCode){
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                player.moveLeft();
+                player.setMovementStrategy(new MoveLeftStrategy());
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                player.moveRight(screenWidth);
+                player.setMovementStrategy(new MoveRightStrategy());
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                player.moveDown(screenHeight);
+                player.setMovementStrategy(new MoveDownStrategy());
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                player.moveUp();
+                player.setMovementStrategy(new MoveUpStrategy());
                 break;
         }
 
+        player.move();
         playerView.updatePosition((float) player.getX(),(float) player.getY());
         // check collisions here
         return true;
