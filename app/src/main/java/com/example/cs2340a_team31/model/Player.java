@@ -46,16 +46,16 @@ public class Player {
         setY(Math.max(0, getY() - movementSpeed));
     }
 
-    public void moveDown() {
-        setY(Math.min(getY() + movementSpeed, 720));
+    public void moveDown(int y) {
+        setY(Math.min(getY() + movementSpeed, y));
     }
 
     public void moveLeft() {
         setX(Math.max(0, getX() - movementSpeed));
     }
 
-    public void moveRight() {
-        setX(Math.min(getX() + movementSpeed, 720));
+    public void moveRight(int x) {
+        setX(Math.min(getX() + movementSpeed, x));
     }
 
     public double getMovementSpeed() {
