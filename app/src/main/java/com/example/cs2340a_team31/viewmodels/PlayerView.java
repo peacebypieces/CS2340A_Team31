@@ -1,9 +1,5 @@
 package com.example.cs2340a_team31.viewmodels;
 
-import android.content.Context;
-
-import androidx.appcompat.widget.AppCompatImageView;
-
 import com.example.cs2340a_team31.model.PlayerObserver;
 
 
@@ -20,7 +16,7 @@ public class PlayerView implements PlayerObserver {
 
     public void onPlayerPositionChanged(float x, float y) {
         this.x = x;
-        this.y =y;
+        this.y = y;
     }
     public float getX() {
         return x;
