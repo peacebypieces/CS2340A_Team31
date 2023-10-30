@@ -8,9 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340a_team31.R;
+import java.util.LinkedList;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import com.example.cs2340a_team31.model.*;
 public class GameEndActivity extends AppCompatActivity {
 
@@ -19,21 +18,13 @@ public class GameEndActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.end_screen);
 
-
-        //declaring leaderboard Textviews
-        TextView leaderBoard1 = findViewById(R.id.leaderBoard1);
-        TextView leaderBoard2 = findViewById(R.id.leaderBoard2);
-        TextView leaderBoard3 = findViewById(R.id.leaderBoard3);
-        TextView leaderBoard4 = findViewById(R.id.leaderBoard4);
-        TextView leaderBoard5 = findViewById(R.id.leaderBoard5);
-
         TextView[] textViews = new TextView[5];
 
-        textViews[0] = leaderBoard1;
-        textViews[1] = leaderBoard2;
-        textViews[2] = leaderBoard3;
-        textViews[3] = leaderBoard4;
-        textViews[4] = leaderBoard5;
+        textViews[0] = findViewById(R.id.leaderBoard1);
+        textViews[1] = findViewById(R.id.leaderBoard2);
+        textViews[2] = findViewById(R.id.leaderBoard3);
+        textViews[3] = findViewById(R.id.leaderBoard4);
+        textViews[4] = findViewById(R.id.leaderBoard5);
 
 
         //singletons
@@ -52,25 +43,15 @@ public class GameEndActivity extends AppCompatActivity {
         currentScore.setText("Current: " + "Name:" + lbPlayer.getName() + ", "
                                          + "Time:" + lbPlayer.getDateTime() + ", "
                                          + "Score:" + lbPlayer.getScore());
-        //sorts the array
-        Comparator<LeaderBoardPlayer> comparator = new Comparator<LeaderBoardPlayer>() {
-            public int compare(LeaderBoardPlayer p1, LeaderBoardPlayer p2) {
-                return (p2.getScore() - p1.getScore());
-            }
-        };
 
-        LeaderBoardPlayer[] temp = LeaderBoard.getleaderboard().getPlayers();
-        Arrays.sort(temp, comparator);
+        LinkedList<LeaderBoardPlayer> players = LeaderBoard.getleaderboard().getPlayers();
 
         //populating the play game data into textviews
         for (int i = 0; i < leaderBoard.getPlayerSize(); i++) {
-            if (i < 5) {
-                if ((temp[i] != null)) {
-                    textViews[i].setText((i  + 1) + ") " + "Name:" + temp[i].getName() + ", "
-                        + "Time:" + temp[i].getDateTime() + ", "
-                        + "Score:" + temp[i].getScore());
-                }
-            }
+            lbPlayer = players.get(i);
+            textViews[i].setText((i  + 1) + ") " + "Name:" + lbPlayer.getName() + ", "
+                    + "Time:" + lbPlayer.getDateTime() + ", "
+                    + "Score:" + lbPlayer.getScore());
         }
 
         Button restartButton = findViewById(R.id.restartBtn);

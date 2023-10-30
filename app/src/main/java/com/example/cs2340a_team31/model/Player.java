@@ -17,7 +17,8 @@ public class Player implements PlayerSubject {
     private double width;
 
     private double height;
-    private double movementSpeed;
+    private double movementSpeedX;
+    private double movementSpeedY;
 
     private double health;
     private static Player player;
@@ -37,7 +38,8 @@ public class Player implements PlayerSubject {
         this.y = 0.0;
         this.width = 0;
         this.height = 0;
-        this.movementSpeed = 25.0;
+        this.movementSpeedX = 25.0;
+        this.movementSpeedY = 25.0;
     }
 
     /*
@@ -65,8 +67,11 @@ public class Player implements PlayerSubject {
         }
     }
 
-    public double getMovementSpeed() {
-        return movementSpeed;
+    public double getMovementSpeedX() {
+        return movementSpeedX;
+    }
+    public double getMovementSpeedY() {
+        return movementSpeedY;
     }
 
     public void setHealth(double health) {
@@ -108,6 +113,11 @@ public class Player implements PlayerSubject {
 
     public void setHeight(double y) {
         this.y = y;
+    }
+
+    public void setMovementSpeed(double movementSpeedX, double movementSpeedY) {
+        this.movementSpeedX = movementSpeedX;
+        this.movementSpeedY = movementSpeedY;
     }
 
     public double getWidth() {

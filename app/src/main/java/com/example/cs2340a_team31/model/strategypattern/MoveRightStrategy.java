@@ -7,6 +7,6 @@ public class MoveRightStrategy implements MovementStrategy {
 
     public void move(float x) {
         Player player = Player.getPlayer();
-        player.setX(Math.min(player.getX() + player.getMovementSpeed(), x));
+        player.setX(Math.min(player.getX() + player.getMovementSpeedX(), x));
     }
 }

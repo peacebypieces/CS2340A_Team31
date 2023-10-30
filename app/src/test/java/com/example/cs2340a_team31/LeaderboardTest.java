@@ -36,7 +36,7 @@ public class LeaderboardTest {
         testLB.add(player);
 
         assertEquals(1,testLB.getPlayerSize());
-        assertEquals(player,testLB.getPlayers()[0]);
+        assertEquals(player,testLB.getPlayers().getFirst());
 
     }
 
