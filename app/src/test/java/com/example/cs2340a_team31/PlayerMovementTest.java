@@ -26,7 +26,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1135,player.getX(),0);
         assertEquals(482,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
     }
 
     //#2 Kenny Nguyen
@@ -41,7 +41,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveRightStrategy());
         float num = (float) (2220 - player.getWidth());
@@ -62,7 +62,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveLeftStrategy());
         float num = 0;
@@ -83,7 +83,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedY(),0);
 
         player.setMovementStrategy(new MoveUpStrategy());
         float num = 0;
@@ -104,7 +104,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedY(),0);
 
         player.setMovementStrategy(new MoveDownStrategy());
         float num = (float) (1014 - player.getWidth());
@@ -125,7 +125,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveRightStrategy());
         float num = (float) (2220 - player.getWidth());
@@ -152,7 +152,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveRightStrategy());
         float num = (float) (2220 - player.getWidth());
@@ -178,7 +178,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveRightStrategy());
         float num = (float) (2220 - player.getWidth());
@@ -205,7 +205,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveLeftStrategy());
         float num = 0;
@@ -231,7 +231,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveLeftStrategy());
         float num = 0;
@@ -257,7 +257,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveDownStrategy());
         float num = (float) (1014 - player.getWidth());
@@ -283,7 +283,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveDownStrategy());
         float num = (float) (1014 - player.getWidth());
@@ -309,7 +309,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveUpStrategy());
         float num = 0;
@@ -335,7 +335,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveRightStrategy());
         float num = (float) (2220 - player.getWidth());
@@ -357,7 +357,7 @@ public class PlayerMovementTest {
         assertEquals(0.0, player.getWidth(), 0);
         assertEquals(1110,player.getX(),0);
         assertEquals(507,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
 
         player.setMovementStrategy(new MoveRightStrategy());
         float num = 0;

@@ -20,7 +20,7 @@ public class PlayerTest {
 
         assertEquals(0.0,player.getX(),0);
         assertEquals(0.0,player.getY(),0);
-        assertEquals(25.0,player.getMovementSpeed(),0);
+        assertEquals(25.0,player.getMovementSpeedX(),0);
     }
 
     // #2 Shahbin Hossain

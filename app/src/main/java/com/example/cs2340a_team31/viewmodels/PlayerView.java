@@ -4,8 +4,8 @@ import com.example.cs2340a_team31.model.PlayerObserver;
 
 
 public class PlayerView implements PlayerObserver {
-    private float x;
-    private float y;
+    private double x;
+    private double y;
 
     // TODO fix to include given imageView
     public PlayerView() {
@@ -14,15 +14,15 @@ public class PlayerView implements PlayerObserver {
 
     }
 
-    public void onPlayerPositionChanged(float x, float y) {
+    public void onPlayerPositionChanged(double x, double y) {
         this.x = x;
         this.y = y;
     }
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 

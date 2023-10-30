@@ -7,6 +7,6 @@ public class MoveLeftStrategy implements MovementStrategy {
 
     public void move(float x) {
         Player player = Player.getPlayer();
-        player.setX(Math.max(x, player.getX() - player.getMovementSpeed()));
+        player.setX(Math.max(x, player.getX() - player.getMovementSpeedX()));
     }
 }
