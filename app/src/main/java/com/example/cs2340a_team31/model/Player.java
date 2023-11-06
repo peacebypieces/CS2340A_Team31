@@ -1,5 +1,8 @@
 package com.example.cs2340a_team31.model;
 
+import com.example.cs2340a_team31.model.observers.EnemyObserver;
+import com.example.cs2340a_team31.model.observers.PlayerObserver;
+import com.example.cs2340a_team31.model.observers.PlayerSubject;
 import com.example.cs2340a_team31.model.strategypattern.MovementStrategy;
 
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ public class Player implements PlayerSubject {
     private MovementStrategy movementStrategy;
 
     private List<PlayerObserver> observers = new ArrayList<>();
+    private List<EnemyObserver> enemyObservers = new ArrayList<>();
 
     private double x;
     private double y;
@@ -65,6 +69,7 @@ public class Player implements PlayerSubject {
         if (movementStrategy != null) {
             movementStrategy.move(x);
         }
+        notifyEnemies();
     }
 
     public double getMovementSpeedX() {
@@ -196,5 +201,29 @@ public class Player implements PlayerSubject {
         for (PlayerObserver observer : observers) {
             observer.onPlayerPositionChanged((float) x, (float) y);
         }
+    }
+
+    public void addEnemyObserver(EnemyObserver observer) {
+        enemyObservers.add(observer);
+    }
+
+    public void removeEnemyObserver(EnemyObserver observer) {
+        enemyObservers.remove(observer);
+    }
+
+    public void notifyEnemies() {
+        for (EnemyObserver observer : enemyObservers) {
+            observer.updatePlayerPosition(x, y);
+            observer.checkCollision(player);
+        }
+    }
+
+    public void notifyCollision(Player player, double damage) {
+        player.onCollision(damage);
+    }
+
+    public void onCollision(double damage) {
+        health -= damage;
+        System.out.println("Player HP: " + health);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.cs2340a_team31.viewmodels;
 
-import com.example.cs2340a_team31.model.PlayerObserver;
+import com.example.cs2340a_team31.model.observers.PlayerObserver;
 
 
 public class PlayerView implements PlayerObserver {
