@@ -13,6 +13,7 @@ import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +22,8 @@ public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
 
     private ImageView playerView;
+
+    private ArrayList<ImageView> enemyViews;
 
     private ConstraintLayout gameLayout;
 
