@@ -2,6 +2,9 @@ package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
 import android.content.Context;
 
+import androidx.core.content.ContextCompat;
+
+import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 
 public class MiceEnemy extends Enemy {
@@ -10,7 +13,7 @@ public class MiceEnemy extends Enemy {
         setSize(0.0 * w, 0.0 * h);
         movementSpeed = 0.0;
         damage = 0.0;
-        sprite = null;
+        sprite = ContextCompat.getDrawable(c, R.drawable.astrokitty_blue);
         health = 0.0;
         alive = true;
     }
