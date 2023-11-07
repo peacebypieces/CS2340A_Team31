@@ -70,4 +70,28 @@
         app:layout_constraintTop_toTopOf="@+id/enemyDamageDisplay"
         app:layout_constraintVertical_bias="0.075" />
 
+    <ImageView
+        android:id="@+id/enemy1View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerView"
+        app:srcCompat="@drawable/astrokitty_blue" />
+
+    <ImageView
+        android:id="@+id/enemy2View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerView"
+        app:layout_constraintVertical_bias="0.137"
+        app:srcCompat="@drawable/astrokitty_blue" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

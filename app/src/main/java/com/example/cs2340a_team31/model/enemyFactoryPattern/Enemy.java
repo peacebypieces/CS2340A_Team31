@@ -1,5 +1,6 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
@@ -10,7 +11,7 @@ public abstract class Enemy implements EnemyObserver {
 
     String direction;
     double damage;
-    ImageView sprite;
+    Drawable sprite;
     double health;
 
     boolean alive;

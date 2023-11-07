@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_screen);
 
         // Initialize the ViewModel
-        viewModel = new GameViewModel();
+        viewModel = new GameViewModel(getApplicationContext());
 
         // Initialize UI components and set listeners
         gameLayout = findViewById(R.id.gameLayout);

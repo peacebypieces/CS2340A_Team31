@@ -1,5 +1,6 @@
 package com.example.cs2340a_team31.viewmodels;
 
+import android.content.Context;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class GameViewModel extends ViewModel {
+    private Context context;
 
     private Player player;
 
@@ -39,9 +41,10 @@ public class GameViewModel extends ViewModel {
     private double widthRatio;
     private double heightRatio;
 
-    public GameViewModel() {
+    public GameViewModel(Context c) {
         // Initialize player, room, and door
         scoreValue = 0; // Change this to the initial score
+        context = c;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -174,11 +177,11 @@ public class GameViewModel extends ViewModel {
 
         // TODO: Add enemies to room
         Enemy enemy;
-        /* Example:
-        enemy = enemyFactory.spawnEnemy("mice", 1.0, 1.0, "UP", widthRatio, heightRatio);
-        firstRoom.addEnemy(enemy);
-        player.addEnemyObserver(enemy);*/
 
+        enemy = enemyFactory.spawnEnemy("mice", 1.0, 1.0, "UP", widthRatio,
+                heightRatio, context);
+        firstRoom.addEnemy(enemy);
+        player.addEnemyObserver(enemy);
         rooms.add(firstRoom);
     }
 
