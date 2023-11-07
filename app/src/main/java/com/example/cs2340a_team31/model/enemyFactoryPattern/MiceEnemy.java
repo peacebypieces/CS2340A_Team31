@@ -1,9 +1,11 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
+import android.content.Context;
+
 import com.example.cs2340a_team31.model.Player;
 
 public class MiceEnemy extends Enemy {
-    MiceEnemy(double w, double h) {
+    MiceEnemy(double w, double h, Context c) {
         // TODO: Set enemy stats
         setSize(0.0 * w, 0.0 * h);
         movementSpeed = 0.0;
