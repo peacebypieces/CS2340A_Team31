@@ -24,8 +24,6 @@ public class GameViewModel extends ViewModel {
 
     private Player player;
 
-    private PlayerView playerView;
-
     private String playername;
     private ArrayList<Room> rooms = new ArrayList<Room>();
 
@@ -92,7 +90,6 @@ public class GameViewModel extends ViewModel {
             break;
         }
 
-        playerView.onPlayerPositionChanged(player.getX(), player.getY());
         player.notifyObservers();
 
         // check collisions here
@@ -113,8 +110,6 @@ public class GameViewModel extends ViewModel {
         player.setPosition(widthRatio * 27, heightRatio * 14);
         player.setSize(widthRatio, heightRatio);
         player.setMovementSpeed(widthRatio / 2, heightRatio / 2);
-        playerView = new PlayerView();
-        player.addObserver(playerView);
 
         setDoorLocation(1, 8, false);
         enemyFactory = new SpaceEnemyFactory();

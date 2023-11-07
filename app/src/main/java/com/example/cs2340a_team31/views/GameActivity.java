@@ -7,11 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
+import com.example.cs2340a_team31.viewmodels.PlayerView;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -21,7 +23,9 @@ public class GameActivity extends AppCompatActivity {
 
     private GameViewModel viewModel;
 
-    private ImageView playerView;
+    private PlayerView playerView;
+
+    //private ImageView playerView;
 
     private ArrayList<ImageView> enemyViews;
 
@@ -48,7 +52,11 @@ public class GameActivity extends AppCompatActivity {
 
         setTextViews();
 
-        playerView = findViewById(R.id.playerView);
+        //playerView = findViewById(R.id.playerView);
+        playerView = new PlayerView(this);
+        gameLayout.addView(playerView);
+        Player player = Player.getPlayer();
+        player.addObserver(playerView);
 
         int newWidth = (int) viewModel.getWidthRatio(); // in pixels
         int newHeight = (int) viewModel.getHeightRatio(); // in pixels
@@ -58,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
         playerView.getLayoutParams().height = newHeight;
 
         // Apply scaling to the image within the ImageView
-        playerView.setScaleType(ImageView.ScaleType.FIT_XY); // Scale image to fill the ImageView
+        playerView.setScaleType(AppCompatImageView.ScaleType.FIT_XY); // Scale image to fill the ImageView
         playerView.requestLayout(); // Apply the changes to the ImageView
 
         setCharacter();
@@ -138,8 +146,9 @@ public class GameActivity extends AppCompatActivity {
 
     private void setPlayerView() {
         Player player = viewModel.getPlayer();
-        playerView.setX((float) player.getX());
-        playerView.setY((float) player.getY());
+        player.notifyObservers();
+        //playerView.setX((float) player.getX());
+        //playerView.setY((float) player.getY());
     }
 
     private void checkRoomBackground() {
