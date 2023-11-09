@@ -339,6 +339,7 @@ public class GameViewModel extends ViewModel {
                 break;
             default:
                 currentRoomNum++;
+                player.setMovementSpeed(0,0);
                 String currentTime = Calendar.getInstance().getTime().toString();
                 player = Player.getPlayer();
                 player.setName(playername);

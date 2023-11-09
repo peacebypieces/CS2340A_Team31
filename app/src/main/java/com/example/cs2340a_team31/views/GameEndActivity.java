@@ -2,6 +2,7 @@ package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,14 +30,29 @@ public class GameEndActivity extends AppCompatActivity {
 
         //singletons
         Player player = Player.getPlayer();
+
         LeaderBoard leaderBoard = LeaderBoard.getleaderboard();
 
         //creating new LeaderBoardplayer
         LeaderBoardPlayer lbPlayer = new LeaderBoardPlayer(player.getName(),
                 player.getDateTime(), player.getScore());
 
-        //add the current game to the leaderboard array to be able to sort
-        leaderBoard.add(lbPlayer);
+        LinkedList<LeaderBoardPlayer> players = LeaderBoard.getleaderboard().getPlayers();
+
+// Check if the player already exists in the leaderboard
+        boolean playerExists = false;
+        for (LeaderBoardPlayer existingPlayer : players) {
+            if (existingPlayer.getName().equals(lbPlayer.getName()) && existingPlayer.getScore() == lbPlayer.getScore()) {
+                playerExists = true;
+                break;
+            }
+        }
+
+// If the player doesn't exist, add them to the leaderboard
+        if (!playerExists) {
+            leaderBoard.add(lbPlayer);
+        }
+
 
         //adding current game to the current textview
         TextView currentScore = findViewById(R.id.currentScore);
@@ -44,7 +60,6 @@ public class GameEndActivity extends AppCompatActivity {
                                          + "Time:" + lbPlayer.getDateTime() + ", "
                                          + "Score:" + lbPlayer.getScore());
 
-        LinkedList<LeaderBoardPlayer> players = LeaderBoard.getleaderboard().getPlayers();
 
         //populating the play game data into textviews
         for (int i = 0; i < leaderBoard.getPlayerSize(); i++) {
