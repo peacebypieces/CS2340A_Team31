@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
+import com.example.cs2340a_team31.viewmodels.EnemyView;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
 
@@ -24,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
 
     private PlayerView playerView;
+    private EnemyView enemyView;
 
     //private ImageView playerView;
 
@@ -53,8 +55,16 @@ public class GameActivity extends AppCompatActivity {
         setTextViews();
 
         //playerView = findViewById(R.id.playerView);
+
+        // Add player view to screen
         playerView = new PlayerView(this);
         gameLayout.addView(playerView);
+
+        // Add enemy view to screen
+        enemyView = new EnemyView(this);
+        gameLayout.addView(enemyView);
+
+
         Player player = Player.getPlayer();
         player.addObserver(playerView);
 
