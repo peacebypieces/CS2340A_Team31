@@ -1,5 +1,6 @@
 package com.example.cs2340a_team31.model;
 
+import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 import com.example.cs2340a_team31.model.observers.PlayerObserver;
 import com.example.cs2340a_team31.model.observers.PlayerSubject;
@@ -225,5 +226,9 @@ public class Player implements PlayerSubject {
     public void onCollision(double damage) {
         health -= damage;
         System.out.println("Player HP: " + health);
+    }
+
+    public List<EnemyObserver> getEnemyObserver() {
+        return enemyObservers;
     }
 }

@@ -10,12 +10,13 @@ import com.example.cs2340a_team31.model.Player;
 public class MiceEnemy extends Enemy {
     MiceEnemy(double w, double h, Context c) {
         // TODO: Set enemy stats
-        setSize(0.0 * w, 0.0 * h);
+        setSize(1.5 * w, 1.5 * h);
         movementSpeed = 0.0;
         damage = 0.0;
         sprite = ContextCompat.getDrawable(c, R.drawable.astrokitty_blue);
         health = 0.0;
         alive = true;
+        type = "mice";
     }
 
     @Override

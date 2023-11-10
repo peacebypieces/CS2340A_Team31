@@ -94,6 +94,7 @@ public class GameViewModel extends ViewModel {
         }
 
         player.notifyObservers();
+        player.notifyEnemies();
 
         // check collisions here
         checkDoorCollision();
@@ -126,6 +127,7 @@ public class GameViewModel extends ViewModel {
         room2();
         room3();
         room4();
+        player.notifyEnemies();
     }
 
     public void room1() {
@@ -175,13 +177,18 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         firstRoom.addWall(wall);
 
-        // TODO: Add enemies to room
         Enemy enemy;
 
-        enemy = enemyFactory.spawnEnemy("mice", 1.0, 1.0, "UP", widthRatio,
+        enemy = enemyFactory.spawnEnemy("mice", 500000.0, 50, "UP", widthRatio,
                 heightRatio, context);
         firstRoom.addEnemy(enemy);
         player.addEnemyObserver(enemy);
+
+        enemy = enemyFactory.spawnEnemy("rat", 10.0, 25.0, "UP", widthRatio,
+                heightRatio, context);
+        firstRoom.addEnemy(enemy);
+        player.addEnemyObserver(enemy);
+
         rooms.add(firstRoom);
     }
 
@@ -223,12 +230,15 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         secondRoom.addWall(wall);
 
-        // TODO: Add enemies to room
         Enemy enemy;
-        /* Example:
-        enemy = enemyFactory.spawnEnemy("mice", 1.0, 1.0, "UP", widthRatio, heightRatio);
+
+        enemy = enemyFactory.spawnEnemy("mice", 50.0, 50, "UP", widthRatio,
+                heightRatio, context);
         secondRoom.addEnemy(enemy);
-        player.addEnemyObserver(enemy);*/
+
+        enemy = enemyFactory.spawnEnemy("rat", 10.0, 25.0, "UP", widthRatio,
+                heightRatio, context);
+        secondRoom.addEnemy(enemy);
 
 
         rooms.add(secondRoom);
@@ -416,5 +426,9 @@ public class GameViewModel extends ViewModel {
 
     public double getHeightRatio() {
         return heightRatio;
+    }
+
+    public ArrayList<Enemy> getEnemy() {
+        return currentRoom.getEnemies();
     }
 }

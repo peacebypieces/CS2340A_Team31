@@ -16,6 +16,7 @@ public class DogEnemy extends Enemy {
         sprite = ContextCompat.getDrawable(c, R.drawable.astrokitty_blue);
         health = 0.0;
         alive = true;
+        type = "dog";
     }
 
     @Override

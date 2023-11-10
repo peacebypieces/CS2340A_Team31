@@ -9,6 +9,8 @@ public abstract class Enemy implements EnemyObserver {
 
     double movementSpeed;
 
+    String type;
+
     String direction;
     double damage;
     Drawable sprite;
@@ -64,8 +66,24 @@ public abstract class Enemy implements EnemyObserver {
         return alive;
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public double getHeight() {
+        return height;
+    }
 
+    public double getWidth() {
+        return width;
+    }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
 }
 
