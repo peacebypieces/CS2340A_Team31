@@ -4,16 +4,16 @@ import android.content.Context;
 
 public class SpaceEnemyFactory extends EnemyFactory {
 
-    Enemy createEnemy(String item, double w, double h, Context c) {
+    Enemy createEnemy(String item, double w, double h, double difficulty) {
         switch (item) {
             case "mice":
-                return new MiceEnemy(w, h, c);
+                return new MiceEnemy(w, h, difficulty);
             case "rat":
-                return new RatEnemy(w, h, c);
+                return new RatEnemy(w, h, difficulty);
             case "dog":
-                return new DogEnemy(w, h, c);
+                return new DogEnemy(w, h, difficulty);
             case "dawg":
-                return new DawgEnemy(w, h, c);
+                return new DawgEnemy(w, h, difficulty);
             default:
                 return null;
         }

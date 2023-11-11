@@ -3,11 +3,14 @@ package com.example.cs2340a_team31.model.enemyFactoryPattern;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
 public abstract class Enemy implements EnemyObserver {
 
     double movementSpeed;
+
+    String type;
 
     String direction;
     double damage;
@@ -26,6 +29,7 @@ public abstract class Enemy implements EnemyObserver {
         if (!alive) {
             return;
         }
+        // TODO: Thomas - remove this
         switch (direction) {
             case "UP":
                 this.y -= movementSpeed;
@@ -42,8 +46,13 @@ public abstract class Enemy implements EnemyObserver {
         }
     }
 
-    void setDirection(String direction) {
-        this.direction = direction;
+    @Override
+    public void checkCollision(Player player) {
+        // TODO: Tran - Implement enemy collision
+        // Simply use the checkWallCollision method in GameViewModel and change up the variables
+        if (false) { // playerBounds.intersect(enemyBounds)
+            player.notifyCollision(damage);
+        }
     }
 
     void setSize(double w, double h) {
@@ -64,8 +73,24 @@ public abstract class Enemy implements EnemyObserver {
         return alive;
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public double getHeight() {
+        return height;
+    }
 
+    public double getWidth() {
+        return width;
+    }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
 }
 

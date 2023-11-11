@@ -1,5 +1,6 @@
 package com.example.cs2340a_team31.model;
 
+import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 import com.example.cs2340a_team31.model.observers.PlayerObserver;
 import com.example.cs2340a_team31.model.observers.PlayerSubject;
@@ -207,22 +208,17 @@ public class Player implements PlayerSubject {
         enemyObservers.add(observer);
     }
 
-    public void removeEnemyObserver(EnemyObserver observer) {
-        enemyObservers.remove(observer);
+    public void removeEnemyObservers() {
+        enemyObservers.clear();
     }
 
     public void notifyEnemies() {
         for (EnemyObserver observer : enemyObservers) {
-            observer.updatePlayerPosition(x, y);
             observer.checkCollision(player);
         }
     }
 
-    public void notifyCollision(Player player, double damage) {
-        player.onCollision(damage);
-    }
-
-    public void onCollision(double damage) {
+    public void notifyCollision(double damage) {
         health -= damage;
         System.out.println("Player HP: " + health);
     }

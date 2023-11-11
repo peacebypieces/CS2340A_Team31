@@ -12,6 +12,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
+import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
+import com.example.cs2340a_team31.model.observers.EnemyObserver;
+import com.example.cs2340a_team31.viewmodels.EnemyView;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
 
@@ -25,9 +28,7 @@ public class GameActivity extends AppCompatActivity {
 
     private PlayerView playerView;
 
-    //private ImageView playerView;
-
-    private ArrayList<ImageView> enemyViews;
+    private ArrayList<EnemyView> enemyViews;
 
     private ConstraintLayout gameLayout;
 
@@ -39,7 +40,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_screen);
 
         // Initialize the ViewModel
-        viewModel = new GameViewModel(getApplicationContext());
+        viewModel = new GameViewModel();
+        enemyViews = new ArrayList<>();
 
         // Initialize UI components and set listeners
         gameLayout = findViewById(R.id.gameLayout);
@@ -52,12 +54,25 @@ public class GameActivity extends AppCompatActivity {
 
         setTextViews();
 
-        //playerView = findViewById(R.id.playerView);
+        // Add player view to screen
         playerView = new PlayerView(this);
         gameLayout.addView(playerView);
+
+        // Add enemy views to screen
+        for (int i = 0; i < 3; i++) {
+            EnemyView enemyView = new EnemyView(this);
+            enemyViews.add(enemyView);
+            gameLayout.addView(enemyView);
+        }
+
+        // makes enemies show up in first room
+        updateEnemyViews();
+
+        // player variable is set to player in player class, observer is added
         Player player = Player.getPlayer();
         player.addObserver(playerView);
 
+        // get ratio of tiles idk
         int newWidth = (int) viewModel.getWidthRatio(); // in pixels
         int newHeight = (int) viewModel.getHeightRatio(); // in pixels
 
@@ -77,7 +92,13 @@ public class GameActivity extends AppCompatActivity {
         // Forward key events to the ViewModel
         viewModel.onKeyDown(keyCode, event);
         setPlayerView();
-        checkRoomBackground();
+
+        // checks if room is changed
+        if (viewModel.isRoomChanged()) {
+            changeRoomBackground();
+            viewModel.setRoomChanged();
+        }
+
         return true;
     }
 
@@ -89,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setCharacter() {
+
         String selectedCharacter = getIntent().getStringExtra("SELECTED_CHARACTER");
         switch (selectedCharacter) {
         case "char1":
@@ -113,12 +135,13 @@ public class GameActivity extends AppCompatActivity {
         TextView score = findViewById(R.id.scoreDisplay);
 
         String playername = getIntent().getStringExtra("PLAYER_NAME");
-        int startHealth  = getIntent().getIntExtra("STARTING_HEALTH", 100);
-        int enemydamage = getIntent().getIntExtra("ENEMY_DAMAGE", 20);
+        double startHealth  = getIntent().getDoubleExtra("STARTING_HEALTH", 100);
+        double enemydamage = getIntent().getDoubleExtra("ENEMY_DAMAGE", 20);
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
 
         viewModel.setPlayername(playername);
         viewModel.setScoreValue(scoreValue);
+        viewModel.setEnemyDamage(enemydamage);
 
         // Updates components on game screen
         playerName.append(playername);
@@ -133,10 +156,17 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
+                        // TODO: Tran - Check if health is 0 and go to losing end screen if so
+                        //viewModel.setPlayerData(); // Sets the player data for end screen
+
+
+                        // TODO: Thomas - Most likely call enemy movement move() here
+                        //setEnemyLocation();
+
+                        // TODO: Later: Will be removed
                         if (viewModel.getScoreValue() > 0) {
                             viewModel.setScoreValue(viewModel.getScoreValue() - 1);
                         }
-
                         score.setText("Score: " + viewModel.getScoreValue());
                     }
                 });
@@ -147,29 +177,114 @@ public class GameActivity extends AppCompatActivity {
     private void setPlayerView() {
         Player player = viewModel.getPlayer();
         player.notifyObservers();
-        //playerView.setX((float) player.getX());
-        //playerView.setY((float) player.getY());
+        player.notifyEnemies();
+        updateHealth();
     }
 
-    private void checkRoomBackground() {
+    private void updateHealth() {
+        // Updates health on screen
+        TextView playerHealth = findViewById(R.id.playerHealthDisplay);
+        Player player = viewModel.getPlayer();
+        playerHealth.setText("Health:" + player.getHealth());
+    }
+
+    private void changeRoomBackground() {
         int currentRoomNum = viewModel.getCurrentRoomNum();
         switch (currentRoomNum) {
         case 1:
+            updateEnemyViews();
             break;
         case 2:
             gameLayout.setBackgroundResource(R.drawable.room2);
+            updateEnemyViews();
             break;
         case 3:
             gameLayout.setBackgroundResource(R.drawable.room3);
+            updateEnemyViews();
             break;
         case 4:
             gameLayout.setBackgroundResource(R.drawable.room4);
+            updateEnemyViews();
             break;
         default:
             Intent intent = new Intent(GameActivity.this, GameEndActivity.class);
             startActivity(intent);
             finish();
         }
+    }
+
+    public void scaleEnemies(AppCompatImageView enemyimg, Enemy enemy) {
+
+        int newWidth = (int) enemy.getWidth(); // in pixels
+        int newHeight = (int) enemy.getHeight(); // in pixels
+
+        // Set new dimensions for the ImageView
+        enemyimg.getLayoutParams().width = newWidth;
+        enemyimg.getLayoutParams().height = newHeight;
+
+        // Apply scaling to the image within the ImageView
+        enemyimg.setScaleType(AppCompatImageView.ScaleType.FIT_XY);
+
+        // Scale image to fill the ImageView
+        enemyimg.requestLayout(); // Apply the changes to the ImageView
+
+    }
+
+    public void setEnemyLocation() {
+        ArrayList<Enemy> enemies = viewModel.getEnemy();
+
+        for (int i = 0; i < enemyViews.size(); i++) {
+            EnemyView enemyView = enemyViews.get(i);
+            Enemy enemy = enemies.get(i);
+            enemyView.updatePlayerPosition((float) enemy.getX(), (float) enemy.getY());
+        }
+    }
+
+    /* get enemies array from view model
+     *
+     */
+    private void updateEnemyViews() {
+
+        ArrayList<Enemy> enemies = viewModel.getEnemy();
+
+        for (int i = 0; i < enemies.size(); i++) {
+            EnemyView enemyView = enemyViews.get(i);
+            Enemy enemy = enemies.get(i);
+            String type = enemy.getType();
+
+            switch (type) {
+                case "mice":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.fox,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
+
+                case "dawg":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.thwg,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
+
+                case "rat":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.rat2,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
+
+                case "dog":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.woof,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
+            }
+        }
+
+        setEnemyLocation();
+
     }
 
     // Other UI-related methods
