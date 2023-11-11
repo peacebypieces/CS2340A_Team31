@@ -8,19 +8,13 @@ import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 
 public class MiceEnemy extends Enemy {
-    MiceEnemy(double w, double h, Context c) {
-        // TODO: Set enemy stats
+    MiceEnemy(double w, double h, double difficulty) {
         setSize(1.5 * w, 1.5 * h);
         movementSpeed = w/4;
-        damage = 0.0;
+        damage = difficulty * 5.0; // Scales the damage based on difficulty
         health = 0.0;
         alive = true;
         type = "mice";
-    }
-
-    @Override
-    public void updatePlayerPosition(double playerX, double playerY) {
-        super.updatePlayerPosition(playerX, playerY);
     }
 
     @Override

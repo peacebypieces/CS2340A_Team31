@@ -214,21 +214,12 @@ public class Player implements PlayerSubject {
 
     public void notifyEnemies() {
         for (EnemyObserver observer : enemyObservers) {
-            observer.updatePlayerPosition(x, y);
             observer.checkCollision(player);
         }
     }
 
-    public void notifyCollision(Player player, double damage) {
-        player.onCollision(damage);
-    }
-
-    public void onCollision(double damage) {
+    public void notifyCollision(double damage) {
         health -= damage;
         System.out.println("Player HP: " + health);
-    }
-
-    public List<EnemyObserver> getEnemyObserver() {
-        return enemyObservers;
     }
 }

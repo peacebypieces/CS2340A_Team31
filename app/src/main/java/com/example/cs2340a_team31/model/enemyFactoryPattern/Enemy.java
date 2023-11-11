@@ -29,6 +29,7 @@ public abstract class Enemy implements EnemyObserver {
         if (!alive) {
             return;
         }
+        // TODO: Thomas - remove this
         switch (direction) {
             case "UP":
                 this.y -= movementSpeed;
@@ -46,19 +47,12 @@ public abstract class Enemy implements EnemyObserver {
     }
 
     @Override
-    public void updatePlayerPosition(double playerX, double playerY) {
-        move();
-    }
-
-    @Override
     public void checkCollision(Player player) {
-        if (false) {
-            player.notifyCollision(player, damage);
+        // TODO: Tran - Implement enemy collision
+        // Simply use the checkWallCollision method in GameViewModel and change up the variables
+        if (false) { // playerBounds.intersect(enemyBounds)
+            player.notifyCollision(damage);
         }
-    }
-
-    void setDirection(String direction) {
-        this.direction = direction;
     }
 
     void setSize(double w, double h) {

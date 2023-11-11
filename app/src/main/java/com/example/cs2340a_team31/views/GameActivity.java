@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_screen);
 
         // Initialize the ViewModel
-        viewModel = new GameViewModel(getApplicationContext());
+        viewModel = new GameViewModel();
         enemyViews = new ArrayList<>();
 
         // Initialize UI components and set listeners
@@ -54,12 +54,11 @@ public class GameActivity extends AppCompatActivity {
 
         setTextViews();
 
-        //playerView = findViewById(R.id.playerView);
-
         // Add player view to screen
         playerView = new PlayerView(this);
         gameLayout.addView(playerView);
 
+        // Add enemy views to screen
         for (int i = 0; i < 3; i++) {
             EnemyView enemyView = new EnemyView(this);
             enemyViews.add(enemyView);
@@ -93,7 +92,13 @@ public class GameActivity extends AppCompatActivity {
         // Forward key events to the ViewModel
         viewModel.onKeyDown(keyCode, event);
         setPlayerView();
-        checkRoomBackground();
+
+        // checks if room is changed
+        if (viewModel.isRoomChanged()) {
+            changeRoomBackground();
+            viewModel.setRoomChanged();
+        }
+
         return true;
     }
 
@@ -105,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setCharacter() {
+
         String selectedCharacter = getIntent().getStringExtra("SELECTED_CHARACTER");
         switch (selectedCharacter) {
         case "char1":
@@ -129,12 +135,13 @@ public class GameActivity extends AppCompatActivity {
         TextView score = findViewById(R.id.scoreDisplay);
 
         String playername = getIntent().getStringExtra("PLAYER_NAME");
-        int startHealth  = getIntent().getIntExtra("STARTING_HEALTH", 100);
-        int enemydamage = getIntent().getIntExtra("ENEMY_DAMAGE", 20);
+        double startHealth  = getIntent().getDoubleExtra("STARTING_HEALTH", 100);
+        double enemydamage = getIntent().getDoubleExtra("ENEMY_DAMAGE", 20);
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
 
         viewModel.setPlayername(playername);
         viewModel.setScoreValue(scoreValue);
+        viewModel.setEnemyDamage(enemydamage);
 
         // Updates components on game screen
         playerName.append(playername);
@@ -149,10 +156,17 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
+                        // TODO: Tran - Check if health is 0 and go to losing end screen if so
+                        //viewModel.setPlayerData(); // Sets the player data for end screen
+
+
+                        // TODO: Thomas - Most likely call enemy movement move() here
+                        //setEnemyLocation();
+
+                        // TODO: Later: Will be removed
                         if (viewModel.getScoreValue() > 0) {
                             viewModel.setScoreValue(viewModel.getScoreValue() - 1);
                         }
-
                         score.setText("Score: " + viewModel.getScoreValue());
                     }
                 });
@@ -164,9 +178,17 @@ public class GameActivity extends AppCompatActivity {
         Player player = viewModel.getPlayer();
         player.notifyObservers();
         player.notifyEnemies();
+        updateHealth();
     }
 
-    private void checkRoomBackground() {
+    private void updateHealth() {
+        // Updates health on screen
+        TextView playerHealth = findViewById(R.id.playerHealthDisplay);
+        Player player = viewModel.getPlayer();
+        playerHealth.setText("Health:" + player.getHealth());
+    }
+
+    private void changeRoomBackground() {
         int currentRoomNum = viewModel.getCurrentRoomNum();
         switch (currentRoomNum) {
         case 1:

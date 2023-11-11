@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class GameViewModel extends ViewModel {
-    private Context context;
 
     private Player player;
 
@@ -30,13 +29,16 @@ public class GameViewModel extends ViewModel {
     private Enemy enemy2;
     private Enemy enemy3;
     private String playername;
-    private ArrayList<Room> rooms = new ArrayList<Room>();
+
+    private double enemyDamage;
 
     private  EnemyFactory enemyFactory;
     private Room currentRoom;
     private Door door;
 
     private int currentRoomNum = 1;
+
+    private boolean roomChanged = false;
     private int scoreValue;
 
     private double screenWidth;
@@ -44,10 +46,9 @@ public class GameViewModel extends ViewModel {
     private double widthRatio;
     private double heightRatio;
 
-    public GameViewModel(Context c) {
+    public GameViewModel() {
         // Initialize player, room, and door
         scoreValue = 0; // Change this to the initial score
-        context = c;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class GameViewModel extends ViewModel {
 
         float num = 0;
 
+        // Moves player based on key
         switch (keyCode) {
         case KeyEvent.KEYCODE_DPAD_LEFT:
             if (checkWallCollision(-player.getMovementSpeedX(), 0)) {
@@ -96,6 +98,7 @@ public class GameViewModel extends ViewModel {
             break;
         }
 
+        // Notifies observers of player movement
         player.notifyObservers();
         player.notifyEnemies();
 
@@ -172,18 +175,19 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         firstRoom.addWall(wall);
 
-        enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 9F * heightRatio, "RIGHT", widthRatio,
-                heightRatio, context);
+        // Adds the 3 enemies in the room
+        enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 9F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         firstRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
-                heightRatio, context);
+        enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         firstRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
-                heightRatio, context);
+        enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         firstRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -230,18 +234,19 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         secondRoom.addWall(wall);
 
-        enemy1 = enemyFactory.spawnEnemy("rat", 13F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
-                heightRatio, context);
+        // Adds the 3 enemies in the room
+        enemy1 = enemyFactory.spawnEnemy("rat", 13F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         secondRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("rat", 18F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
-                heightRatio, context);
+        enemy2 = enemyFactory.spawnEnemy("rat", 18F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         secondRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 5F * heightRatio, "RIGHT", widthRatio,
-                heightRatio, context);
+        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 5F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         secondRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -275,18 +280,19 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         thirdRoom.addWall(wall);
 
-        enemy1 = enemyFactory.spawnEnemy("rat", 9F * widthRatio, 11F * heightRatio, "RIGHT", widthRatio,
-                heightRatio, context);
+        // Adds the 3 enemies in the room
+        enemy1 = enemyFactory.spawnEnemy("rat", 9F * widthRatio, 11F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         thirdRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("dog", 27F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
-                heightRatio, context);
+        enemy2 = enemyFactory.spawnEnemy("dog", 27F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         thirdRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 7F * heightRatio, "RIGHT", widthRatio,
-                heightRatio, context);
+        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 7F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         thirdRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -311,18 +317,19 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         fourthRoom.addWall(wall);
 
-        enemy1 = enemyFactory.spawnEnemy("dog", 4F * widthRatio, 1F * heightRatio, "DOWN", widthRatio,
-                heightRatio, context);
+        // Adds the 3 enemies in the room
+        enemy1 = enemyFactory.spawnEnemy("dog", 4F * widthRatio, 1F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         fourthRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("dog", 12F * widthRatio, 16F * heightRatio, "UP", widthRatio,
-                heightRatio, context);
+        enemy2 = enemyFactory.spawnEnemy("dog", 12F * widthRatio, 16F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         fourthRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("dawg", 26F * widthRatio, 1F * heightRatio, "LEFT", widthRatio,
-                heightRatio, context);
+        enemy3 = enemyFactory.spawnEnemy("dawg", 26F * widthRatio, 1F * heightRatio, enemyDamage, widthRatio,
+                heightRatio);
         fourthRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -356,27 +363,26 @@ public class GameViewModel extends ViewModel {
                 setDoorLocation(22, 15, true);
                 currentRoomNum++;
                 currentRoom = room2();
+                roomChanged = true;
                 break;
             case 2:
                 setPlayerLocation(22, 2);
                 setDoorLocation(30, 11, false);
                 currentRoomNum++;
                 currentRoom = room3();
+                roomChanged = true;
                 break;
             case 3:
                 currentRoomNum++;
                 currentRoom = room4();
                 setPlayerLocation(2, 11);
                 setDoorLocation(28, 13, false);
+                roomChanged = true;
                 break;
             default:
                 currentRoomNum++;
-                player.setMovementSpeed(0,0);
-                String currentTime = Calendar.getInstance().getTime().toString();
-                player = Player.getPlayer();
-                player.setName(playername);
-                player.setScore(scoreValue);
-                player.setDateTime(currentTime);
+                roomChanged = true;
+                setPlayerData();
             }
         }
     }
@@ -408,6 +414,15 @@ public class GameViewModel extends ViewModel {
         return false;
     }
 
+    public void setPlayerData() {
+        String currentTime = Calendar.getInstance().getTime().toString();
+        player = Player.getPlayer();
+        player.setMovementSpeed(0,0);
+        player.setName(playername);
+        player.setScore(scoreValue);
+        player.setDateTime(currentTime);
+    }
+
     public void setPlayerLocation(double x, double y) {
         // Set the player's location
         player = Player.getPlayer();
@@ -429,6 +444,10 @@ public class GameViewModel extends ViewModel {
 
     public void setScoreValue(int scoreValue) {
         this.scoreValue = scoreValue;
+    }
+
+    public void setEnemyDamage(double enemyDamage) {
+        this.enemyDamage = enemyDamage;
     }
 
     public int getScoreValue() {
@@ -453,5 +472,13 @@ public class GameViewModel extends ViewModel {
 
     public ArrayList<Enemy> getEnemy() {
         return currentRoom.getEnemies();
+    }
+
+    public boolean isRoomChanged() {
+        return roomChanged;
+    }
+
+    public void setRoomChanged() {
+        this.roomChanged = false;
     }
 }

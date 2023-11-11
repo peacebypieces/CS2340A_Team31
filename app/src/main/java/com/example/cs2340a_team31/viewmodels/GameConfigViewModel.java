@@ -6,24 +6,24 @@ import com.example.cs2340a_team31.R;
 
 public class GameConfigViewModel extends ViewModel {
     private String playerName;
-    private int startingHealth = 100;
-    private int enemyDamage = 20;
+    private double startingHealth = 100;
+    private double enemyDamage = 1;
     private int score = 100;
     private String selectedCharacter;
 
     public void handleStartButtonClick(String playerName,
-                                       int selectedDifficulty,
-                                       int selectedCharacterID) {
+                                       double selectedDifficulty,
+                                       double selectedCharacterID) {
         this.playerName = playerName;
 
         // Handle selected difficulty and set relevant parameters
         if (selectedDifficulty == R.id.radioMedium) {
-            startingHealth = 80;
-            enemyDamage = 25;
+            startingHealth = 150;
+            enemyDamage = 1.5;
             score = 200;
         } else if (selectedDifficulty == R.id.radioHard) {
-            startingHealth = 60;
-            enemyDamage = 30;
+            startingHealth = 200;
+            enemyDamage = 2;
             score = 300;
         }
 
@@ -41,11 +41,11 @@ public class GameConfigViewModel extends ViewModel {
         return playerName;
     }
 
-    public int getStartingHealth() {
+    public double getStartingHealth() {
         return startingHealth;
     }
 
-    public int getEnemyDamage() {
+    public double getEnemyDamage() {
         return enemyDamage;
     }
 

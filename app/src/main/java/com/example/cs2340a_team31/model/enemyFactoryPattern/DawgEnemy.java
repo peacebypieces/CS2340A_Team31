@@ -9,19 +9,13 @@ import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 
 public class DawgEnemy extends Enemy {
-    DawgEnemy(double w, double h, Context c) {
-        // TODO: Set enemy stats
+    DawgEnemy(double w, double h, double difficulty) {
         setSize(10 * w, 12 * h);
         movementSpeed = w/10;
-        damage = 0.0;
+        damage = difficulty * 25.0; // Scales the damage based on difficulty
         health = 0.0;
         alive = true;
         type = "dawg";
-    }
-
-    @Override
-    public void updatePlayerPosition(double playerX, double playerY) {
-        super.updatePlayerPosition(playerX, playerY);
     }
 
     @Override

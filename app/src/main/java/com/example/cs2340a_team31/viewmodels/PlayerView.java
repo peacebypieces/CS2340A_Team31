@@ -13,7 +13,6 @@ public class PlayerView extends AppCompatImageView implements PlayerObserver {
     private float x;
     private float y;
 
-    // TODO fix to include given imageView
     public PlayerView(Context context) {
         super(context);
         this.x = 0;

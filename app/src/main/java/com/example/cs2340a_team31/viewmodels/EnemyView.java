@@ -15,8 +15,6 @@ import com.example.cs2340a_team31.model.observers.PlayerObserver;
 public class EnemyView extends AppCompatImageView {
     private float x;
     private float y;
-
-    // TODO fix to include given imageView
     public EnemyView(Context context) {
         super(context);
         this.x = 0;
