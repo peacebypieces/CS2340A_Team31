@@ -208,8 +208,8 @@ public class Player implements PlayerSubject {
         enemyObservers.add(observer);
     }
 
-    public void removeEnemyObserver(EnemyObserver observer) {
-        enemyObservers.remove(observer);
+    public void removeEnemyObservers() {
+        enemyObservers.clear();
     }
 
     public void notifyEnemies() {

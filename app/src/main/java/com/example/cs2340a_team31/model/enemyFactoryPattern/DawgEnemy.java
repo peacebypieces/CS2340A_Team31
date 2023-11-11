@@ -12,9 +12,8 @@ public class DawgEnemy extends Enemy {
     DawgEnemy(double w, double h, Context c) {
         // TODO: Set enemy stats
         setSize(10 * w, 12 * h);
-        movementSpeed = 0.0;
+        movementSpeed = w/10;
         damage = 0.0;
-        sprite = ContextCompat.getDrawable(c, R.drawable.astrokitty_blue);
         health = 0.0;
         alive = true;
         type = "dawg";
@@ -22,13 +21,11 @@ public class DawgEnemy extends Enemy {
 
     @Override
     public void updatePlayerPosition(double playerX, double playerY) {
-        // TODO: Make enemy move based on player position
+        super.updatePlayerPosition(playerX, playerY);
     }
 
     @Override
     public void checkCollision(Player player) {
-        if (false) {
-            player.notifyCollision(player, damage);
-        }
+        super.checkCollision(player);
     }
 }

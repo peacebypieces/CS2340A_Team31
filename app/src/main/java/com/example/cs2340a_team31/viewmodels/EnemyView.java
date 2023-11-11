@@ -12,7 +12,7 @@ import com.example.cs2340a_team31.model.observers.EnemyObserver;
 import com.example.cs2340a_team31.model.observers.PlayerObserver;
 
 
-public class EnemyView extends AppCompatImageView implements EnemyObserver {
+public class EnemyView extends AppCompatImageView {
     private float x;
     private float y;
 
@@ -23,14 +23,9 @@ public class EnemyView extends AppCompatImageView implements EnemyObserver {
         this.y = 0;
     }
 
-    @Override
-    public void updatePlayerPosition(double playerX, double playerY) {
+    public void updatePlayerPosition(float x, float y) {
         this.setX(x);
         this.setY(y);
-    }
-
-    public void checkCollision(Player player) {
-        // todo add collision
     }
 
     public float getX() {

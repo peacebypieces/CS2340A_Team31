@@ -26,6 +26,9 @@ public class GameViewModel extends ViewModel {
 
     private Player player;
 
+    private Enemy enemy1;
+    private Enemy enemy2;
+    private Enemy enemy3;
     private String playername;
     private ArrayList<Room> rooms = new ArrayList<Room>();
 
@@ -117,20 +120,12 @@ public class GameViewModel extends ViewModel {
 
         setDoorLocation(1, 8, false);
         enemyFactory = new SpaceEnemyFactory();
-        makeRooms();
-        currentRoom = rooms.get(0);
-
+        currentRoom = room1();
     }
 
-    public void makeRooms() {
-        room1();
-        room2();
-        room3();
-        room4();
-        player.notifyEnemies();
-    }
+    public Room room1() {
+        player.removeEnemyObservers();
 
-    public void room1() {
         // Create rooms and add walls to them
         Wall wall;
 
@@ -177,22 +172,27 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         firstRoom.addWall(wall);
 
-        Enemy enemy;
-
-        enemy = enemyFactory.spawnEnemy("mice", 500000.0, 50, "UP", widthRatio,
+        enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 9F * heightRatio, "RIGHT", widthRatio,
                 heightRatio, context);
-        firstRoom.addEnemy(enemy);
-        player.addEnemyObserver(enemy);
+        firstRoom.addEnemy(enemy1);
+        player.addEnemyObserver(enemy1);
 
-        enemy = enemyFactory.spawnEnemy("rat", 10.0, 25.0, "UP", widthRatio,
+        enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
                 heightRatio, context);
-        firstRoom.addEnemy(enemy);
-        player.addEnemyObserver(enemy);
+        firstRoom.addEnemy(enemy2);
+        player.addEnemyObserver(enemy2);
 
-        rooms.add(firstRoom);
+        enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
+                heightRatio, context);
+        firstRoom.addEnemy(enemy3);
+        player.addEnemyObserver(enemy3);
+
+        return firstRoom;
     }
 
-    public void room2() {
+    public Room room2() {
+        player.removeEnemyObservers();
+
         Wall wall;
 
         // Room 2
@@ -230,21 +230,27 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         secondRoom.addWall(wall);
 
-        Enemy enemy;
-
-        enemy = enemyFactory.spawnEnemy("mice", 50.0, 50, "UP", widthRatio,
+        enemy1 = enemyFactory.spawnEnemy("rat", 13F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
                 heightRatio, context);
-        secondRoom.addEnemy(enemy);
+        secondRoom.addEnemy(enemy1);
+        player.addEnemyObserver(enemy1);
 
-        enemy = enemyFactory.spawnEnemy("rat", 10.0, 25.0, "UP", widthRatio,
+        enemy2 = enemyFactory.spawnEnemy("rat", 18F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
                 heightRatio, context);
-        secondRoom.addEnemy(enemy);
+        secondRoom.addEnemy(enemy2);
+        player.addEnemyObserver(enemy2);
 
+        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 5F * heightRatio, "RIGHT", widthRatio,
+                heightRatio, context);
+        secondRoom.addEnemy(enemy3);
+        player.addEnemyObserver(enemy3);
 
-        rooms.add(secondRoom);
+        return secondRoom;
     }
 
-    public void room3() {
+    public Room room3() {
+        player.removeEnemyObservers();
+
         Wall wall;
 
         // Room 3
@@ -269,18 +275,27 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         thirdRoom.addWall(wall);
 
-        // TODO: Add enemies to room
-        Enemy enemy;
-        /* Example:
-        enemy = enemyFactory.spawnEnemy("mice", 1.0, 1.0, "UP", widthRatio, heightRatio);
-        thirdRoom.addEnemy(enemy);
-        player.addEnemyObserver(enemy);*/
+        enemy1 = enemyFactory.spawnEnemy("rat", 9F * widthRatio, 11F * heightRatio, "RIGHT", widthRatio,
+                heightRatio, context);
+        thirdRoom.addEnemy(enemy1);
+        player.addEnemyObserver(enemy1);
 
+        enemy2 = enemyFactory.spawnEnemy("dog", 27F * widthRatio, 2F * heightRatio, "DOWN", widthRatio,
+                heightRatio, context);
+        thirdRoom.addEnemy(enemy2);
+        player.addEnemyObserver(enemy2);
 
-        rooms.add(thirdRoom);
+        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 7F * heightRatio, "RIGHT", widthRatio,
+                heightRatio, context);
+        thirdRoom.addEnemy(enemy3);
+        player.addEnemyObserver(enemy3);
+
+        return thirdRoom;
     }
 
-    public void room4() {
+    public Room room4() {
+        player.removeEnemyObservers();
+
         Wall wall;
 
         // Room 4
@@ -296,15 +311,22 @@ public class GameViewModel extends ViewModel {
         wall = new Wall(widthRatio * 31, heightRatio * 0, widthRatio * 1, heightRatio * 18);
         fourthRoom.addWall(wall);
 
-        // TODO: Add enemies to room
-        Enemy enemy;
-        /* Example:
-        enemy = enemyFactory.spawnEnemy("mice", 1.0, 1.0, "UP", widthRatio, heightRatio);
-        fourthRoom.addEnemy(enemy);
-        player.addEnemyObserver(enemy);*/
+        enemy1 = enemyFactory.spawnEnemy("dog", 4F * widthRatio, 1F * heightRatio, "DOWN", widthRatio,
+                heightRatio, context);
+        fourthRoom.addEnemy(enemy1);
+        player.addEnemyObserver(enemy1);
 
+        enemy2 = enemyFactory.spawnEnemy("dog", 12F * widthRatio, 16F * heightRatio, "UP", widthRatio,
+                heightRatio, context);
+        fourthRoom.addEnemy(enemy2);
+        player.addEnemyObserver(enemy2);
 
-        rooms.add(fourthRoom);
+        enemy3 = enemyFactory.spawnEnemy("dawg", 26F * widthRatio, 1F * heightRatio, "LEFT", widthRatio,
+                heightRatio, context);
+        fourthRoom.addEnemy(enemy3);
+        player.addEnemyObserver(enemy3);
+
+        return fourthRoom;
     }
 
     public void checkDoorCollision() {
@@ -333,17 +355,17 @@ public class GameViewModel extends ViewModel {
                 setPlayerLocation(30, 8);
                 setDoorLocation(22, 15, true);
                 currentRoomNum++;
-                currentRoom = rooms.get(1);
+                currentRoom = room2();
                 break;
             case 2:
                 setPlayerLocation(22, 2);
                 setDoorLocation(30, 11, false);
                 currentRoomNum++;
-                currentRoom = rooms.get(2);
+                currentRoom = room3();
                 break;
             case 3:
                 currentRoomNum++;
-                currentRoom = rooms.get(3);
+                currentRoom = room4();
                 setPlayerLocation(2, 11);
                 setDoorLocation(28, 13, false);
                 break;

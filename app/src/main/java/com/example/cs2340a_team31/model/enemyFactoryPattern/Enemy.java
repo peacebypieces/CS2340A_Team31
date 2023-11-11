@@ -3,6 +3,7 @@ package com.example.cs2340a_team31.model.enemyFactoryPattern;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
 public abstract class Enemy implements EnemyObserver {
@@ -41,6 +42,18 @@ public abstract class Enemy implements EnemyObserver {
             case "LEFT":
                 this.x -= movementSpeed;
                 break;
+        }
+    }
+
+    @Override
+    public void updatePlayerPosition(double playerX, double playerY) {
+        move();
+    }
+
+    @Override
+    public void checkCollision(Player player) {
+        if (false) {
+            player.notifyCollision(player, damage);
         }
     }
 

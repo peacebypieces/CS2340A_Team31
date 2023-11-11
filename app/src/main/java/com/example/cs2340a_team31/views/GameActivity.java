@@ -27,12 +27,8 @@ public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
 
     private PlayerView playerView;
-    private EnemyView enemyView;
-    private EnemyView enemy2View;
 
-    //private ImageView playerView;
-
-    private ArrayList<ImageView> enemyViews;
+    private ArrayList<EnemyView> enemyViews;
 
     private ConstraintLayout gameLayout;
 
@@ -45,6 +41,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Initialize the ViewModel
         viewModel = new GameViewModel(getApplicationContext());
+        enemyViews = new ArrayList<>();
 
         // Initialize UI components and set listeners
         gameLayout = findViewById(R.id.gameLayout);
@@ -63,13 +60,11 @@ public class GameActivity extends AppCompatActivity {
         playerView = new PlayerView(this);
         gameLayout.addView(playerView);
 
-        // Add enemy view to screen
-        enemyView = new EnemyView(this);
-        gameLayout.addView(enemyView);
-
-        // add enemy 2 view to screen
-        enemy2View = new EnemyView(this);
-        gameLayout.addView(enemy2View);
+        for (int i = 0; i < 3; i++) {
+            EnemyView enemyView = new EnemyView(this);
+            enemyViews.add(enemyView);
+            gameLayout.addView(enemyView);
+        }
 
         // makes enemies show up in first room
         updateEnemyViews();
@@ -216,8 +211,11 @@ public class GameActivity extends AppCompatActivity {
     public void setEnemyLocation() {
         ArrayList<Enemy> enemies = viewModel.getEnemy();
 
-        enemyView.updatePlayerPosition(enemies.get(0).getX(), enemies.get(0).getY());
-        enemy2View.updatePlayerPosition(enemies.get(1).getX(), enemies.get(1).getY());
+        for (int i = 0; i < enemyViews.size(); i++) {
+            EnemyView enemyView = enemyViews.get(i);
+            Enemy enemy = enemies.get(i);
+            enemyView.updatePlayerPosition((float) enemy.getX(), (float) enemy.getY());
+        }
     }
 
     /* get enemies array from view model
@@ -227,67 +225,40 @@ public class GameActivity extends AppCompatActivity {
 
         ArrayList<Enemy> enemies = viewModel.getEnemy();
 
-        String enemy1 = enemies.get(0).getType();
-        String enemy2 = enemies.get(1).getType();
+        for (int i = 0; i < enemies.size(); i++) {
+            EnemyView enemyView = enemyViews.get(i);
+            Enemy enemy = enemies.get(i);
+            String type = enemy.getType();
 
-        switch (enemy1) {
-            case "mice":
-                enemyView.setImageDrawable(getResources().
-                        getDrawable(R.drawable.fox,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemyView, enemies.get(0));
-                break;
+            switch (type) {
+                case "mice":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.fox,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
 
-            case "dawg":
-                enemyView.setImageDrawable(getResources().
-                        getDrawable(R.drawable.thwg,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemy2View, enemies.get(0));
-                break;
+                case "dawg":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.thwg,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
 
-            case "rat":
-                enemyView.setImageDrawable(getResources().
-                        getDrawable(R.drawable.rat2,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemyView, enemies.get(0));
-                break;
+                case "rat":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.rat2,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
 
-            case "dog":
-                enemyView.setImageDrawable(getResources().
-                        getDrawable(R.drawable.woof,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemyView, enemies.get(0));
-                break;
-        }
-
-        switch (enemy2) {
-            case "mice":
-                enemy2View.setImageDrawable(getResources().
-                        getDrawable(R.drawable.fox,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemy2View, enemies.get(1));
-                break;
-
-            case "dawg":
-                enemy2View.setImageDrawable(getResources().
-                        getDrawable(R.drawable.thwg,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemy2View, enemies.get(1));
-                break;
-
-            case "rat":
-                enemy2View.setImageDrawable(getResources().
-                        getDrawable(R.drawable.rat2,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemy2View, enemies.get(1));
-                break;
-
-            case "dog":
-                enemy2View.setImageDrawable(getResources().
-                        getDrawable(R.drawable.woof,
-                                getApplicationContext().getTheme()));
-                scaleEnemies(enemy2View, enemies.get(1));
-                break;
+                case "dog":
+                    enemyView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.woof,
+                                    getApplicationContext().getTheme()));
+                    scaleEnemies(enemyView, enemy);
+                    break;
+            }
         }
 
         setEnemyLocation();
