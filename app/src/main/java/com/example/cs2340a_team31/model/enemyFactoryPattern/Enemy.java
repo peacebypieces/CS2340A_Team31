@@ -1,5 +1,6 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
@@ -7,7 +8,7 @@ import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
 public abstract class Enemy implements EnemyObserver {
-
+    int movementCounter = 0;
     double movementSpeed;
 
     String type;
@@ -25,11 +26,12 @@ public abstract class Enemy implements EnemyObserver {
     double width;
     double height;
 
-    void move() {
+    @Override
+    public void move() {
         if (!alive) {
             return;
         }
-        // TODO: Thomas - remove this
+
         switch (direction) {
             case "UP":
                 this.y -= movementSpeed;
@@ -44,13 +46,50 @@ public abstract class Enemy implements EnemyObserver {
                 this.x -= movementSpeed;
                 break;
         }
+
+        movementCounter++;
+
+        if (movementCounter == 20) {
+            movementCounter = 0;
+            switch(direction) {
+                case "UP":
+                    this.direction = "DOWN";
+                    break;
+                case "DOWN":
+                    this.direction = "UP";
+                    break;
+                case "RIGHT":
+                    this.direction = "LEFT";
+                    break;
+                case "LEFT":
+                    this.direction = "RIGHT";
+                    break;
+            }
+        }
+
     }
 
     @Override
     public void checkCollision(Player player) {
         // TODO: Tran - Implement enemy collision
-        // Simply use the checkWallCollision method in GameViewModel and change up the variables
-        if (false) { // playerBounds.intersect(enemyBounds)
+        double playerX = player.getX();
+        double playerY = player.getY();
+        double playerWidth = player.getWidth();
+        double playerHeight = player.getHeight();
+        double enemyX = getX();
+        double enemyY = getY();
+        double enemyWidth = getWidth();
+        double enemyHeight = getHeight();
+
+    /*
+    Creates a rectangle around dot, and checks for an intersection between player rect and
+    dot rect. Intersection = collision.
+     */
+        RectF playerBounds = new RectF((float) playerX, (float) playerY,
+                (float) (playerX + playerWidth), (float) (playerY + playerHeight));
+        RectF enemyBounds = new RectF((float) enemyX, (float) enemyY,
+                (float) (enemyX + enemyWidth), (float) (enemyY + enemyHeight));
+        if (playerBounds.intersect(enemyBounds)) {
             player.notifyCollision(damage);
         }
     }

@@ -1,8 +1,11 @@
 package com.example.cs2340a_team31.views;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import kotlin.jvm.Volatile;
+
 public class GameActivity extends AppCompatActivity {
 
     private GameViewModel viewModel;
@@ -34,14 +39,18 @@ public class GameActivity extends AppCompatActivity {
 
     private Timer scoreTimer;
 
+    private volatile boolean keepRunning = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
 
+
         // Initialize the ViewModel
         viewModel = new GameViewModel();
         enemyViews = new ArrayList<>();
+
 
         // Initialize UI components and set listeners
         gameLayout = findViewById(R.id.gameLayout);
@@ -140,6 +149,7 @@ public class GameActivity extends AppCompatActivity {
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
 
         viewModel.setPlayername(playername);
+        viewModel.setPlayerHealth(startHealth);
         viewModel.setScoreValue(scoreValue);
         viewModel.setEnemyDamage(enemydamage);
 
@@ -159,15 +169,33 @@ public class GameActivity extends AppCompatActivity {
                         // TODO: Tran - Check if health is 0 and go to losing end screen if so
                         //viewModel.setPlayerData(); // Sets the player data for end screen
 
+                        if (keepRunning) {
+                            if (viewModel.getPlayer().getHealth() <= 0) {
+                                viewModel.setPlayerData();
+                                keepRunning = false;
+                                Intent intent = new Intent(GameActivity.this,
+                                        GameEndActivity.class);
+                                intent.putExtra("LOST", true);
+                                startActivity(intent);
+                                finish();
+                            }
 
-                        // TODO: Thomas - Most likely call enemy movement move() here
-                        //setEnemyLocation();
+                            // TODO: Thomas - Most likely call enemy movement move() here
+                            Player player = Player.getPlayer();
+                            player.notifyEnemies();
+                            updateEnemyViews();
 
-                        // TODO: Later: Will be removed
-                        if (viewModel.getScoreValue() > 0) {
-                            viewModel.setScoreValue(viewModel.getScoreValue() - 1);
+                            setEnemyLocation();
+
+                            ArrayList<Enemy> enemies = viewModel.getEnemy();
+
+
+                            // TODO: Later: Will be removed
+                            if (viewModel.getScoreValue() > 0) {
+                                viewModel.setScoreValue(viewModel.getScoreValue() - 1);
+                            }
+                            score.setText("Score: " + viewModel.getScoreValue());
                         }
-                        score.setText("Score: " + viewModel.getScoreValue());
                     }
                 });
             }
@@ -177,7 +205,6 @@ public class GameActivity extends AppCompatActivity {
     private void setPlayerView() {
         Player player = viewModel.getPlayer();
         player.notifyObservers();
-        player.notifyEnemies();
         updateHealth();
     }
 
@@ -207,7 +234,9 @@ public class GameActivity extends AppCompatActivity {
             updateEnemyViews();
             break;
         default:
-            Intent intent = new Intent(GameActivity.this, GameEndActivity.class);
+            Intent intent = new Intent(GameActivity.this,
+                    GameEndActivity.class);
+            intent.putExtra("LOST", false);
             startActivity(intent);
             finish();
         }
