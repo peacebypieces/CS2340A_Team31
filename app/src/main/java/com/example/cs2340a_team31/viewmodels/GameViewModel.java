@@ -100,7 +100,6 @@ public class GameViewModel extends ViewModel {
 
         // Notifies observers of player movement
         player.notifyObservers();
-        player.notifyEnemies();
 
         // check collisions here
         checkDoorCollision();
@@ -177,17 +176,17 @@ public class GameViewModel extends ViewModel {
 
         // Adds the 3 enemies in the room
         enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 9F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "RIGHT");
         firstRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
         enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "DOWN");
         firstRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
         enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "DOWN");
         firstRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -236,17 +235,17 @@ public class GameViewModel extends ViewModel {
 
         // Adds the 3 enemies in the room
         enemy1 = enemyFactory.spawnEnemy("rat", 13F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "DOWN");
         secondRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
         enemy2 = enemyFactory.spawnEnemy("rat", 18F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "DOWN");
         secondRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
         enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 5F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "RIGHT");
         secondRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -282,17 +281,17 @@ public class GameViewModel extends ViewModel {
 
         // Adds the 3 enemies in the room
         enemy1 = enemyFactory.spawnEnemy("rat", 9F * widthRatio, 11F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "RIGHT");
         thirdRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
         enemy2 = enemyFactory.spawnEnemy("dog", 27F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio , "DOWN");
         thirdRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
         enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio, 7F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "RIGHT");
         thirdRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -319,17 +318,17 @@ public class GameViewModel extends ViewModel {
 
         // Adds the 3 enemies in the room
         enemy1 = enemyFactory.spawnEnemy("dog", 4F * widthRatio, 1F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "DOWN");
         fourthRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
         enemy2 = enemyFactory.spawnEnemy("dog", 12F * widthRatio, 16F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "UP");
         fourthRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
         enemy3 = enemyFactory.spawnEnemy("dawg", 26F * widthRatio, 1F * heightRatio, enemyDamage, widthRatio,
-                heightRatio);
+                heightRatio, "LEFT");
         fourthRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -480,5 +479,8 @@ public class GameViewModel extends ViewModel {
 
     public void setRoomChanged() {
         this.roomChanged = false;
+    }
+
+    public void setPlayerHealth(double startHealth) { player.setHealth(startHealth);
     }
 }

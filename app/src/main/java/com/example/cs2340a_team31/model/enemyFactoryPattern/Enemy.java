@@ -7,7 +7,7 @@ import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
 public abstract class Enemy implements EnemyObserver {
-
+    int movementCounter = 0;
     double movementSpeed;
 
     String type;
@@ -25,11 +25,12 @@ public abstract class Enemy implements EnemyObserver {
     double width;
     double height;
 
-    void move() {
+    @Override
+    public void move() {
         if (!alive) {
             return;
         }
-        // TODO: Thomas - remove this
+
         switch (direction) {
             case "UP":
                 this.y -= movementSpeed;
@@ -44,6 +45,27 @@ public abstract class Enemy implements EnemyObserver {
                 this.x -= movementSpeed;
                 break;
         }
+
+        movementCounter++;
+
+        if (movementCounter == 20) {
+            movementCounter = 0;
+            switch(direction) {
+                case "UP":
+                    this.direction = "DOWN";
+                    break;
+                case "DOWN":
+                    this.direction = "UP";
+                    break;
+                case "RIGHT":
+                    this.direction = "LEFT";
+                    break;
+                case "LEFT":
+                    this.direction = "RIGHT";
+                    break;
+            }
+        }
+
     }
 
     @Override

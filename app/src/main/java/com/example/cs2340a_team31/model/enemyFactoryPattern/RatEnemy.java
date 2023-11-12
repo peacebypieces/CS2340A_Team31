@@ -8,13 +8,14 @@ import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 
 public class RatEnemy extends Enemy {
-    RatEnemy(double w, double h, double difficulty) {
+    RatEnemy(double w, double h, double difficulty, String direction) {
         setSize(2 * w, 2 * h);
         movementSpeed = w/4;
         damage = difficulty * 10.0; // Scales the damage based on difficulty
         health = 0.0;
         alive = true;
         type = "rat";
+        this.direction = direction;
     }
 
     @Override
