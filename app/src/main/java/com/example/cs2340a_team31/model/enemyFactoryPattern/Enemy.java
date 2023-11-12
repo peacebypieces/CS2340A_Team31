@@ -1,5 +1,6 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
@@ -71,8 +72,24 @@ public abstract class Enemy implements EnemyObserver {
     @Override
     public void checkCollision(Player player) {
         // TODO: Tran - Implement enemy collision
-        // Simply use the checkWallCollision method in GameViewModel and change up the variables
-        if (false) { // playerBounds.intersect(enemyBounds)
+        double playerX = player.getX();
+        double playerY = player.getY();
+        double playerWidth = player.getWidth();
+        double playerHeight = player.getHeight();
+        double enemyX = getX();
+        double enemyY = getY();
+        double enemyWidth = getWidth();
+        double enemyHeight = getHeight();
+
+    /*
+    Creates a rectangle around dot, and checks for an intersection between player rect and
+    dot rect. Intersection = collision.
+     */
+        RectF playerBounds = new RectF((float) playerX, (float) playerY,
+                (float) (playerX + playerWidth), (float) (playerY + playerHeight));
+        RectF enemyBounds = new RectF((float) enemyX, (float) enemyY,
+                (float) (enemyX + enemyWidth), (float) (enemyY + enemyHeight));
+        if (playerBounds.intersect(enemyBounds)) {
             player.notifyCollision(damage);
         }
     }

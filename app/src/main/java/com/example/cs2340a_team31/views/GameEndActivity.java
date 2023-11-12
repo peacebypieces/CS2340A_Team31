@@ -3,6 +3,7 @@ package com.example.cs2340a_team31.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +20,14 @@ public class GameEndActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.end_screen);
 
+        boolean lost = getIntent().getBooleanExtra("LOST", false);
+
+
+      /**  if (lost) {
+            View gameLayout = findViewById(R.id.gameLayout);
+            gameLayout.setBackgroundResource(R.drawable.losebackground);
+        }
+**/
         TextView[] textViews = new TextView[5];
 
         textViews[0] = findViewById(R.id.leaderBoard1);
