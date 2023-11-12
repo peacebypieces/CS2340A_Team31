@@ -70,7 +70,6 @@ public class Player implements PlayerSubject {
         if (movementStrategy != null) {
             movementStrategy.move(x);
         }
-        notifyEnemies();
     }
 
     public double getMovementSpeedX() {
@@ -214,6 +213,7 @@ public class Player implements PlayerSubject {
 
     public void notifyEnemies() {
         for (EnemyObserver observer : enemyObservers) {
+            observer.move();
             observer.checkCollision(player);
         }
     }

@@ -1,8 +1,11 @@
 package com.example.cs2340a_team31.views;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,9 +42,11 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
 
+
         // Initialize the ViewModel
         viewModel = new GameViewModel();
         enemyViews = new ArrayList<>();
+
 
         // Initialize UI components and set listeners
         gameLayout = findViewById(R.id.gameLayout);
@@ -140,6 +145,7 @@ public class GameActivity extends AppCompatActivity {
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
 
         viewModel.setPlayername(playername);
+        viewModel.setPlayerHealth(startHealth);
         viewModel.setScoreValue(scoreValue);
         viewModel.setEnemyDamage(enemydamage);
 
@@ -161,7 +167,17 @@ public class GameActivity extends AppCompatActivity {
 
 
                         // TODO: Thomas - Most likely call enemy movement move() here
-                        //setEnemyLocation();
+                        Player player = Player.getPlayer();
+                        player.notifyEnemies();
+                        updateEnemyViews();
+
+                        setEnemyLocation();
+
+                        ArrayList<Enemy> enemies = viewModel.getEnemy();
+
+
+
+
 
                         // TODO: Later: Will be removed
                         if (viewModel.getScoreValue() > 0) {
@@ -177,7 +193,6 @@ public class GameActivity extends AppCompatActivity {
     private void setPlayerView() {
         Player player = viewModel.getPlayer();
         player.notifyObservers();
-        player.notifyEnemies();
         updateHealth();
     }
 
