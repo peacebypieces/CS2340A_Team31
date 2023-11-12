@@ -23,6 +23,8 @@ public class Player {
     private int score;
     private String difficulty;
 
+    private boolean win;
+
     /*
      * @param x x-coordinate of player (default 0.0)
      * @param y y-coordinate of player (default 0.0)
@@ -63,6 +65,14 @@ public class Player {
 
     public double getMovementSpeed() {
         return movementSpeed;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
+    public boolean getWin() {
+        return this.win;
     }
 
     public void setHealth(double health) {

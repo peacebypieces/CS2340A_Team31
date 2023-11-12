@@ -222,6 +222,7 @@ public class GameActivity extends AppCompatActivity {
                 player.setName(playername);
                 player.setScore(scoreValue[0]);
                 player.setDateTime(currentTime);
+                player.setWin(true);
 
 
                 finish();

@@ -48,9 +48,16 @@ public class GameEndActivity extends AppCompatActivity {
 
         //adding current game to the current textview
         TextView currentScore = findViewById(R.id.currentScore);
-        currentScore.setText("Current: " + "Name:" + lbPlayer.getName() + ", "
-                                         + "Time:" + lbPlayer.getDateTime() + ", "
-                                         + "Score:" + lbPlayer.getScore());
+        if (player.getWin() == true) {
+            currentScore.setText("Current: " + "Name:" + lbPlayer.getName() + ", "
+                    + "Time:" + lbPlayer.getDateTime() + ", "
+                    + "Score:" + lbPlayer.getScore() + "        YOU HAVE WON!");
+        } else {
+            currentScore.setText("Current: " + "Name:" + lbPlayer.getName() + ", "
+                    + "Time:" + lbPlayer.getDateTime() + ", "
+                    + "Score:" + lbPlayer.getScore() + "         YOU HAVE LOST!");
+        }
+
         //sorts the array
         Comparator<LeaderBoardPlayer> comparator = new Comparator<LeaderBoardPlayer>() {
             public int compare(LeaderBoardPlayer p1, LeaderBoardPlayer p2) {
