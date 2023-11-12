@@ -131,5 +131,9 @@ public abstract class Enemy implements EnemyObserver {
     public double getY() {
         return y;
     }
+
+    public double getDamage() {
+        return damage;
+    }
 }
 

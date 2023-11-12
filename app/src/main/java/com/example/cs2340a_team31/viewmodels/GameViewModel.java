@@ -122,6 +122,7 @@ public class GameViewModel extends ViewModel {
 
         setDoorLocation(1, 8, false);
         enemyFactory = new SpaceEnemyFactory();
+
         currentRoom = room1();
     }
 
@@ -420,6 +421,7 @@ public class GameViewModel extends ViewModel {
         player.setName(playername);
         player.setScore(scoreValue);
         player.setDateTime(currentTime);
+
     }
 
     public void setPlayerLocation(double x, double y) {
