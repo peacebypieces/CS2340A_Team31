@@ -33,6 +33,8 @@ public class Player implements PlayerSubject {
     private int score;
     private String difficulty;
 
+
+
     /*
      * @param x x-coordinate of player (default 0.0)
      * @param y y-coordinate of player (default 0.0)
@@ -72,6 +74,7 @@ public class Player implements PlayerSubject {
         }
         notifyEnemies();
     }
+
 
     public double getMovementSpeedX() {
         return movementSpeedX;
