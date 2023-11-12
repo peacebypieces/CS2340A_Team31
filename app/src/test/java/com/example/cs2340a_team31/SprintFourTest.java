@@ -31,8 +31,8 @@ public class SprintFourTest {
     public void testMiceEnemyLocation() {//Testing Factory Pattern
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
-        Enemy enemy = enemyFactory.spawnEnemy("mice", 12F * 100, 9F * 100, 20, 100,
-                100);
+        Enemy enemy = enemyFactory.spawnEnemy("mice", 12.0 * 100.0, 9.0 * 100.0, 20.0, 100.0,
+                100, "DOWN");
 
         player = Player.getPlayer();
         player.setHealth(100);
@@ -50,7 +50,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("rat", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         //System.out.println(enemy.getDamage());
         player = Player.getPlayer();
         player.setHealth(100);
@@ -67,7 +67,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("dog", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
 
         player = Player.getPlayer();
         player.setHealth(100);
@@ -85,7 +85,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("dawg", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
 
         player = Player.getPlayer();
         player.setHealth(100);
@@ -103,7 +103,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("rat", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         assertEquals(200,enemy.getDamage(),0);
 
     }
@@ -113,7 +113,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("dog", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         assertEquals(300,enemy.getDamage(),0);
 
     }
@@ -123,7 +123,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("mice", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         assertEquals(100,enemy.getDamage(),0);
 
     }
@@ -133,7 +133,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("dawg", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         assertEquals(500,enemy.getDamage(),0);
 
     }
@@ -143,7 +143,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("rat", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         player = player.getPlayer();
         player.setHealth(1000);
         assertEquals(200,enemy.getDamage(),0);
@@ -157,7 +157,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("dog", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         player = player.getPlayer();
         player.setHealth(1000);
         assertEquals(300,enemy.getDamage(),0);
@@ -171,7 +171,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("dawg", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         player = player.getPlayer();
         player.setHealth(1000);
         assertEquals(500,enemy.getDamage(),0);
@@ -185,7 +185,7 @@ public class SprintFourTest {
         EnemyFactory enemyFactory;
         enemyFactory = new SpaceEnemyFactory();
         Enemy enemy = enemyFactory.spawnEnemy("mice", 12F * 100, 9F * 100, 20, 100,
-                100);
+                100, "DOWN");
         player = player.getPlayer();
         player.setHealth(1000);
         assertEquals(100,enemy.getDamage(),0);
