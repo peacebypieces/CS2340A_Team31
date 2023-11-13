@@ -1,10 +1,8 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
-import android.content.Context;
-
 public abstract class EnemyFactory {
     public Enemy spawnEnemy(String type, double x, double y, double difficulty, double w,
-                            double h , String direction) {
+                            double h, String direction) {
         Enemy enemy;
         enemy = createEnemy(type, w, h, difficulty, direction);
         enemy.setLocation(x, y);

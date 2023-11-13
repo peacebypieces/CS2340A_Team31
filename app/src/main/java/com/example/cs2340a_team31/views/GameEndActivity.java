@@ -2,7 +2,6 @@ package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,11 +22,13 @@ public class GameEndActivity extends AppCompatActivity {
         boolean lost = getIntent().getBooleanExtra("LOST", false);
 
 
-      /**  if (lost) {
+        if (lost) {
             View gameLayout = findViewById(R.id.gameLayout);
             gameLayout.setBackgroundResource(R.drawable.losebackground);
+            TextView endText = findViewById(R.id.winText);
+            endText.setText("Ouch! You died!");
         }
-**/
+
         TextView[] textViews = new TextView[5];
 
         textViews[0] = findViewById(R.id.leaderBoard1);
@@ -48,16 +49,18 @@ public class GameEndActivity extends AppCompatActivity {
 
         LinkedList<LeaderBoardPlayer> players = LeaderBoard.getleaderboard().getPlayers();
 
-// Check if the player already exists in the leaderboard
+        // Check if the player already exists in the leaderboard
         boolean playerExists = false;
         for (LeaderBoardPlayer existingPlayer : players) {
-            if (existingPlayer.getName().equals(lbPlayer.getName()) && existingPlayer.getScore() == lbPlayer.getScore()) {
+            if (existingPlayer.getName().equals(lbPlayer.getName())
+                    &&
+                    existingPlayer.getScore() == lbPlayer.getScore()) {
                 playerExists = true;
                 break;
             }
         }
 
-// If the player doesn't exist, add them to the leaderboard
+        // If the player doesn't exist, add them to the leaderboard
         if (!playerExists) {
             leaderBoard.add(lbPlayer);
         }
