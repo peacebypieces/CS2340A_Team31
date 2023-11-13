@@ -1,30 +1,27 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
 import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
 public abstract class Enemy implements EnemyObserver {
-    int movementCounter = 0;
-    double movementSpeed;
+    private int movementCounter = 0;
+    private double movementSpeed;
 
-    String type;
+    private String type;
 
-    String direction;
-    double damage;
-    Drawable sprite;
-    double health;
+    private String direction;
+    private double damage;
+    private double health;
 
-    boolean alive;
+    private boolean alive;
 
-    double x;
-    double y;
+    private double x;
+    private double y;
 
-    double width;
-    double height;
+    private double width;
+    private double height;
 
     @Override
     public void move() {
@@ -33,37 +30,41 @@ public abstract class Enemy implements EnemyObserver {
         }
 
         switch (direction) {
-            case "UP":
-                this.y -= movementSpeed;
-                break;
-            case "DOWN":
-                this.y += movementSpeed;
-                break;
-            case "RIGHT":
-                this.x += movementSpeed;
-                break;
-            case "LEFT":
-                this.x -= movementSpeed;
-                break;
+        case "UP":
+            this.y -= movementSpeed;
+            break;
+        case "DOWN":
+            this.y += movementSpeed;
+            break;
+        case "RIGHT":
+            this.x += movementSpeed;
+            break;
+        case "LEFT":
+            this.x -= movementSpeed;
+            break;
+        default:
+            break;
         }
 
         movementCounter++;
 
         if (movementCounter == 20) {
             movementCounter = 0;
-            switch(direction) {
-                case "UP":
-                    this.direction = "DOWN";
-                    break;
-                case "DOWN":
-                    this.direction = "UP";
-                    break;
-                case "RIGHT":
-                    this.direction = "LEFT";
-                    break;
-                case "LEFT":
-                    this.direction = "RIGHT";
-                    break;
+            switch (direction) {
+            case "UP":
+                this.direction = "DOWN";
+                break;
+            case "DOWN":
+                this.direction = "UP";
+                break;
+            case "RIGHT":
+                this.direction = "LEFT";
+                break;
+            case "LEFT":
+                this.direction = "RIGHT";
+                break;
+            default:
+                break;
             }
         }
 
@@ -71,7 +72,6 @@ public abstract class Enemy implements EnemyObserver {
 
     @Override
     public void checkCollision(Player player) {
-        // TODO: Tran - Implement enemy collision
         double playerX = player.getX();
         double playerY = player.getY();
         double playerWidth = player.getWidth();
@@ -81,10 +81,10 @@ public abstract class Enemy implements EnemyObserver {
         double enemyWidth = getWidth();
         double enemyHeight = getHeight();
 
-    /*
-    Creates a rectangle around dot, and checks for an intersection between player rect and
-    dot rect. Intersection = collision.
-     */
+        /*
+        Creates a rectangle around dot, and checks for an intersection between player rect and
+        dot rect. Intersection = collision.
+         */
         RectF playerBounds = new RectF((float) playerX, (float) playerY,
                 (float) (playerX + playerWidth), (float) (playerY + playerHeight));
         RectF enemyBounds = new RectF((float) enemyX, (float) enemyY,

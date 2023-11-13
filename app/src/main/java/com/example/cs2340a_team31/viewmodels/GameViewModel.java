@@ -1,6 +1,5 @@
 package com.example.cs2340a_team31.viewmodels;
 
-import android.content.Context;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -127,7 +126,7 @@ public class GameViewModel extends ViewModel {
     }
 
     public Room room1() {
-        player.removeEnemyObservers();
+        //player.removeEnemyObservers();
 
         // Create rooms and add walls to them
         Wall wall;
@@ -176,17 +175,20 @@ public class GameViewModel extends ViewModel {
         firstRoom.addWall(wall);
 
         // Adds the 3 enemies in the room
-        enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 9F * heightRatio, enemyDamage, widthRatio,
+        enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio,
+                9F * heightRatio, enemyDamage, widthRatio,
                 heightRatio, "RIGHT");
         firstRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+        enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio,
+                2F * heightRatio, enemyDamage, widthRatio,
                 heightRatio, "DOWN");
         firstRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio, 2F * heightRatio, enemyDamage, widthRatio,
+        enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio,
+                2F * heightRatio, enemyDamage, widthRatio,
                 heightRatio, "DOWN");
         firstRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);

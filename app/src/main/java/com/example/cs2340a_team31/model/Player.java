@@ -175,10 +175,10 @@ public class Player implements PlayerSubject {
             this.health = 100;
             this.score = 100;
         } else if (name.equals("Medium")) {
-            this.health = 80;
+            this.health = 200;
             this.score = 200;
         } else if (name.equals("Hard")) {
-            this.health = 60;
+            this.health = 300;
             this.score = 300;
         } else {
             throw new NoSuchElementException("Difficulty wasn't given");
