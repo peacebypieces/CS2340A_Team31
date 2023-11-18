@@ -104,6 +104,30 @@ public abstract class Enemy implements EnemyObserver {
         this.y = y;
     }
 
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public void setMovementSpeed(double movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
     void kill() {
         this.alive = false;
     }

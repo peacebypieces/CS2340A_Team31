@@ -1,11 +1,8 @@
 package com.example.cs2340a_team31.viewmodels;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.observers.PlayerObserver;
 
 
