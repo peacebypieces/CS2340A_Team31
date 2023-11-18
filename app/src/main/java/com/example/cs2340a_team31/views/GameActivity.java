@@ -53,12 +53,6 @@ public class GameActivity extends AppCompatActivity {
         double screenWidth = gameView.getResources().getDisplayMetrics().widthPixels;
         double screenHeight = gameView.getResources().getDisplayMetrics().heightPixels;
 
-        viewModel.calculateRatio(screenWidth, screenHeight);
-
-        // Add player view to screen
-        playerView = new PlayerView(this);
-        gameLayout.addView(playerView);
-
         // Add enemy views to screen
         for (int i = 0; i < 3; i++) {
             EnemyView enemyView = new EnemyView(this);
@@ -66,13 +60,24 @@ public class GameActivity extends AppCompatActivity {
             gameLayout.addView(enemyView);
         }
 
-        updateEnemyViews();
+        // Add player view to screen
+        playerView = new PlayerView(this);
+        gameLayout.addView(playerView);
 
         // player variable is set to player in player class, observer is added
         Player player = Player.getPlayer();
         player.addObserver(playerView);
 
         setTextViews();
+
+        viewModel.calculateRatio(screenWidth, screenHeight);
+        changeRoomBackground();
+
+        updateEnemyViews();
+
+
+
+        player.notifyEnemies();
 
         // makes enemies show up in first room
         updateEnemyViews();
@@ -166,7 +171,7 @@ public class GameActivity extends AppCompatActivity {
                         if (keepRunning) {
 
                             // Check if health is 0 and go to losing end screen if so
-                            if (viewModel.getPlayer().getHealth() <= 0) {
+                            if (Player.getPlayer().getHealth() <= 0) {
                                 viewModel.setPlayerData();
                                 keepRunning = false;
                                 Intent intent = new Intent(GameActivity.this,
@@ -197,7 +202,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setPlayerView() {
-        Player player = viewModel.getPlayer();
+        Player player = Player.getPlayer();
         player.notifyObservers();
     }
 
@@ -205,6 +210,7 @@ public class GameActivity extends AppCompatActivity {
         int currentRoomNum = viewModel.getCurrentRoomNum();
         switch (currentRoomNum) {
         case 1:
+            updateEnemyViews();
             break;
         case 2:
             gameLayout.setBackgroundResource(R.drawable.room2);
