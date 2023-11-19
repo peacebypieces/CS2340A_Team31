@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -145,21 +147,25 @@ public class GameActivity extends AppCompatActivity {
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         TextView score = findViewById(R.id.scoreDisplay);
+        TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
 
         String playername = getIntent().getStringExtra("PLAYER_NAME");
         double startHealth  = getIntent().getDoubleExtra("STARTING_HEALTH", 100);
         double enemydamage = getIntent().getDoubleExtra("ENEMY_DAMAGE", 20);
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
+        double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
 
         viewModel.setPlayername(playername);
         viewModel.setPlayerHealth(startHealth);
         viewModel.setScoreValue(scoreValue);
         viewModel.setEnemyDamage(enemydamage);
+        viewModel.setEnemyHealth(enemyHealth);
 
         // Updates components on game screen
         playerName.append(playername);
         playerHealth.append(" " + startHealth);
         enemyDamage.append(" " + enemydamage);
+        enemyhealth.append(" " + enemyHealth);
 
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
@@ -194,6 +200,27 @@ public class GameActivity extends AppCompatActivity {
                                 viewModel.setScoreValue(viewModel.getScoreValue() - 1);
                             }
                             score.setText("Score: " + viewModel.getScoreValue());
+
+                            Button attack = findViewById(R.id.attack);
+
+                            attack.setOnClickListener(v -> {
+                                List<Enemy> enemies = viewModel.getEnemy();
+                                for (int i = 0; i < enemies.size(); i++) {
+                                    EnemyView enemyView = enemyViews.get(i);
+                                    Enemy enemy = enemies.get(i);
+                                    enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                                    if (player.isCollided(enemy)) {
+                                        player.attack(enemy);
+                                        if (enemy.getHealth() <= 0) {
+                                            enemy.setAlive(false);
+                                            enemyView.setVisibility(View.INVISIBLE);
+                                        }
+                                        enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                                        break;
+                                    }
+                                }
+                            });
+
                         }
                     }
                 });
@@ -208,21 +235,38 @@ public class GameActivity extends AppCompatActivity {
 
     private void changeRoomBackground() {
         int currentRoomNum = viewModel.getCurrentRoomNum();
+        List<Enemy> enemies = viewModel.getEnemy();
         switch (currentRoomNum) {
         case 1:
             updateEnemyViews();
+            for (int i = 0; i < enemies.size(); i++) {
+                EnemyView enemyView = enemyViews.get(i);
+                enemyView.setVisibility(View.VISIBLE);
+            }
             break;
         case 2:
             gameLayout.setBackgroundResource(R.drawable.room2);
             updateEnemyViews();
+            for (int i = 0; i < enemies.size(); i++) {
+                EnemyView enemyView = enemyViews.get(i);
+                enemyView.setVisibility(View.VISIBLE);
+            }
             break;
         case 3:
             gameLayout.setBackgroundResource(R.drawable.room3);
             updateEnemyViews();
+            for (int i = 0; i < enemies.size(); i++) {
+                EnemyView enemyView = enemyViews.get(i);
+                enemyView.setVisibility(View.VISIBLE);
+            }
             break;
         case 4:
             gameLayout.setBackgroundResource(R.drawable.room4);
             updateEnemyViews();
+            for (int i = 0; i < enemies.size(); i++) {
+                EnemyView enemyView = enemyViews.get(i);
+                enemyView.setVisibility(View.VISIBLE);
+            }
             break;
         default:
             Intent intent = new Intent(GameActivity.this,
@@ -247,7 +291,6 @@ public class GameActivity extends AppCompatActivity {
 
         // Scale image to fill the ImageView
         enemyimg.requestLayout(); // Apply the changes to the ImageView
-
     }
 
     public void setEnemyLocation() {
@@ -306,7 +349,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
         setEnemyLocation();
-
     }
 
     // Other UI-related methods

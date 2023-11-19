@@ -48,6 +48,7 @@ public class GameConfigActivity extends AppCompatActivity {
                 intent.putExtra("ENEMY_DAMAGE", viewModel.getEnemyDamage());
                 intent.putExtra("SELECTED_CHARACTER", viewModel.getSelectedCharacter());
                 intent.putExtra("SCORE", viewModel.getScore());
+                intent.putExtra("ENEMY_HEALTH", viewModel.getEnemyHealth());
 
                 startActivity(intent);
             } else {
