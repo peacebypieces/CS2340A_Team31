@@ -1,5 +1,8 @@
 package com.example.cs2340a_team31.model;
 
+import android.graphics.RectF;
+
+import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 import com.example.cs2340a_team31.model.observers.PlayerObserver;
 import com.example.cs2340a_team31.model.observers.PlayerSubject;
@@ -25,6 +28,8 @@ public class Player implements PlayerSubject {
     private double movementSpeedY;
 
     private double health;
+
+    private double attackDamage;
     private static Player player;
 
     private String name;
@@ -46,6 +51,7 @@ public class Player implements PlayerSubject {
         this.height = 0;
         this.movementSpeedX = 25.0;
         this.movementSpeedY = 25.0;
+        this.attackDamage = 10.0;
     }
 
     /*
@@ -86,6 +92,13 @@ public class Player implements PlayerSubject {
     }
     public double getHealth() {
         return this.health;
+    }
+
+    public void setAttackDamage(double attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+    public double getAttackDamage() {
+        return attackDamage;
     }
 
     public void setPosition(double x, double y) {
@@ -184,6 +197,30 @@ public class Player implements PlayerSubject {
         }
     }
 
+    public boolean isCollided(Enemy enemy) {
+        double playerX = getX();
+        double playerY = getY();
+        double playerWidth = getWidth();
+        double playerHeight = getHeight();
+        double enemyX = enemy.getX();
+        double enemyY = enemy.getY();
+        double enemyWidth = enemy.getWidth();
+        double enemyHeight = enemy.getHeight();
+
+        /*
+        Creates a rectangle around dot, and checks for an intersection between player rect and
+        dot rect. Intersection = collision.
+         */
+        RectF playerBounds = new RectF((float) playerX, (float) playerY,
+                (float) (playerX + playerWidth), (float) (playerY + playerHeight));
+        RectF enemyBounds = new RectF((float) enemyX, (float) enemyY,
+                (float) (enemyX + enemyWidth), (float) (enemyY + enemyHeight));
+        if (playerBounds.intersect(enemyBounds)) {
+            return true;
+        }
+        return false;
+    }
+
 
 
     // Other player-related methods and logic here...
@@ -223,5 +260,9 @@ public class Player implements PlayerSubject {
     public void notifyCollision(double damage) {
         health -= damage;
         System.out.println("Player HP: " + health);
+    }
+
+    public void attack(Enemy enemy) {
+        enemy.takeDamage(attackDamage);
     }
 }

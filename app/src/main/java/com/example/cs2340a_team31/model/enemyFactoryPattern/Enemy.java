@@ -15,6 +15,8 @@ public abstract class Enemy implements EnemyObserver {
     private double damage;
     private double health;
 
+    private double enemyHealth;
+
     private boolean alive;
 
     private double x;
@@ -89,9 +91,14 @@ public abstract class Enemy implements EnemyObserver {
                 (float) (playerX + playerWidth), (float) (playerY + playerHeight));
         RectF enemyBounds = new RectF((float) enemyX, (float) enemyY,
                 (float) (enemyX + enemyWidth), (float) (enemyY + enemyHeight));
-        if (playerBounds.intersect(enemyBounds)) {
+        if (playerBounds.intersect(enemyBounds) && isAlive()) {
             player.notifyCollision(damage);
         }
+    }
+
+    public void takeDamage(double damage) {
+        enemyHealth -= damage;
+        System.out.println("Enemy HP: " + enemyHealth);
     }
 
     void setSize(double w, double h) {
@@ -128,7 +135,7 @@ public abstract class Enemy implements EnemyObserver {
         this.health = health;
     }
 
-    void kill() {
+    public void kill() {
         this.alive = false;
     }
 
@@ -158,6 +165,10 @@ public abstract class Enemy implements EnemyObserver {
 
     public double getDamage() {
         return damage;
+    }
+
+    public double getHealth() {
+        return enemyHealth;
     }
 }
 

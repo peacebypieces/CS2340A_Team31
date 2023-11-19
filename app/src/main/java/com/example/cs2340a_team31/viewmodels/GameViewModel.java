@@ -3,6 +3,8 @@ package com.example.cs2340a_team31.viewmodels;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.widget.ImageView;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.cs2340a_team31.model.Door;
@@ -30,6 +32,8 @@ public class GameViewModel extends ViewModel {
     private String playername;
 
     private double enemyDamage;
+
+    private double enemyHealth;
 
     private  EnemyFactory enemyFactory;
     private Room currentRoom;
@@ -462,6 +466,10 @@ public class GameViewModel extends ViewModel {
         this.enemyDamage = enemyDamage;
     }
 
+    public void setEnemyHealth(double enemyHealth) {
+        this.enemyHealth = enemyHealth;
+    }
+
     public int getScoreValue() {
         return scoreValue;
     }
@@ -495,5 +503,6 @@ public class GameViewModel extends ViewModel {
     }
 
     public void setPlayerHealth(double startHealth) {
-        player.setHealth(startHealth); }
+        player.setHealth(startHealth);
+    }
 }
