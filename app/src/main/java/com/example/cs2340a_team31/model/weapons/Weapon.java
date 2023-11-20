@@ -1,4 +1,4 @@
-package com.example.cs2340a_team31.weapons;
+package com.example.cs2340a_team31.model.weapons;
 
 public class Weapon {
     int damage;

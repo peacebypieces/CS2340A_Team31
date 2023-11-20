@@ -7,7 +7,7 @@ public class MiceEnemy extends Enemy {
         setSize(1.5 * w, 1.5 * h);
         setMovementSpeed(w / 4);
         setDamage(difficulty * 5.0); // Scales the damage based on difficulty
-        setHealth(0);
+        setHealth(difficulty * 10.0);
         setAlive(true);
         setType("mice");
         setDirection(direction);

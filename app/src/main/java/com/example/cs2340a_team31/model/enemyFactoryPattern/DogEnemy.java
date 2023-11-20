@@ -7,7 +7,7 @@ public class DogEnemy extends Enemy {
         setSize(2 * w, 2 * h);
         setMovementSpeed(h / 4);
         setDamage(difficulty * 15.0); // Scales the damage based on difficulty
-        setHealth(0);
+        setHealth(difficulty * 50.0);
         setAlive(true);
         setType("dog");
         setDirection(direction);

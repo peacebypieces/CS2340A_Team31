@@ -15,8 +15,6 @@ public abstract class Enemy implements EnemyObserver {
     private double damage;
     private double health;
 
-    private double enemyHealth;
-
     private boolean alive;
 
     private double x;
@@ -97,8 +95,8 @@ public abstract class Enemy implements EnemyObserver {
     }
 
     public void takeDamage(double damage) {
-        enemyHealth -= damage;
-        System.out.println("Enemy HP: " + enemyHealth);
+        health -= damage;
+        System.out.println("Enemy HP: " + health);
     }
 
     void setSize(double w, double h) {
@@ -168,7 +166,7 @@ public abstract class Enemy implements EnemyObserver {
     }
 
     public double getHealth() {
-        return enemyHealth;
+        return health;
     }
 }
 

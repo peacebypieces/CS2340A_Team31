@@ -98,6 +98,33 @@ public class GameActivity extends AppCompatActivity {
                 ScaleType.FIT_XY); // Scale image to fill the ImageView
         playerView.requestLayout(); // Apply the changes to the ImageView
 
+        TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
+        double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
+        viewModel.setEnemyHealth(enemyHealth);
+
+        Button attack = findViewById(R.id.attack);
+
+        attack.setOnClickListener(v -> {
+            List<Enemy> enemies = viewModel.getEnemy();
+            for (int i = 0; i < enemies.size(); i++) {
+                EnemyView enemyView = enemyViews.get(i);
+                Enemy enemy = enemies.get(i);
+                if (enemy.getHealth() <= 0) {
+                    continue;
+                }
+                enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                if (player.isCollided(enemy)) {
+                    player.attack(enemy);
+                    if (enemy.getHealth() <= 0) {
+                        enemy.setAlive(false);
+                        enemyView.setVisibility(View.INVISIBLE);
+                    }
+                    enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                    break;
+                }
+            }
+        });
+
         setCharacter();
     }
 
@@ -147,25 +174,22 @@ public class GameActivity extends AppCompatActivity {
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         TextView score = findViewById(R.id.scoreDisplay);
-        TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
+
 
         String playername = getIntent().getStringExtra("PLAYER_NAME");
         double startHealth  = getIntent().getDoubleExtra("STARTING_HEALTH", 100);
         double enemydamage = getIntent().getDoubleExtra("ENEMY_DAMAGE", 20);
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
-        double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
 
         viewModel.setPlayername(playername);
         viewModel.setPlayerHealth(startHealth);
         viewModel.setScoreValue(scoreValue);
         viewModel.setEnemyDamage(enemydamage);
-        viewModel.setEnemyHealth(enemyHealth);
 
         // Updates components on game screen
         playerName.append(playername);
         playerHealth.append(" " + startHealth);
         enemyDamage.append(" " + enemydamage);
-        enemyhealth.append(" " + enemyHealth);
 
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
@@ -200,27 +224,6 @@ public class GameActivity extends AppCompatActivity {
                                 viewModel.setScoreValue(viewModel.getScoreValue() - 1);
                             }
                             score.setText("Score: " + viewModel.getScoreValue());
-
-                            Button attack = findViewById(R.id.attack);
-
-                            attack.setOnClickListener(v -> {
-                                List<Enemy> enemies = viewModel.getEnemy();
-                                for (int i = 0; i < enemies.size(); i++) {
-                                    EnemyView enemyView = enemyViews.get(i);
-                                    Enemy enemy = enemies.get(i);
-                                    enemyhealth.setText("Enemy HP: " + enemy.getHealth());
-                                    if (player.isCollided(enemy)) {
-                                        player.attack(enemy);
-                                        if (enemy.getHealth() <= 0) {
-                                            enemy.setAlive(false);
-                                            enemyView.setVisibility(View.INVISIBLE);
-                                        }
-                                        enemyhealth.setText("Enemy HP: " + enemy.getHealth());
-                                        break;
-                                    }
-                                }
-                            });
-
                         }
                     }
                 });
@@ -238,35 +241,15 @@ public class GameActivity extends AppCompatActivity {
         List<Enemy> enemies = viewModel.getEnemy();
         switch (currentRoomNum) {
         case 1:
-            updateEnemyViews();
-            for (int i = 0; i < enemies.size(); i++) {
-                EnemyView enemyView = enemyViews.get(i);
-                enemyView.setVisibility(View.VISIBLE);
-            }
             break;
         case 2:
             gameLayout.setBackgroundResource(R.drawable.room2);
-            updateEnemyViews();
-            for (int i = 0; i < enemies.size(); i++) {
-                EnemyView enemyView = enemyViews.get(i);
-                enemyView.setVisibility(View.VISIBLE);
-            }
             break;
         case 3:
             gameLayout.setBackgroundResource(R.drawable.room3);
-            updateEnemyViews();
-            for (int i = 0; i < enemies.size(); i++) {
-                EnemyView enemyView = enemyViews.get(i);
-                enemyView.setVisibility(View.VISIBLE);
-            }
             break;
         case 4:
             gameLayout.setBackgroundResource(R.drawable.room4);
-            updateEnemyViews();
-            for (int i = 0; i < enemies.size(); i++) {
-                EnemyView enemyView = enemyViews.get(i);
-                enemyView.setVisibility(View.VISIBLE);
-            }
             break;
         default:
             Intent intent = new Intent(GameActivity.this,
@@ -275,6 +258,12 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        updateEnemyViews();
+        for (int i = 0; i < enemies.size(); i++) {
+            EnemyView enemyView = enemyViews.get(i);
+            enemyView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void scaleEnemies(AppCompatImageView enemyimg, Enemy enemy) {

@@ -7,7 +7,7 @@ public class RatEnemy extends Enemy {
         setSize(2 * w, 2 * h);
         setMovementSpeed(w / 4);
         setDamage(difficulty * 10.0); // Scales the damage based on difficulty
-        setHealth(0);
+        setHealth(difficulty * 25.0);
         setAlive(true);
         setType("rat");
         setDirection(direction);
