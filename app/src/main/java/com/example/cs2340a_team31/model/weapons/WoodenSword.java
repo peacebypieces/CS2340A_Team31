@@ -1,9 +1,9 @@
 package com.example.cs2340a_team31.model.weapons;
 
-public class DiamondWeapon extends Weapon {
+public class WoodenSword extends Weapon {
 
-    DiamondWeapon(){
-        setDamage(100);
+    WoodenSword(){
+        setDamage(10);
         setWeapon_type("diamond");
     }
 
