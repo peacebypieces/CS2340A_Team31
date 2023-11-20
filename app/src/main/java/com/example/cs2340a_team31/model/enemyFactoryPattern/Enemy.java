@@ -7,6 +7,8 @@ import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
 public abstract class Enemy implements EnemyObserver {
     private int movementCounter = 0;
+
+    private int movementCounterCap = 20;
     private double movementSpeed;
 
     private String type;
@@ -48,7 +50,7 @@ public abstract class Enemy implements EnemyObserver {
 
         movementCounter++;
 
-        if (movementCounter == 20) {
+        if (movementCounter == movementCounterCap) {
             movementCounter = 0;
             switch (direction) {
             case "UP":
@@ -131,6 +133,10 @@ public abstract class Enemy implements EnemyObserver {
 
     public void setHealth(double health) {
         this.health = health;
+    }
+
+    public void setMovementCounterCap(int movementCounterCap) {
+        this.movementCounterCap = movementCounterCap;
     }
 
     public void kill() {

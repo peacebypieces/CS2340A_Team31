@@ -3,13 +3,14 @@ package com.example.cs2340a_team31.model.enemyFactoryPattern;
 import com.example.cs2340a_team31.model.Player;
 
 public class MiceEnemy extends Enemy {
-    MiceEnemy(double w, double h, double difficulty, String direction) {
+    MiceEnemy(double w, double h, double difficulty, String direction, int steps) {
         setSize(1.5 * w, 1.5 * h);
         setMovementSpeed(w / 4);
         setDamage(difficulty * 5.0); // Scales the damage based on difficulty
         setHealth(difficulty * 10.0);
         setAlive(true);
         setType("mice");
+        setMovementCounterCap(steps);
         setDirection(direction);
     }
 

@@ -178,18 +178,18 @@ public class GameActivity extends AppCompatActivity {
 
         String playername = getIntent().getStringExtra("PLAYER_NAME");
         double startHealth  = getIntent().getDoubleExtra("STARTING_HEALTH", 100);
-        double enemydamage = getIntent().getDoubleExtra("ENEMY_DAMAGE", 20);
+        double difficulty = getIntent().getDoubleExtra("ENEMY_DAMAGE", 20);
         int scoreValue = getIntent().getIntExtra("SCORE", 100);
 
         viewModel.setPlayername(playername);
         viewModel.setPlayerHealth(startHealth);
         viewModel.setScoreValue(scoreValue);
-        viewModel.setEnemyDamage(enemydamage);
+        viewModel.setDifficulty(difficulty);
 
         // Updates components on game screen
         playerName.append(playername);
         playerHealth.append(" " + startHealth);
-        enemyDamage.append(" " + enemydamage);
+        enemyDamage.append(" " + difficulty);
 
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
@@ -228,7 +228,7 @@ public class GameActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, 1000); // Check every second
+        }, 0, 100); // Check every second
     }
 
     private void setPlayerView() {
