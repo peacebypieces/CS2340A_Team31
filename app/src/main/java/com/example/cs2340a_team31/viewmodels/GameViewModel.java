@@ -3,6 +3,7 @@ package com.example.cs2340a_team31.viewmodels;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.lifecycle.ViewModel;
@@ -30,6 +31,7 @@ import com.example.cs2340a_team31.model.weapons.WoodenSword;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class GameViewModel extends ViewModel {
 

@@ -103,31 +103,16 @@ public class GameActivity extends AppCompatActivity {
                 ScaleType.FIT_XY); // Scale image to fill the ImageView
         playerView.requestLayout(); // Apply the changes to the ImageView
 
+        Button attack = findViewById(R.id.attack);
+        attack.setOnClickListener(v -> {
+            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_SPACE);
+            onKeyDown(KeyEvent.KEYCODE_SPACE, event);
         TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
         double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
         viewModel.setEnemyHealth(enemyHealth);
 
-        Button attack = findViewById(R.id.attack);
 
-        attack.setOnClickListener(v -> {
-            List<Enemy> enemies = viewModel.getEnemy();
-            for (int i = 0; i < enemies.size(); i++) {
-                EnemyView enemyView = enemyViews.get(i);
-                Enemy enemy = enemies.get(i);
-                if (enemy.getHealth() <= 0) {
-                    continue;
-                }
-                enemyhealth.setText("Enemy HP: " + enemy.getHealth());
-                if (player.isCollided(enemy)) {
-                    player.attack(enemy);
-                    if (enemy.getHealth() <= 0) {
-                        enemy.setAlive(false);
-                        enemyView.setVisibility(View.INVISIBLE);
-                    }
-                    enemyhealth.setText("Enemy HP: " + enemy.getHealth());
-                    break;
-                }
-            }
+
         });
 
         setCharacter();
@@ -143,6 +128,29 @@ public class GameActivity extends AppCompatActivity {
         if (viewModel.isRoomChanged()) {
             changeRoomBackground();
             viewModel.setRoomChanged();
+        }
+        if (keyCode == KeyEvent.KEYCODE_SPACE) {
+            TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
+            double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
+            viewModel.setEnemyHealth(enemyHealth);
+            Player player = viewModel.getPlayer();
+            List<Enemy> enemies = viewModel.getEnemy();
+            enemyhealth.append(" " + enemyHealth);
+            for (int i = 0; i < enemies.size(); i++) {
+                EnemyView enemyView = enemyViews.get(i);
+                Enemy enemy = enemies.get(i);
+                enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                if (player.isCollided(enemy)) {
+                    player.attack(enemy);
+                    if (enemy.getHealth() <= 0) {
+                        enemy.setAlive(false);
+                        viewModel.setScoreValue(viewModel.getScoreValue() + 20);
+                        enemyView.setVisibility(View.INVISIBLE);
+                    }
+                    enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                    break;
+                }
+            }
         }
 
         return true;
@@ -225,9 +233,6 @@ public class GameActivity extends AppCompatActivity {
                             playerHealth.setText("Health:" + player.getHealth());
 
 
-                            if (viewModel.getScoreValue() > 0) {
-                                viewModel.setScoreValue(viewModel.getScoreValue() - 1);
-                            }
                             score.setText("Score: " + viewModel.getScoreValue());
                         }
                     }
