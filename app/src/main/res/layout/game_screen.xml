@@ -97,7 +97,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/pickedWeapon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="116dp"
