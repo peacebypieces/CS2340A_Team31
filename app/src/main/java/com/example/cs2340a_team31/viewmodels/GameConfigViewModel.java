@@ -20,12 +20,12 @@ public class GameConfigViewModel extends ViewModel {
 
         // Handle selected difficulty and set relevant parameters
         if (selectedDifficulty == R.id.radioMedium) {
-            startingHealth = 150;
+            startingHealth = 250;
             enemyDamage = 1.5;
             score = 200;
             enemyHealth = 20;
         } else if (selectedDifficulty == R.id.radioHard) {
-            startingHealth = 200;
+            startingHealth = 500;
             enemyDamage = 2;
             score = 300;
             enemyHealth = 30;
