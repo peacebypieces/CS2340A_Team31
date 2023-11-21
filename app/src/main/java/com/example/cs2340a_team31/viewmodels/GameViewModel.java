@@ -18,6 +18,15 @@ import com.example.cs2340a_team31.model.strategypattern.MoveDownStrategy;
 import com.example.cs2340a_team31.model.strategypattern.MoveLeftStrategy;
 import com.example.cs2340a_team31.model.strategypattern.MoveRightStrategy;
 import com.example.cs2340a_team31.model.strategypattern.MoveUpStrategy;
+import com.example.cs2340a_team31.model.weapons.DiamondWeapon;
+import com.example.cs2340a_team31.model.weapons.EmeraldWeapon;
+import com.example.cs2340a_team31.model.weapons.GoldWeapon;
+import com.example.cs2340a_team31.model.weapons.IronWeapon;
+import com.example.cs2340a_team31.model.weapons.NetheriteWeapon;
+import com.example.cs2340a_team31.model.weapons.RedstoneWeapon;
+import com.example.cs2340a_team31.model.weapons.StoneWeapon;
+import com.example.cs2340a_team31.model.weapons.Weapon;
+import com.example.cs2340a_team31.model.weapons.WoodenSword;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +34,8 @@ import java.util.Calendar;
 public class GameViewModel extends ViewModel {
 
     private Player player;
+
+    private Weapon weapon;
 
     private Enemy enemy1;
     private Enemy enemy2;
@@ -197,6 +208,13 @@ public class GameViewModel extends ViewModel {
         firstRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
+        if (Math.random() < 0.5) {
+            weapon = new WoodenSword();
+        } else {
+            weapon = new StoneWeapon();
+        }
+        setPlayerAttackDamage();
+
         return firstRoom;
     }
 
@@ -259,6 +277,13 @@ public class GameViewModel extends ViewModel {
         secondRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
+        if (Math.random() < 0.33) {
+            weapon = new IronWeapon();
+        } else {
+            weapon = new GoldWeapon();
+        }
+        setPlayerAttackDamage();
+
         return secondRoom;
     }
 
@@ -308,6 +333,13 @@ public class GameViewModel extends ViewModel {
         thirdRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
+        if (Math.random() < 0.2) {
+            weapon = new RedstoneWeapon();
+        } else {
+            weapon = new EmeraldWeapon();
+        }
+        setPlayerAttackDamage();
+
         return thirdRoom;
     }
 
@@ -347,6 +379,13 @@ public class GameViewModel extends ViewModel {
                 heightRatio, "LEFT", 40);
         fourthRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
+
+        if (Math.random() < 0.05) {
+            weapon = new NetheriteWeapon();
+        } else {
+            weapon = new DiamondWeapon();
+        }
+        setPlayerAttackDamage();
 
         return fourthRoom;
     }
@@ -454,6 +493,10 @@ public class GameViewModel extends ViewModel {
         }
     }
 
+    public void setPlayerAttackDamage() {
+        player.setAttackDamage(weapon.getDamage() * difficulty);
+    }
+
     public void setPlayername(String playername) {
         this.playername = playername;
     }
@@ -504,5 +547,9 @@ public class GameViewModel extends ViewModel {
 
     public void setPlayerHealth(double startHealth) {
         player.setHealth(startHealth);
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 }

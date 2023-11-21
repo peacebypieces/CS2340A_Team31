@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
 
     private PlayerView playerView;
+
+    private ImageView pickedWeapon;
 
     private ArrayList<EnemyView> enemyViews;
 
@@ -54,6 +57,8 @@ public class GameActivity extends AppCompatActivity {
         View gameView = findViewById(R.id.gameView);
         double screenWidth = gameView.getResources().getDisplayMetrics().widthPixels;
         double screenHeight = gameView.getResources().getDisplayMetrics().heightPixels;
+
+        pickedWeapon = findViewById(R.id.pickedWeapon);
 
         // Add enemy views to screen
         for (int i = 0; i < 3; i++) {
@@ -296,6 +301,37 @@ public class GameActivity extends AppCompatActivity {
      *
      */
     private void updateEnemyViews() {
+
+        String weaponType = viewModel.getWeapon().getWeapon();
+
+        switch (weaponType) {
+            case "wood":
+                pickedWeapon.setImageResource(R.drawable.wood_sword);
+                break;
+            case "stone":
+                pickedWeapon.setImageResource(R.drawable.stone_sword);
+                break;
+            case "gold":
+                pickedWeapon.setImageResource(R.drawable.gold_sword);
+                break;
+            case "iron":
+                pickedWeapon.setImageResource(R.drawable.iron_sword);
+                break;
+            case "emerald":
+                pickedWeapon.setImageResource(R.drawable.emerald_sword);
+                break;
+            case "redstone":
+                pickedWeapon.setImageResource(R.drawable.redstone_sword);
+                break;
+            case "diamond":
+                pickedWeapon.setImageResource(R.drawable.diamond_sword);
+                break;
+            case "netherite":
+                pickedWeapon.setImageResource(R.drawable.netherite_sword);
+                break;
+            default:
+                break;
+        }
 
         ArrayList<Enemy> enemies = viewModel.getEnemy();
 
