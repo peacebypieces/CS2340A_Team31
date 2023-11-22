@@ -15,14 +15,14 @@ public class DawgEnemy extends Enemy {
     // h The height of the DawgEnemy.
     //difficulty The difficulty level of the DawgEnemy.
     //  direction The direction of the DawgEnemy.
-
-    DawgEnemy(double w, double h, double difficulty, String direction) {
+    DawgEnemy(double w, double h, double difficulty, String direction, int steps) {
         setSize(10 * w, 12 * h);
         setMovementSpeed(w / 10);
         setDamage(difficulty * 25.0); // Scales the damage based on difficulty
-        setHealth(0);
+        setHealth(difficulty * 200.0);
         setAlive(true);
         setType("dawg");
+        setMovementCounterCap(steps);
         setDirection(direction);
     }
 
