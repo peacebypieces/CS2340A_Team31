@@ -9,7 +9,7 @@ import com.example.cs2340a_team31.model.Player;
  */
 public class DawgEnemy extends Enemy {
 
-    // Constructs a new DawgEnemy with the specified width, height, difficulty, and direction.
+     // Constructs a new DawgEnemy with the specified width, height, difficulty, and direction.
 
     //  w The width of the DawgEnemy.
     // h The height of the DawgEnemy.
