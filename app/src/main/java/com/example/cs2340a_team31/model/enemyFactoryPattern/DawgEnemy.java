@@ -8,6 +8,13 @@ import com.example.cs2340a_team31.model.Player;
  * type, and direction.
  */
 public class DawgEnemy extends Enemy {
+
+    // Constructs a new DawgEnemy with the specified width, height, difficulty, and direction.
+
+    //  w The width of the DawgEnemy.
+    // h The height of the DawgEnemy.
+    //difficulty The difficulty level of the DawgEnemy.
+    //  direction The direction of the DawgEnemy.
     DawgEnemy(double w, double h, double difficulty, String direction, int steps) {
         setSize(10 * w, 12 * h);
         setMovementSpeed(w / 10);
