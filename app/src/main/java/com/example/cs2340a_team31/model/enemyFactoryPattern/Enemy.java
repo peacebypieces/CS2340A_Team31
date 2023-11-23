@@ -19,6 +19,8 @@ public abstract class Enemy implements EnemyObserver {
 
     private boolean alive;
 
+    private double enemyPoint;
+
     private double x;
     private double y;
 
@@ -173,6 +175,14 @@ public abstract class Enemy implements EnemyObserver {
 
     public double getHealth() {
         return health;
+    }
+
+    public void setEnemyPoint(double enemyPoint) {
+        this.enemyPoint = enemyPoint;
+    }
+
+    public double getEnemyPoint() {
+        return enemyPoint;
     }
 }
 

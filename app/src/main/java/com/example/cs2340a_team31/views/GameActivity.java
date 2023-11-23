@@ -16,12 +16,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
-import com.example.cs2340a_team31.model.strategypattern.MoveUpStrategy;
 import com.example.cs2340a_team31.viewmodels.EnemyView;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -169,7 +167,7 @@ public class GameActivity extends AppCompatActivity {
                     player.attack(enemy);
                     if (enemy.getHealth() <= 0) {
                         enemy.setAlive(false);
-                        viewModel.setScoreValue(viewModel.getScoreValue() + 20);
+                        viewModel.setScoreValue((int) (viewModel.getScoreValue() + enemy.getEnemyPoint()));
                         enemyView.setVisibility(View.INVISIBLE);
                     }
                     enemyhealth.setText("Enemy HP: " + enemy.getHealth());
