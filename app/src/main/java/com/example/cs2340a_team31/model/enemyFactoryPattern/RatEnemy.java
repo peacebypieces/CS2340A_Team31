@@ -8,6 +8,7 @@ public class RatEnemy extends Enemy {
         setMovementSpeed(w / 4);
         setDamage(difficulty * 10.0); // Scales the damage based on difficulty
         setHealth(difficulty * 25.0);
+        setEnemyPoint(difficulty * 25.0);
         setAlive(true);
         setType("rat");
         setMovementCounterCap(steps);

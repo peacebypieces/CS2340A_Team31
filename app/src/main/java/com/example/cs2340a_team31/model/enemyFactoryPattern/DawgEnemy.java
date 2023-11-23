@@ -13,6 +13,7 @@ public class DawgEnemy extends Enemy {
         setMovementSpeed(w / 10);
         setDamage(difficulty * 25.0); // Scales the damage based on difficulty
         setHealth(difficulty * 200.0);
+        setEnemyPoint(difficulty * 200.0);
         setAlive(true);
         setType("dawg");
         setMovementCounterCap(steps);

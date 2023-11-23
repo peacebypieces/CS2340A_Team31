@@ -8,6 +8,7 @@ public class MiceEnemy extends Enemy {
         setMovementSpeed(w / 4);
         setDamage(difficulty * 5.0); // Scales the damage based on difficulty
         setHealth(difficulty * 10.0);
+        setEnemyPoint(difficulty * 10.0);
         setAlive(true);
         setType("mice");
         setMovementCounterCap(steps);
