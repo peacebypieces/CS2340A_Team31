@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +16,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
+import com.example.cs2340a_team31.model.strategypattern.MoveUpStrategy;
 import com.example.cs2340a_team31.viewmodels.EnemyView;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -107,12 +110,33 @@ public class GameActivity extends AppCompatActivity {
         attack.setOnClickListener(v -> {
             KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_SPACE);
             onKeyDown(KeyEvent.KEYCODE_SPACE, event);
-        TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
-        double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
-        viewModel.setEnemyHealth(enemyHealth);
+            TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
+            double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
+            viewModel.setEnemyHealth(enemyHealth);
+        });
 
+        ImageButton upArrow = findViewById(R.id.upArrow);
+        upArrow.setOnClickListener(v -> {
+            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_UP);
+            onKeyDown(KeyEvent.KEYCODE_DPAD_UP, event);
+        });
 
+        ImageButton downArrow = findViewById(R.id.downArrow);
+        downArrow.setOnClickListener(v -> {
+            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_DOWN);
+            onKeyDown(KeyEvent.KEYCODE_DPAD_DOWN, event);
+        });
 
+        ImageButton leftArrow = findViewById(R.id.leftArrow);
+        leftArrow.setOnClickListener(v -> {
+            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_LEFT);
+            onKeyDown(KeyEvent.KEYCODE_DPAD_LEFT, event);
+        });
+
+        ImageButton rightArrow = findViewById(R.id.rightArrow);
+        rightArrow.setOnClickListener(v -> {
+            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_RIGHT);
+            onKeyDown(KeyEvent.KEYCODE_DPAD_RIGHT, event);
         });
 
         setCharacter();
@@ -129,6 +153,7 @@ public class GameActivity extends AppCompatActivity {
             changeRoomBackground();
             viewModel.setRoomChanged();
         }
+
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
             double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
