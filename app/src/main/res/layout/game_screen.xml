@@ -112,7 +112,8 @@
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.9"
+        android:alpha="0.5"/>
 
     <ImageButton
         android:id="@+id/upArrow"
@@ -124,7 +125,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.825"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:srcCompat="@android:drawable/arrow_up_float"
+        android:alpha="0.5"/>
 
     <ImageButton
         android:id="@+id/downArrow"
@@ -137,7 +139,8 @@
         app:layout_constraintStart_toEndOf="@+id/leftArrow"
         app:layout_constraintTop_toBottomOf="@+id/upArrow"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:srcCompat="@android:drawable/arrow_down_float"
+        android:alpha="0.5"/>
 
     <ImageButton
         android:id="@+id/rightArrow"
@@ -150,7 +153,8 @@
         app:layout_constraintStart_toEndOf="@+id/upArrow"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:srcCompat="@android:drawable/arrow_down_float"
+        android:alpha="0.5"/>
 
     <ImageButton
         android:id="@+id/leftArrow"
@@ -164,6 +168,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:srcCompat="@android:drawable/arrow_up_float"
+        android:alpha="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

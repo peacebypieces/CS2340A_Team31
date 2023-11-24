@@ -2,7 +2,8 @@ package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
 public class SpaceEnemyFactory extends EnemyFactory {
 
-    Enemy createEnemy(String item, double w, double h, double difficulty, String direction, int steps) {
+    Enemy createEnemy(String item, double w, double h, double difficulty,
+                      String direction, int steps) {
         switch (item) {
         case "mice":
             return new MiceEnemy(w, h, difficulty, direction, steps);

@@ -106,36 +106,39 @@ public class GameActivity extends AppCompatActivity {
 
         Button attack = findViewById(R.id.attack);
         attack.setOnClickListener(v -> {
-            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_SPACE, KeyEvent.KEYCODE_SPACE);
+            KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_SPACE);
             onKeyDown(KeyEvent.KEYCODE_SPACE, event);
-            TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
-            double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
-            viewModel.setEnemyHealth(enemyHealth);
         });
 
         ImageButton upArrow = findViewById(R.id.upArrow);
         upArrow.setOnClickListener(v -> {
-            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_UP);
+            KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_UP);
             onKeyDown(KeyEvent.KEYCODE_DPAD_UP, event);
         });
 
         ImageButton downArrow = findViewById(R.id.downArrow);
         downArrow.setOnClickListener(v -> {
-            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_DOWN);
+            KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN);
             onKeyDown(KeyEvent.KEYCODE_DPAD_DOWN, event);
         });
 
         ImageButton leftArrow = findViewById(R.id.leftArrow);
         leftArrow.setOnClickListener(v -> {
-            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_LEFT);
+            KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_LEFT);
             onKeyDown(KeyEvent.KEYCODE_DPAD_LEFT, event);
         });
 
         ImageButton rightArrow = findViewById(R.id.rightArrow);
         rightArrow.setOnClickListener(v -> {
-            KeyEvent event = new KeyEvent(KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_RIGHT);
+            KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_RIGHT);
             onKeyDown(KeyEvent.KEYCODE_DPAD_RIGHT, event);
         });
+
+        attack.bringToFront();
+        upArrow.bringToFront();
+        downArrow.bringToFront();
+        rightArrow.bringToFront();
+        leftArrow.bringToFront();
 
         setCharacter();
     }
@@ -154,24 +157,23 @@ public class GameActivity extends AppCompatActivity {
 
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
-            double enemyHealth = getIntent().getDoubleExtra("ENEMY_HEALTH", 10);
-            viewModel.setEnemyHealth(enemyHealth);
             Player player = viewModel.getPlayer();
             List<Enemy> enemies = viewModel.getEnemy();
-            enemyhealth.append(" " + enemyHealth);
             for (int i = 0; i < enemies.size(); i++) {
                 EnemyView enemyView = enemyViews.get(i);
                 Enemy enemy = enemies.get(i);
-                enemyhealth.setText("Enemy HP: " + enemy.getHealth());
-                if (player.isCollided(enemy)) {
-                    player.attack(enemy);
-                    if (enemy.getHealth() <= 0) {
-                        enemy.setAlive(false);
-                        viewModel.setScoreValue((int) (viewModel.getScoreValue() + enemy.getEnemyPoint()));
-                        enemyView.setVisibility(View.INVISIBLE);
+                if (enemy.isAlive()) {
+                    if (player.isCollided(enemy)) {
+                        player.attack(enemy);
+                        if (enemy.getHealth() <= 0) {
+                            enemy.kill();
+                            viewModel.setScoreValue((int) (viewModel.getScoreValue()
+                                    + enemy.getEnemyPoint()));
+                            enemyView.setVisibility(View.INVISIBLE);
+                        }
+                        enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                        break;
                     }
-                    enemyhealth.setText("Enemy HP: " + enemy.getHealth());
-                    break;
                 }
             }
         }
@@ -333,32 +335,32 @@ public class GameActivity extends AppCompatActivity {
         String weaponType = viewModel.getWeapon().getWeapon();
 
         switch (weaponType) {
-            case "wood":
-                pickedWeapon.setImageResource(R.drawable.wood_sword);
-                break;
-            case "stone":
-                pickedWeapon.setImageResource(R.drawable.stone_sword);
-                break;
-            case "gold":
-                pickedWeapon.setImageResource(R.drawable.gold_sword);
-                break;
-            case "iron":
-                pickedWeapon.setImageResource(R.drawable.iron_sword);
-                break;
-            case "emerald":
-                pickedWeapon.setImageResource(R.drawable.emerald_sword);
-                break;
-            case "redstone":
-                pickedWeapon.setImageResource(R.drawable.redstone_sword);
-                break;
-            case "diamond":
-                pickedWeapon.setImageResource(R.drawable.diamond_sword);
-                break;
-            case "netherite":
-                pickedWeapon.setImageResource(R.drawable.netherite_sword);
-                break;
-            default:
-                break;
+        case "wood":
+            pickedWeapon.setImageResource(R.drawable.wood_sword);
+            break;
+        case "stone":
+            pickedWeapon.setImageResource(R.drawable.stone_sword);
+            break;
+        case "gold":
+            pickedWeapon.setImageResource(R.drawable.gold_sword);
+            break;
+        case "iron":
+            pickedWeapon.setImageResource(R.drawable.iron_sword);
+            break;
+        case "emerald":
+            pickedWeapon.setImageResource(R.drawable.emerald_sword);
+            break;
+        case "redstone":
+            pickedWeapon.setImageResource(R.drawable.redstone_sword);
+            break;
+        case "diamond":
+            pickedWeapon.setImageResource(R.drawable.diamond_sword);
+            break;
+        case "netherite":
+            pickedWeapon.setImageResource(R.drawable.netherite_sword);
+            break;
+        default:
+            break;
         }
 
         ArrayList<Enemy> enemies = viewModel.getEnemy();

@@ -145,7 +145,7 @@ public abstract class Enemy implements EnemyObserver {
         this.alive = false;
     }
 
-    boolean isAlive() {
+    public boolean isAlive() {
         return alive;
     }
 

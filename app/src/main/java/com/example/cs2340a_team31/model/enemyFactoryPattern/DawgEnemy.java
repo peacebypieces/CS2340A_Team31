@@ -9,7 +9,7 @@ import com.example.cs2340a_team31.model.Player;
  */
 public class DawgEnemy extends Enemy {
 
-     // Constructs a new DawgEnemy with the specified width, height, difficulty, and direction.
+    // Constructs a new DawgEnemy with the specified width, height, difficulty, and direction.
 
     //  w The width of the DawgEnemy.
     // h The height of the DawgEnemy.
@@ -19,7 +19,7 @@ public class DawgEnemy extends Enemy {
         setSize(10 * w, 12 * h);
         setMovementSpeed(w / 10);
         setDamage(difficulty * 25.0); // Scales the damage based on difficulty
-        setHealth(difficulty * 200.0);
+        setHealth(difficulty * 1000.0);
         setEnemyPoint(difficulty * 200.0);
         setAlive(true);
         setType("dawg");
