@@ -2,6 +2,7 @@ package com.example.cs2340a_team31.model;
 
 import android.graphics.RectF;
 
+import com.example.cs2340a_team31.model.decorator.PowerUps;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 import com.example.cs2340a_team31.model.observers.PlayerObserver;
@@ -17,6 +18,8 @@ public class Player implements PlayerSubject {
 
     private List<PlayerObserver> observers = new ArrayList<>();
     private List<EnemyObserver> enemyObservers = new ArrayList<>();
+
+
 
     private double x;
     private double y;
@@ -265,4 +268,6 @@ public class Player implements PlayerSubject {
     public void attack(Enemy enemy) {
         enemy.takeDamage(attackDamage);
     }
+
+
 }
