@@ -19,7 +19,9 @@ public class Room {
     }
 
 
-    public ArrayList<PowerUp> getPowerUps() { return powerUps; }
+    public ArrayList<PowerUp> getPowerUps() {
+        return powerUps;
+    }
 
     public void addPowerUps(PowerUp powerUp, double x, double y) {
         powerUp.setLocation(x, y);

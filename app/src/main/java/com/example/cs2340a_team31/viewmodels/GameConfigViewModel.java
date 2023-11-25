@@ -6,7 +6,7 @@ import com.example.cs2340a_team31.R;
 
 public class GameConfigViewModel extends ViewModel {
     private String playerName;
-    private double startingHealth = 100;
+    private double startingHealth = 250;
     private double enemyDamage = 1;
     private int score = 100;
     private String selectedCharacter;
@@ -18,11 +18,11 @@ public class GameConfigViewModel extends ViewModel {
 
         // Handle selected difficulty and set relevant parameters
         if (selectedDifficulty == R.id.radioMedium) {
-            startingHealth = 250;
+            startingHealth = 500;
             enemyDamage = 1.5;
             score = 200;
         } else if (selectedDifficulty == R.id.radioHard) {
-            startingHealth = 500;
+            startingHealth = 1000;
             enemyDamage = 2;
             score = 300;
         }
