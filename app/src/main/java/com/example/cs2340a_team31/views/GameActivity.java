@@ -389,12 +389,12 @@ public class GameActivity extends AppCompatActivity {
                     break;
                 case "HealthPowerUp":
                     powerUpView.setImageDrawable(getResources().
-                            getDrawable(R.drawable.shield_potion,
+                            getDrawable(R.drawable.health_potion,
                                     getApplicationContext().getTheme()));
                     break;
-                case "SpeedPowerUp":
+                case "ShieldPowerUp":
                     powerUpView.setImageDrawable(getResources().
-                            getDrawable(R.drawable.speed_potion,
+                            getDrawable(R.drawable.shield_potion,
                                     getApplicationContext().getTheme()));
                     break;
                 default:

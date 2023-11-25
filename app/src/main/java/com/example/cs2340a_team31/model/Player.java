@@ -40,6 +40,8 @@ public class Player implements PlayerSubject {
     private int score;
     private String difficulty;
 
+    private double shield;
+
 
 
     /*
@@ -55,6 +57,7 @@ public class Player implements PlayerSubject {
         this.movementSpeedX = 25.0;
         this.movementSpeedY = 25.0;
         this.attackDamage = 5.0;
+        shield = 1;
     }
 
     /*
@@ -163,6 +166,14 @@ public class Player implements PlayerSubject {
         return this.name;
     }
 
+    public void setShield(double shield) {
+        this.shield = shield;
+    }
+
+    public double getShield() {
+        return shield;
+    }
+
     public void setScore(int score) {
         this.score = score;
     }
@@ -261,7 +272,7 @@ public class Player implements PlayerSubject {
     }
 
     public void notifyCollision(double damage) {
-        health -= damage;
+        health -= damage / shield;
         System.out.println("Player HP: " + health);
     }
 

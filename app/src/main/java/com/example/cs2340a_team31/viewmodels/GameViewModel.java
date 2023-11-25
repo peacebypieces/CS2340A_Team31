@@ -14,7 +14,7 @@ import com.example.cs2340a_team31.model.Wall;
 import com.example.cs2340a_team31.model.decorator.AttackPowerUp;
 import com.example.cs2340a_team31.model.decorator.HealthPowerUp;
 import com.example.cs2340a_team31.model.decorator.PowerUp;
-import com.example.cs2340a_team31.model.decorator.SpeedPowerUp;
+import com.example.cs2340a_team31.model.decorator.ShieldPowerUp;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.EnemyFactory;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.SpaceEnemyFactory;
@@ -152,7 +152,7 @@ public class GameViewModel extends ViewModel {
             case 0:
                 return new AttackPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
             case 1:
-                return new SpeedPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+                return new ShieldPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
             case 2:
                 return new HealthPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
         }
@@ -466,6 +466,7 @@ public class GameViewModel extends ViewModel {
                 roomChanged = true;
                 setPlayerData();
             }
+            player.setShield(1);
         }
     }
 
