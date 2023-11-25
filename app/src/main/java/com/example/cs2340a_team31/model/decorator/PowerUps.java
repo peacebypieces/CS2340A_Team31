@@ -4,4 +4,5 @@ public interface PowerUps {
     void applyPowerUp();
 
 
+
 }
