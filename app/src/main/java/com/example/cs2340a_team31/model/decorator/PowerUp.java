@@ -20,8 +20,12 @@ public abstract class PowerUp implements PowerUps {
 
     private boolean pickedUp;
 
-    public String getType() { return type; }
-    public Boolean getStatus() { return pickedUp; }
+    public String getType() {
+        return type;
+    }
+    public Boolean getStatus() {
+        return pickedUp;
+    }
 
     public double getWidth() {
         return width;

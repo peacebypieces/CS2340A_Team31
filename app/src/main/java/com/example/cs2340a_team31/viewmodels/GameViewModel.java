@@ -14,7 +14,7 @@ import com.example.cs2340a_team31.model.Wall;
 import com.example.cs2340a_team31.model.decorator.AttackPowerUp;
 import com.example.cs2340a_team31.model.decorator.HealthPowerUp;
 import com.example.cs2340a_team31.model.decorator.PowerUp;
-import com.example.cs2340a_team31.model.decorator.SpeedPowerUp;
+import com.example.cs2340a_team31.model.decorator.ShieldPowerUp;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.EnemyFactory;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.SpaceEnemyFactory;
@@ -147,17 +147,17 @@ public class GameViewModel extends ViewModel {
     private PowerUp makePowerUps() {
         //repeat each time for speed and strength
 
-        int randomNum = (int)(Math.random() * 3);
+        int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
-            case 0:
-                return new AttackPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
-            case 1:
-                return new SpeedPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
-            case 2:
-                return new HealthPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        case 0:
+            return new AttackPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        case 1:
+            return new ShieldPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        case 2:
+            return new HealthPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        default:
+            return null;
         }
-        return null;
-
     }
     public Room room1() {
         player.removeEnemyObservers();
@@ -466,6 +466,7 @@ public class GameViewModel extends ViewModel {
                 roomChanged = true;
                 setPlayerData();
             }
+            player.setHealth(player.getHealth() + 100);
         }
     }
 
@@ -558,7 +559,9 @@ public class GameViewModel extends ViewModel {
         return currentRoomNum;
     }
 
-    public ArrayList<PowerUp> getPowerUps() { return currentRoom.getPowerUps(); }
+    public ArrayList<PowerUp> getPowerUps() {
+        return currentRoom.getPowerUps();
+    }
     public double getWidthRatio() {
         return widthRatio;
     }

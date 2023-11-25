@@ -166,6 +166,9 @@ public class GameActivity extends AppCompatActivity {
             viewModel.setRoomChanged();
         }
 
+        TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
+        enemyDamage.setText("Player Damage: " + ((int) viewModel.getPlayer().getAttackDamage()));
+
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
             Player player = viewModel.getPlayer();
@@ -182,7 +185,7 @@ public class GameActivity extends AppCompatActivity {
                                     + enemy.getEnemyPoint()));
                             enemyView.setVisibility(View.INVISIBLE);
                         }
-                        enemyhealth.setText("Enemy HP: " + enemy.getHealth());
+                        enemyhealth.setText("Enemy HP: " + ((int) enemy.getHealth()));
                         break;
                     }
                 }
@@ -190,7 +193,7 @@ public class GameActivity extends AppCompatActivity {
         }
         ArrayList<PowerUp> powers = viewModel.getPowerUps();
         for (int i = 0; i < powerUpViews.size(); i++) {
-            if (powers.get(i).getStatus() == true) {
+            if (powers.get(i).getStatus()) {
                 powerUpViews.get(i).setVisibility(View.INVISIBLE);
             }
         }
@@ -254,7 +257,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Updates components on game screen
         playerName.append(playername);
-        playerHealth.append(" " + startHealth);
+        playerHealth.append(" " + ((int) startHealth));
 
 
         gameTimer = new Timer();
@@ -283,7 +286,7 @@ public class GameActivity extends AppCompatActivity {
 
                             setEnemyLocation();
 
-                            playerHealth.setText("Health:" + player.getHealth());
+                            playerHealth.setText("Health:" + ((int) player.getHealth()));
 
 
                             score.setText("Score: " + viewModel.getScoreValue());
@@ -329,9 +332,12 @@ public class GameActivity extends AppCompatActivity {
 
         ArrayList<PowerUp> powerUps = viewModel.getPowerUps();
         for (int i = 0; i < powerUpViews.size(); i++) {
-                powerUpViews.get(i).setVisibility(View.VISIBLE);
-                powerUps.get(i).setStatus(false);
+            powerUpViews.get(i).setVisibility(View.VISIBLE);
+            powerUps.get(i).setStatus(false);
         }
+
+        TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
+        enemyDamage.setText("Player Damage: " + ((int) viewModel.getPlayer().getAttackDamage()));
 
     }
 
@@ -382,26 +388,26 @@ public class GameActivity extends AppCompatActivity {
             PowerUp powerUp = powerUps.get(i);
             String type = powerUp.getType();
             switch (type) {
-                case "AttackPowerUp":
-                    powerUpView.setImageDrawable(getResources().
-                            getDrawable(R.drawable.strength_potion,
-                                    getApplicationContext().getTheme()));
-                    break;
-                case "HealthPowerUp":
-                    powerUpView.setImageDrawable(getResources().
-                            getDrawable(R.drawable.shield_potion,
-                                    getApplicationContext().getTheme()));
-                    break;
-                case "SpeedPowerUp":
-                    powerUpView.setImageDrawable(getResources().
-                            getDrawable(R.drawable.speed_potion,
-                                    getApplicationContext().getTheme()));
-                    break;
-                default:
-                    powerUpView.setImageDrawable(getResources().
-                            getDrawable(R.drawable.ic_launcher_background,
-                                    getApplicationContext().getTheme()));
-                    break;
+            case "AttackPowerUp":
+                powerUpView.setImageDrawable(getResources().
+                        getDrawable(R.drawable.strength_potion,
+                                getApplicationContext().getTheme()));
+                break;
+            case "HealthPowerUp":
+                powerUpView.setImageDrawable(getResources().
+                        getDrawable(R.drawable.health_potion,
+                                getApplicationContext().getTheme()));
+                break;
+            case "ShieldPowerUp":
+                powerUpView.setImageDrawable(getResources().
+                        getDrawable(R.drawable.shield_potion,
+                                getApplicationContext().getTheme()));
+                break;
+            default:
+                powerUpView.setImageDrawable(getResources().
+                        getDrawable(R.drawable.ic_launcher_background,
+                                getApplicationContext().getTheme()));
+                break;
             }
         }
 
