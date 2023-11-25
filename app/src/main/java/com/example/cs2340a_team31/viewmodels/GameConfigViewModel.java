@@ -10,7 +10,7 @@ public class GameConfigViewModel extends ViewModel {
     private double enemyDamage = 1;
     private int score = 100;
     private String selectedCharacter;
-
+  
     public void handleStartButtonClick(String playerName,
                                        double selectedDifficulty,
                                        double selectedCharacterID) {
