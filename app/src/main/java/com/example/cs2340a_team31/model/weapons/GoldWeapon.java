@@ -2,9 +2,9 @@ package com.example.cs2340a_team31.model.weapons;
 
 public class GoldWeapon extends Weapon {
 
-    public GoldWeapon(){
+    public GoldWeapon() {
         setDamage(20);
-        setWeapon_type("gold");
+        setWeaponType("gold");
     }
 
 }

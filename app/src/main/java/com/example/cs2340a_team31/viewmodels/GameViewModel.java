@@ -50,8 +50,6 @@ public class GameViewModel extends ViewModel {
 
     private double difficulty;
 
-    private double enemyHealth;
-
     private  EnemyFactory enemyFactory;
     private Room currentRoom;
     private Door door;
@@ -212,21 +210,18 @@ public class GameViewModel extends ViewModel {
         firstRoom.addWall(wall);
 
         // Adds the 3 enemies in the room
-        enemy1 = enemyFactory.spawnEnemy("mice", 12F * widthRatio,
-                9F * heightRatio, difficulty, widthRatio,
-                heightRatio, "RIGHT", 60);
+        enemy1 = enemyFactory.spawnEnemy("mice", new double[]{12F * widthRatio,
+            9F * heightRatio, widthRatio, heightRatio}, difficulty, "RIGHT", 60);
         firstRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("mice", 12F * widthRatio,
-                2F * heightRatio, difficulty, widthRatio,
-                heightRatio, "DOWN", 40);
+        enemy2 = enemyFactory.spawnEnemy("mice", new double[]{12F * widthRatio,
+            2F * heightRatio, widthRatio, heightRatio}, difficulty, "DOWN", 40);
         firstRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("rat", 2F * widthRatio,
-                2F * heightRatio, difficulty, widthRatio,
-                heightRatio, "DOWN", 30);
+        enemy3 = enemyFactory.spawnEnemy("rat", new double[]{2F * widthRatio,
+            2F * heightRatio, widthRatio, heightRatio}, difficulty, "DOWN", 30);
         firstRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -285,21 +280,18 @@ public class GameViewModel extends ViewModel {
         secondRoom.addWall(wall);
 
         // Adds the 3 enemies in the room
-        enemy1 = enemyFactory.spawnEnemy("rat", 13F * widthRatio,
-                2F * heightRatio, difficulty, widthRatio,
-                heightRatio, "DOWN", 40);
+        enemy1 = enemyFactory.spawnEnemy("rat", new double[]{13F * widthRatio,
+            2F * heightRatio, widthRatio, heightRatio}, difficulty, "DOWN", 40);
         secondRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("rat", 18F * widthRatio,
-                2F * heightRatio, difficulty, widthRatio,
-                heightRatio, "DOWN", 40);
+        enemy2 = enemyFactory.spawnEnemy("rat", new double[]{18F * widthRatio,
+            2F * heightRatio, widthRatio, heightRatio}, difficulty, "DOWN", 40);
         secondRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio,
-                5F * heightRatio, difficulty, widthRatio,
-                heightRatio, "RIGHT", 40);
+        enemy3 = enemyFactory.spawnEnemy("dog", new double[]{2F * widthRatio,
+            5F * heightRatio, widthRatio, heightRatio}, difficulty, "RIGHT", 40);
         secondRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -346,21 +338,18 @@ public class GameViewModel extends ViewModel {
         thirdRoom.addWall(wall);
 
         // Adds the 3 enemies in the room
-        enemy1 = enemyFactory.spawnEnemy("rat", 9F * widthRatio,
-                11F * heightRatio, difficulty, widthRatio,
-                heightRatio, "RIGHT", 30);
+        enemy1 = enemyFactory.spawnEnemy("rat", new double[]{9F * widthRatio,
+            11F * heightRatio, widthRatio, heightRatio}, difficulty, "RIGHT", 30);
         thirdRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("dog", 27F * widthRatio,
-                2F * heightRatio, difficulty, widthRatio,
-                heightRatio, "DOWN", 40);
+        enemy2 = enemyFactory.spawnEnemy("dog", new double[]{27F * widthRatio,
+            2F * heightRatio, widthRatio, heightRatio}, difficulty, "DOWN", 40);
         thirdRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("dog", 2F * widthRatio,
-                7F * heightRatio, difficulty, widthRatio,
-                heightRatio, "RIGHT", 75);
+        enemy3 = enemyFactory.spawnEnemy("dog", new double[]{2F * widthRatio,
+            7F * heightRatio, widthRatio, heightRatio}, difficulty, "RIGHT", 75);
         thirdRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -399,21 +388,18 @@ public class GameViewModel extends ViewModel {
         fourthRoom.addWall(wall);
 
         // Adds the 3 enemies in the room
-        enemy1 = enemyFactory.spawnEnemy("dog", 4F * widthRatio,
-                1F * heightRatio, difficulty, widthRatio,
-                heightRatio, "DOWN", 50);
+        enemy1 = enemyFactory.spawnEnemy("dog", new double[]{4F * widthRatio,
+            1F * heightRatio, widthRatio, heightRatio}, difficulty, "DOWN", 50);
         fourthRoom.addEnemy(enemy1);
         player.addEnemyObserver(enemy1);
 
-        enemy2 = enemyFactory.spawnEnemy("dog", 12F * widthRatio,
-                16F * heightRatio, difficulty, widthRatio,
-                heightRatio, "UP", 50);
+        enemy2 = enemyFactory.spawnEnemy("dog", new double[]{12F * widthRatio,
+            16F * heightRatio, widthRatio, heightRatio}, difficulty, "UP", 50);
         fourthRoom.addEnemy(enemy2);
         player.addEnemyObserver(enemy2);
 
-        enemy3 = enemyFactory.spawnEnemy("dawg", 26F * widthRatio,
-                5F * heightRatio, difficulty, widthRatio,
-                heightRatio, "LEFT", 40);
+        enemy3 = enemyFactory.spawnEnemy("dawg", new double[]{26F * widthRatio,
+            5F * heightRatio, widthRatio, heightRatio}, difficulty, "LEFT", 40);
         fourthRoom.addEnemy(enemy3);
         player.addEnemyObserver(enemy3);
 
@@ -558,10 +544,6 @@ public class GameViewModel extends ViewModel {
 
     public void setDifficulty(double difficulty) {
         this.difficulty = difficulty;
-    }
-
-    public void setEnemyHealth(double enemyHealth) {
-        this.enemyHealth = enemyHealth;
     }
 
     public int getScoreValue() {

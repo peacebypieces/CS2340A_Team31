@@ -1,8 +1,8 @@
 package com.example.cs2340a_team31.model.weapons;
 
 public abstract class Weapon {
-    int damage;
-    String weaponType;
+    private int damage;
+    private String weaponType;
 
     public int getDamage() {
         return damage;
@@ -12,7 +12,7 @@ public abstract class Weapon {
         return weaponType;
     }
 
-    public void setWeapon_type(String type) {
+    public void setWeaponType(String type) {
         weaponType = type;
     }
 

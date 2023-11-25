@@ -1,11 +1,11 @@
 package com.example.cs2340a_team31.model.enemyFactoryPattern;
 
 public abstract class EnemyFactory {
-    public Enemy spawnEnemy(String type, double x, double y, double difficulty, double w,
-                            double h, String direction, int steps) {
+    public Enemy spawnEnemy(String type, double[] rect,
+                            double difficulty, String direction, int steps) {
         Enemy enemy;
-        enemy = createEnemy(type, w, h, difficulty, direction, steps);
-        enemy.setLocation(x, y);
+        enemy = createEnemy(type, rect[2], rect[3], difficulty, direction, steps);
+        enemy.setLocation(rect[0], rect[1]);
         return enemy;
     }
 

@@ -5,8 +5,6 @@ import android.content.Context;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.cs2340a_team31.model.observers.PlayerObserver;
-
 public class WeaponView extends AppCompatImageView {
     private float x;
     private float y;
