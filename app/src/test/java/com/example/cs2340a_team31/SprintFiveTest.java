@@ -11,7 +11,7 @@ import com.example.cs2340a_team31.model.enemyFactoryPattern.*;
 
 import org.junit.Test;
 public class SprintFiveTest {
-    
+
 
     private Player player;
 
