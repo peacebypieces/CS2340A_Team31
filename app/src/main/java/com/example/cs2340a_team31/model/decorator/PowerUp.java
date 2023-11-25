@@ -16,6 +16,12 @@ public abstract class PowerUp implements PowerUps {
 
     private double buff;
 
+    private String type;
+
+    private boolean pickedUp;
+
+    public String getType() { return type; }
+    public Boolean getStatus() { return pickedUp; }
 
     public double getWidth() {
         return width;
@@ -37,14 +43,18 @@ public abstract class PowerUp implements PowerUps {
         return buff;
     }
 
-    @Override
-    public void applyPowerUp() {
-    }
 
     public Player getPlayer() {
         return player;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setStatus(boolean pickedUp) {
+        this.pickedUp = pickedUp;
+    }
     public void setBuff(double buff) {
         this.buff = buff;
     }
@@ -62,7 +72,7 @@ public abstract class PowerUp implements PowerUps {
     }
 
 
-    private boolean isCollidedWithPowerUp() {
+    public boolean isCollidedWithPowerUp() {
         double playerX = player.getX();
         double playerY = player.getY();
         double playerWidth = getWidth();

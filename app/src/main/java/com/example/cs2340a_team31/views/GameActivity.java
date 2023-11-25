@@ -14,10 +14,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cs2340a_team31.R;
 import com.example.cs2340a_team31.model.Player;
+import com.example.cs2340a_team31.model.decorator.PowerUp;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.viewmodels.EnemyView;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
+import com.example.cs2340a_team31.viewmodels.PowerUpView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.TimerTask;
 public class GameActivity extends AppCompatActivity {
 
     private GameViewModel viewModel;
+
+    private ArrayList<PowerUpView> powerUpViews;
 
     private PlayerView playerView;
 
@@ -49,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
         // Initialize the ViewModel
         viewModel = new GameViewModel();
         enemyViews = new ArrayList<>();
-
+        powerUpViews = new ArrayList<>();
 
         // Initialize UI components and set listeners
         gameLayout = findViewById(R.id.gameLayout);
@@ -65,6 +69,13 @@ public class GameActivity extends AppCompatActivity {
             EnemyView enemyView = new EnemyView(this);
             enemyViews.add(enemyView);
             gameLayout.addView(enemyView);
+        }
+
+        //add powerUps views per screen
+        for (int i = 0; i < 3; i++) {
+            PowerUpView powerUpView = new PowerUpView(this);
+            powerUpViews.add(powerUpView);
+            gameLayout.addView(powerUpView);
         }
 
         // Add player view to screen
@@ -152,7 +163,12 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
-
+        ArrayList<PowerUp> powers = viewModel.getPowerUps();
+        for (int i = 0; i < powerUpViews.size(); i++) {
+            if (powers.get(i).getStatus() == true) {
+                powerUpViews.get(i).setVisibility(View.INVISIBLE);
+            }
+        }
         return true;
     }
 
@@ -182,10 +198,22 @@ public class GameActivity extends AppCompatActivity {
         setPlayerView();
     }
 
+    public void scalePowerUps(AppCompatImageView powerUpImg) {
+        int newWidth = (int) viewModel.getWidthRatio(); // in pixels
+        int newHeight = (int) viewModel.getHeightRatio(); // in pixels
+        // Set new dimensions for the ImageView
+        powerUpImg.getLayoutParams().width = newWidth;
+        powerUpImg.getLayoutParams().height = newHeight;
+        // Apply scaling to the image within the ImageView
+        powerUpImg.setScaleType(AppCompatImageView.ScaleType.FIT_XY);
+        // Scale image to fill the ImageView
+        powerUpImg.requestLayout(); // Apply the changes to the ImageView
+    }
+
     private void setTextViews() {
         TextView playerName = findViewById(R.id.playerName);
         TextView playerHealth = findViewById(R.id.playerHealthDisplay);
-        TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
+
         TextView score = findViewById(R.id.scoreDisplay);
 
 
@@ -202,7 +230,7 @@ public class GameActivity extends AppCompatActivity {
         // Updates components on game screen
         playerName.append(playername);
         playerHealth.append(" " + startHealth);
-        enemyDamage.append(" " + difficulty);
+
 
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
@@ -274,6 +302,12 @@ public class GameActivity extends AppCompatActivity {
             enemyView.setVisibility(View.VISIBLE);
         }
 
+        ArrayList<PowerUp> powerUps = viewModel.getPowerUps();
+        for (int i = 0; i < powerUpViews.size(); i++) {
+                powerUpViews.get(i).setVisibility(View.VISIBLE);
+                powerUps.get(i).setStatus(false);
+        }
+
     }
 
     public void scaleEnemies(AppCompatImageView enemyimg, Enemy enemy) {
@@ -302,10 +336,50 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    public void setPowerUpLocations() {
+        ArrayList<PowerUp> powerUps = viewModel.getPowerUps();
+
+        for (int i = 0; i < powerUps.size(); i++) {
+            PowerUpView powerUpView = powerUpViews.get(i);
+            PowerUp powerUp = powerUps.get(i);
+            powerUpView.updatePlayerPosition((float) powerUp.getX(), (float) powerUp.getY());
+        }
+    }
+
     /* get enemies array from view model
      *
      */
     private void updateEnemyViews() {
+        ArrayList<PowerUp> powerUps = viewModel.getPowerUps();
+        for (int i = 0; i < powerUps.size(); i++) {
+            PowerUpView powerUpView = powerUpViews.get(i);
+            scalePowerUps(powerUpView);
+            PowerUp powerUp = powerUps.get(i);
+            String type = powerUp.getType();
+            switch (type) {
+                case "AttackPowerUp":
+                    powerUpView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.strength_potion,
+                                    getApplicationContext().getTheme()));
+                    break;
+                case "HealthPowerUp":
+                    powerUpView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.shield_potion,
+                                    getApplicationContext().getTheme()));
+                    break;
+                case "SpeedPowerUp":
+                    powerUpView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.speed_potion,
+                                    getApplicationContext().getTheme()));
+                    break;
+                default:
+                    powerUpView.setImageDrawable(getResources().
+                            getDrawable(R.drawable.ic_launcher_background,
+                                    getApplicationContext().getTheme()));
+                    break;
+            }
+        }
+
 
         String weaponType = viewModel.getWeapon().getWeapon();
 
@@ -377,7 +451,7 @@ public class GameActivity extends AppCompatActivity {
                 break;
             }
         }
-
+        setPowerUpLocations();
         setEnemyLocation();
     }
 

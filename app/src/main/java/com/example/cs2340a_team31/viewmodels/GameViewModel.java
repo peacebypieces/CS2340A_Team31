@@ -2,9 +2,8 @@ package com.example.cs2340a_team31.viewmodels;
 
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.lifecycle.ViewModel;
 
@@ -12,6 +11,10 @@ import com.example.cs2340a_team31.model.Door;
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.Room;
 import com.example.cs2340a_team31.model.Wall;
+import com.example.cs2340a_team31.model.decorator.AttackPowerUp;
+import com.example.cs2340a_team31.model.decorator.HealthPowerUp;
+import com.example.cs2340a_team31.model.decorator.PowerUp;
+import com.example.cs2340a_team31.model.decorator.SpeedPowerUp;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.Enemy;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.EnemyFactory;
 import com.example.cs2340a_team31.model.enemyFactoryPattern.SpaceEnemyFactory;
@@ -31,7 +34,6 @@ import com.example.cs2340a_team31.model.weapons.WoodenSword;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class GameViewModel extends ViewModel {
 
@@ -43,6 +45,8 @@ public class GameViewModel extends ViewModel {
     private Enemy enemy2;
     private Enemy enemy3;
     private String playername;
+
+    private ArrayList<PowerUp> powerUps;
 
     private double difficulty;
 
@@ -118,6 +122,7 @@ public class GameViewModel extends ViewModel {
         player.notifyObservers();
 
         // check collisions here
+        checkPowerUpCollision();
         checkDoorCollision();
     }
 
@@ -139,9 +144,24 @@ public class GameViewModel extends ViewModel {
         setDoorLocation(1, 8, false);
         enemyFactory = new SpaceEnemyFactory();
 
+        powerUps = new ArrayList<PowerUp>();
+        makePowerUps();
+
         currentRoom = room1();
     }
 
+    private void makePowerUps() {
+        PowerUp powerUp;
+        powerUp = new AttackPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        powerUps.add(powerUp);
+        powerUp = new SpeedPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        powerUps.add(powerUp);
+        powerUp = new HealthPowerUp(player, difficulty * 1.25, widthRatio, heightRatio);
+        powerUps.add(powerUp);
+        //repeat each time for speed and strength
+
+
+    }
     public Room room1() {
         player.removeEnemyObservers();
 
@@ -217,6 +237,10 @@ public class GameViewModel extends ViewModel {
         }
         setPlayerAttackDamage();
 
+        firstRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 2F * widthRatio, 2F * heightRatio);
+        firstRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 10F * widthRatio, 5F * heightRatio);
+        firstRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 18F * widthRatio, 9F * heightRatio);
+        Log.d("TAG", "room1: " + firstRoom.getPowerUps().toString());
         return firstRoom;
     }
 
@@ -286,6 +310,11 @@ public class GameViewModel extends ViewModel {
         }
         setPlayerAttackDamage();
 
+        secondRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 2F * widthRatio, 2F * heightRatio);
+        secondRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 10F * widthRatio, 5F * heightRatio);
+        secondRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 18F * widthRatio, 9F * heightRatio);
+
+        Log.d("TAG", "room1: " + secondRoom.getPowerUps().toString());
         return secondRoom;
     }
 
@@ -342,6 +371,12 @@ public class GameViewModel extends ViewModel {
         }
         setPlayerAttackDamage();
 
+        thirdRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 2F * widthRatio, 2F * heightRatio);
+        thirdRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 10F * widthRatio, 5F * heightRatio);
+        thirdRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 18F * widthRatio, 9F * heightRatio);
+
+        Log.d("TAG", "room1: " + thirdRoom.getPowerUps().toString());
+
         return thirdRoom;
     }
 
@@ -389,6 +424,11 @@ public class GameViewModel extends ViewModel {
         }
         setPlayerAttackDamage();
 
+        fourthRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 2F * widthRatio, 2F * heightRatio);
+        fourthRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 10F * widthRatio, 5F * heightRatio);
+        fourthRoom.addPowerUps(powerUps.get((int) (Math.random() * powerUps.size())), 16F * widthRatio, 9F * heightRatio);
+
+        Log.d("TAG", "room1: " + fourthRoom.getPowerUps().toString());
         return fourthRoom;
     }
 
@@ -470,6 +510,15 @@ public class GameViewModel extends ViewModel {
         return false;
     }
 
+    public void checkPowerUpCollision() {
+        for (PowerUp powerUp : currentRoom.getPowerUps()) {
+
+            if (!powerUp.getStatus() && powerUp.isCollidedWithPowerUp()) {
+                powerUp.applyPowerUp();
+                powerUp.setStatus(true);
+            }
+        }
+    }
     public void setPlayerData() {
         String currentTime = Calendar.getInstance().getTime().toString();
         player = Player.getPlayer();
@@ -527,6 +576,7 @@ public class GameViewModel extends ViewModel {
         return currentRoomNum;
     }
 
+    public ArrayList<PowerUp> getPowerUps() { return currentRoom.getPowerUps(); }
     public double getWidthRatio() {
         return widthRatio;
     }
