@@ -38,8 +38,8 @@ public class SprintFiveTest {
         assertEquals(0.0,player.getY(),0);
         assertEquals(25.0,player.getMovementSpeedX(),0);
         assertEquals(100,player.getHealth(),0);
-        assertEquals(1,player.getShield(),0);
-        assertEquals(5,player.getAttackDamage(),0);
+        assertEquals(100,player.getShield(),0);
+        assertEquals(30,player.getAttackDamage(),0);
 
     }
     //#2 Kenny Nguyen
