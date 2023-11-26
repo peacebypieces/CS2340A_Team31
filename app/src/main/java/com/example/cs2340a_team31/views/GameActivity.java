@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +20,7 @@ import com.example.cs2340a_team31.viewmodels.EnemyView;
 import com.example.cs2340a_team31.viewmodels.GameViewModel;
 import com.example.cs2340a_team31.viewmodels.PlayerView;
 import com.example.cs2340a_team31.viewmodels.PowerUpView;
+import com.example.cs2340a_team31.viewmodels.WeaponView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
 
     private PlayerView playerView;
 
-    private ImageView pickedWeapon;
+    private WeaponView weaponView;
 
     private ArrayList<EnemyView> enemyViews;
 
@@ -63,7 +63,11 @@ public class GameActivity extends AppCompatActivity {
         double screenWidth = gameView.getResources().getDisplayMetrics().widthPixels;
         double screenHeight = gameView.getResources().getDisplayMetrics().heightPixels;
 
-        pickedWeapon = findViewById(R.id.pickedWeapon);
+        // Add weapon views to screen
+        weaponView = new WeaponView(this);
+        gameLayout.addView(weaponView);
+        weaponView.setScaleX(-1);
+        weaponView.setVisibility(View.VISIBLE);
 
         // Add enemy views to screen
         for (int i = 0; i < 3; i++) {
@@ -101,6 +105,7 @@ public class GameActivity extends AppCompatActivity {
         // makes enemies show up in first room
         updateEnemyViews();
         setEnemyLocation();
+        setWeaponLocation();
 
         // get ratio of tiles idk
         int newWidth = (int) viewModel.getWidthRatio(); // in pixels
@@ -178,6 +183,7 @@ public class GameActivity extends AppCompatActivity {
                 Enemy enemy = enemies.get(i);
                 if (enemy.isAlive()) {
                     if (player.isCollided(enemy)) {
+                  //      weaponView.setVisibility(View.VISIBLE);
                         player.attack(enemy);
                         if (enemy.getHealth() <= 0) {
                             enemy.kill();
@@ -187,9 +193,12 @@ public class GameActivity extends AppCompatActivity {
                         }
                         enemyhealth.setText("Enemy HP: " + ((int) enemy.getHealth()));
                         break;
+                    } else {
+                      //  weaponView.setVisibility(View.INVISIBLE);
                     }
                 }
             }
+
         }
         ArrayList<PowerUp> powers = viewModel.getPowerUps();
         for (int i = 0; i < powerUpViews.size(); i++) {
@@ -236,6 +245,18 @@ public class GameActivity extends AppCompatActivity {
         powerUpImg.setScaleType(AppCompatImageView.ScaleType.FIT_XY);
         // Scale image to fill the ImageView
         powerUpImg.requestLayout(); // Apply the changes to the ImageView
+    }
+
+    public void scaleWeapon(AppCompatImageView weaponImg) {
+        int newWidth = (int) viewModel.getWidthRatio(); // in pixels
+        int newHeight = (int) viewModel.getHeightRatio(); // in pixels
+        // Set new dimensions for the ImageView
+        weaponImg.getLayoutParams().width = newWidth;
+        weaponImg.getLayoutParams().height = newHeight;
+        // Apply scaling to the image within the ImageView
+        weaponImg.setScaleType(AppCompatImageView.ScaleType.FIT_XY);
+        // Scale image to fill the ImageView
+        weaponImg.requestLayout(); // Apply the changes to the ImageView
     }
 
     private void setTextViews() {
@@ -285,6 +306,7 @@ public class GameActivity extends AppCompatActivity {
                             player.notifyEnemies();
 
                             setEnemyLocation();
+                            setWeaponLocation();
 
                             playerHealth.setText("Health:" + ((int) player.getHealth()));
 
@@ -367,6 +389,11 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    public void setWeaponLocation() {
+        Player player = viewModel.getPlayer();
+        weaponView.set((float) player.getX(), (float) player.getY());
+    }
+
     public void setPowerUpLocations() {
         ArrayList<PowerUp> powerUps = viewModel.getPowerUps();
 
@@ -413,31 +440,32 @@ public class GameActivity extends AppCompatActivity {
 
 
         String weaponType = viewModel.getWeapon().getWeapon();
+        scaleWeapon(weaponView);
 
         switch (weaponType) {
         case "wood":
-            pickedWeapon.setImageResource(R.drawable.wood_sword);
+            weaponView.setImageResource(R.drawable.wood_sword);
             break;
         case "stone":
-            pickedWeapon.setImageResource(R.drawable.stone_sword);
+            weaponView.setImageResource(R.drawable.stone_sword);
             break;
         case "gold":
-            pickedWeapon.setImageResource(R.drawable.gold_sword);
+            weaponView.setImageResource(R.drawable.gold_sword);
             break;
         case "iron":
-            pickedWeapon.setImageResource(R.drawable.iron_sword);
+            weaponView.setImageResource(R.drawable.iron_sword);
             break;
         case "emerald":
-            pickedWeapon.setImageResource(R.drawable.emerald_sword);
+            weaponView.setImageResource(R.drawable.emerald_sword);
             break;
         case "redstone":
-            pickedWeapon.setImageResource(R.drawable.redstone_sword);
+            weaponView.setImageResource(R.drawable.redstone_sword);
             break;
         case "diamond":
-            pickedWeapon.setImageResource(R.drawable.diamond_sword);
+            weaponView.setImageResource(R.drawable.diamond_sword);
             break;
         case "netherite":
-            pickedWeapon.setImageResource(R.drawable.netherite_sword);
+            weaponView.setImageResource(R.drawable.netherite_sword);
             break;
         default:
             break;
@@ -484,6 +512,7 @@ public class GameActivity extends AppCompatActivity {
         }
         setPowerUpLocations();
         setEnemyLocation();
+        setWeaponLocation();
     }
 
     // Other UI-related methods
