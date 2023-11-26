@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class SprintFiveTest {
 
 
-    private Player player;
+    private Player player; //initial
 
     //#1 Kenny Nguyen
     @Test
