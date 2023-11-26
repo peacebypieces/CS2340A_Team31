@@ -4,8 +4,9 @@ import android.graphics.RectF;
 
 import com.example.cs2340a_team31.model.Player;
 
-public abstract class PowerUp implements PowerUps {
 
+public abstract class PowerUp implements PowerUps {
+    // abstract class
     private Player player;
     private double x;
     private double y;
@@ -18,8 +19,18 @@ public abstract class PowerUp implements PowerUps {
 
     private String type;
 
+    /**
+     * Get the type of the power-up.
+     *
+     * @return The type of the power-up.
+     */
     private boolean pickedUp;
 
+    /**
+     * Get the type of the power-up.
+     *
+     * @return The type of the power-up.
+     */
     public String getType() { return type; }
     public Boolean getStatus() { return pickedUp; }
 
@@ -39,6 +50,11 @@ public abstract class PowerUp implements PowerUps {
         return y;
     }
 
+    /**
+     * Get the buff value associated with the power-up.
+     *
+     * @return The buff value.
+     */
     public double getBuff() {
         return buff;
     }
@@ -52,9 +68,19 @@ public abstract class PowerUp implements PowerUps {
         this.type = type;
     }
 
+    /**
+     * Set the status of the power-up (picked up or not).
+     *
+     * @param pickedUp True if the power-up is picked up, otherwise false.
+     */
     public void setStatus(boolean pickedUp) {
         this.pickedUp = pickedUp;
     }
+    /**
+     * Set the buff value for the power-up.
+     *
+     * @param buff The buff value to set.
+     */
     public void setBuff(double buff) {
         this.buff = buff;
     }
@@ -71,6 +97,11 @@ public abstract class PowerUp implements PowerUps {
         this.player = player;
     }
 
+    /**
+     * Check if the player has collided with the power-up.
+     *
+     * @return True if the player has collided with the power-up, otherwise false.
+     */
 
     public boolean isCollidedWithPowerUp() {
         double playerX = player.getX();
