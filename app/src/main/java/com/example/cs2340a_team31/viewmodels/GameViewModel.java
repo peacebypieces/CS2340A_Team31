@@ -68,6 +68,10 @@ public class GameViewModel extends ViewModel {
         player = Player.getPlayer();
     }
 
+    public void setWeapon(Weapon weapon) { //for the purpose of testing
+        this.weapon = weapon;
+    }
+
     public void onActivityCreated(Bundle savedInstanceState) {
         // Perform initialization tasks here
 
