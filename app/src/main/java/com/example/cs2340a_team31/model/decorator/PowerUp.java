@@ -26,11 +26,6 @@ public abstract class PowerUp implements PowerUps {
      */
     private boolean pickedUp;
 
-    /**
-     * Get the type of the power-up.
-     *
-     * @return The type of the power-up.
-     */
     public String getType() { return type; }
     public Boolean getStatus() { return pickedUp; }
 
