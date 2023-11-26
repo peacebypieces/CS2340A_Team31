@@ -93,15 +93,6 @@
         app:layout_constraintTop_toBottomOf="@+id/enemyDamageDisplay"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/pickedWeapon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="116dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wood_sword" />
-
     <Button
         android:id="@+id/attack"
         android:layout_width="wrap_content"

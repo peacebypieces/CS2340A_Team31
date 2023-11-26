@@ -524,6 +524,7 @@ public class GameViewModel extends ViewModel {
         // Set the player's location
         player = Player.getPlayer();
         player.setPosition(widthRatio * x, heightRatio * y);
+        weapon.setLocation(widthRatio * x, heightRatio * y);
     }
 
     public void setDoorLocation(double x, double y, boolean landscape) {
