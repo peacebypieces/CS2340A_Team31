@@ -2,8 +2,10 @@ package com.example.cs2340a_team31.model.decorator;
 
 import com.example.cs2340a_team31.model.Player;
 
+//health power up extending abstract class
 public class HealthPowerUp extends PowerUp {
 
+    //constructor creating instance of buff
     public HealthPowerUp(Player player, double buffAmount, double width, double height) {
         setBuff(buffAmount);
         setSize(width, height);
@@ -19,6 +21,6 @@ public class HealthPowerUp extends PowerUp {
     }
 
 
-    //check collusions method
+
 
 }
