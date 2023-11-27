@@ -5,6 +5,10 @@ import android.graphics.RectF;
 import com.example.cs2340a_team31.model.Player;
 import com.example.cs2340a_team31.model.observers.EnemyObserver;
 
+/**
+ * The abstract class Enemy represents the base class for various enemy types in the game.
+ * It includes common properties and methods that all enemies share.
+ */
 public abstract class Enemy implements EnemyObserver {
     private int movementCounter = 0;
 
@@ -26,7 +30,10 @@ public abstract class Enemy implements EnemyObserver {
 
     private double width;
     private double height;
-
+    /**
+     * Moves the enemy in the specified direction based on its movement speed.
+     * If the enemy is not alive, no movement occurs.
+     */
     @Override
     public void move() {
         if (!alive) {
@@ -74,6 +81,13 @@ public abstract class Enemy implements EnemyObserver {
 
     }
 
+    /**
+     * Checks for collision between the enemy and the player.
+     * If a collision occurs and the enemy is alive, it notifies the player of the collision.
+     *
+     * @param player The player object to check collision with.
+     */
+
     @Override
     public void checkCollision(Player player) {
         double playerX = player.getX();
@@ -98,6 +112,12 @@ public abstract class Enemy implements EnemyObserver {
         }
     }
 
+    /**
+     * Reduces the enemy's health based on the amount of damage taken.
+     * Prints the updated enemy's health to the console.
+     *
+     * @param damage The amount of damage to be inflicted on the enemy.
+     */
     public void takeDamage(double damage) {
         health -= damage;
         System.out.println("Enemy HP: " + health);
