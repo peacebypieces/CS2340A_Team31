@@ -2,6 +2,7 @@ package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,23 @@ public class GameActivity extends AppCompatActivity {
     private Timer gameTimer;
 
     private volatile boolean keepRunning = true;
+
+    private boolean isGreenCat;
+    private boolean isBlueCat;
+    private boolean isPinkCat;
+    private int[] playerFrames = {R.drawable.astrokitty_green, R.drawable.astrokitty_green2, R.drawable.astrokitty_green3};
+    private int[] playerLeftFrames = {R.drawable.astrokitty_greenleft1, R.drawable.astrokitty_greenleft2, R.drawable.astrokitty_greenleft3};
+
+    private int[] playerBlueFrames = {R.drawable.astrokitty_blue, R.drawable.astrokitty_blue2, R.drawable.astrokitty_blue3};
+    private int[] playerBlueLeftFrames = {R.drawable.astrokitty_blueleft1, R.drawable.astrokitty_blueleft2, R.drawable.astrokitty_blueleft3};
+
+    private int currentFrameIndex = 0;
+    private Handler handler;
+    private final int FRAME_DELAY = 200;
+    private boolean isAnimating = false; // To keep track of animation status
+    private boolean isMovingRight = false;
+    private boolean isMovingLeft = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +188,25 @@ public class GameActivity extends AppCompatActivity {
             changeRoomBackground();
             viewModel.setRoomChanged();
         }
-
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                if (isGreenCat) {
+                    setPlayerView();
+                    stopMoveLeft();
+                    moveRight();
+                }
+                setPlayerView();
+                return true;
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                if (isGreenCat) {
+                    setPlayerView();
+                    stopMoveRight();
+                    moveLeft();
+                }
+                setPlayerView();
+                return true;
+            // Handle other key events as needed
+        }
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         enemyDamage.setText("Player Damage: " + ((int) viewModel.getPlayer().getAttackDamage()));
 
@@ -223,14 +259,17 @@ public class GameActivity extends AppCompatActivity {
         case "char1":
             playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_green, getApplicationContext().getTheme()));
+            isGreenCat = true;
             break;
         case "char2":
             playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_blue, getApplicationContext().getTheme()));
+            isBlueCat = true;
             break;
         default:
             playerView.setImageDrawable(getResources().
                     getDrawable(R.drawable.astrokitty_pink, getApplicationContext().getTheme()));
+            isPinkCat = true;
         }
         setPlayerView();
     }
@@ -516,5 +555,93 @@ public class GameActivity extends AppCompatActivity {
     }
 
     // Other UI-related methods
+
+    private void startPlayerAnimation() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Set the player's view to the next frame in the animation sequence
+                playerView.setImageDrawable(getResources().getDrawable(playerFrames[currentFrameIndex], getApplicationContext().getTheme()));
+
+                // Increment the frame index, looping back to the first frame if at the end
+                currentFrameIndex = (currentFrameIndex + 1) % playerFrames.length;
+
+                // Repeat the animation by calling this method recursively with a delay
+                startPlayerAnimation();
+            }
+        }, FRAME_DELAY);
+    }
+    private void startPlayerLeftAnimation() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Set the player's view to the next frame in the animation sequence
+                playerView.setImageDrawable(getResources().getDrawable(playerLeftFrames[currentFrameIndex], getApplicationContext().getTheme()));
+
+                // Increment the frame index, looping back to the first frame if at the end
+                currentFrameIndex = (currentFrameIndex + 1) % playerFrames.length;
+
+                // Repeat the animation by calling this method recursively with a delay
+                startPlayerLeftAnimation();
+            }
+        }, FRAME_DELAY);
+    }
+    // Method to start the player's movement animation loop
+    private void startPlayerLeftMovementAnimation() {
+        handler = new Handler();
+        startPlayerLeftAnimation();
+    }
+
+    // Method to start the player's movement animation loop
+    private void startPlayerMovementAnimation() {
+        handler = new Handler();
+        startPlayerAnimation();
+    }
+
+    // Method to stop the player's movement animation loop
+    private void stopPlayerMovementAnimation() {
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
+    }
+    private void stopPlayerLeftMovementAnimation() {
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
+    }
+    private void moveRight() {
+        // Start the animation loop if it's not already running
+        if (!isAnimating) {
+            isAnimating = true;
+            isMovingRight = true; // Set the flag for right movement
+            startPlayerMovementAnimation();
+        }
+    }
+    private void moveLeft() {
+        // Start the animation loop if it's not already running
+        if (!isAnimating) {
+            isAnimating = true;
+            isMovingLeft = true; // Set the flag for right movement
+            startPlayerLeftMovementAnimation();
+        }
+    }
+    private void stopMoveRight() {
+        // Stop the animation loop if it's related to right movement
+        if (isMovingRight) {
+            isMovingRight = false;
+            isAnimating = false;
+            stopPlayerMovementAnimation();
+        }
+    }
+    private void stopMoveLeft() {
+        // Stop the animation loop if it's related to right movement
+        if (isMovingLeft) {
+            isMovingLeft = false;
+            isAnimating = false;
+            stopPlayerLeftMovementAnimation();
+        }
+    }
 }
 
