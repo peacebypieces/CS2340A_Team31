@@ -55,6 +55,9 @@ public class GameActivity extends AppCompatActivity {
     private int[] playerBlueFrames = {R.drawable.astrokitty_blue, R.drawable.astrokitty_blue2, R.drawable.astrokitty_blue3};
     private int[] playerBlueLeftFrames = {R.drawable.astrokitty_blueleft1, R.drawable.astrokitty_blueleft2, R.drawable.astrokitty_blueleft3};
 
+    private int[] playerPinkFrames = {R.drawable.astrokitty_pink, R.drawable.astrokitty_pink2, R.drawable.astrokitty_pink3};
+    private int[] playerPinkLeftFrames = {R.drawable.astrokitty_pinkleft1, R.drawable.astrokitty_pinkleft2, R.drawable.astrokitty_pinkleft3};
+
     private int currentFrameIndex = 0;
     private Handler handler;
     private final int FRAME_DELAY = 200;
@@ -190,22 +193,19 @@ public class GameActivity extends AppCompatActivity {
         }
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                if (isGreenCat) {
-                    setPlayerView();
-                    stopMoveLeft();
-                    moveRight();
-                }
+                setPlayerView();
+                stopMoveLeft();
+                moveRight();
                 setPlayerView();
                 return true;
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                if (isGreenCat) {
-                    setPlayerView();
-                    stopMoveRight();
-                    moveLeft();
-                }
+                setPlayerView();
+                stopMoveRight();
+                moveLeft();
                 setPlayerView();
                 return true;
             // Handle other key events as needed
+
         }
         TextView enemyDamage = findViewById(R.id.enemyDamageDisplay);
         enemyDamage.setText("Player Damage: " + ((int) viewModel.getPlayer().getAttackDamage()));
@@ -557,11 +557,21 @@ public class GameActivity extends AppCompatActivity {
     // Other UI-related methods
 
     private void startPlayerAnimation() {
+        int[] playerRightFrames = null;
+        if (isGreenCat) {
+            playerRightFrames = playerFrames;
+        } else if (isBlueCat) {
+            playerRightFrames = playerBlueFrames;
+        } else {
+            playerRightFrames = playerPinkFrames;
+        }
+
+        int[] finalPlayerRightFrames = playerRightFrames;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Set the player's view to the next frame in the animation sequence
-                playerView.setImageDrawable(getResources().getDrawable(playerFrames[currentFrameIndex], getApplicationContext().getTheme()));
+                playerView.setImageDrawable(getResources().getDrawable(finalPlayerRightFrames[currentFrameIndex], getApplicationContext().getTheme()));
 
                 // Increment the frame index, looping back to the first frame if at the end
                 currentFrameIndex = (currentFrameIndex + 1) % playerFrames.length;
@@ -572,11 +582,21 @@ public class GameActivity extends AppCompatActivity {
         }, FRAME_DELAY);
     }
     private void startPlayerLeftAnimation() {
+        int[] playerLeftFrames1 = null;
+        if (isGreenCat) {
+            playerLeftFrames1 = playerLeftFrames;
+        } else if (isBlueCat) {
+            playerLeftFrames1 = playerBlueLeftFrames;
+        } else {
+            playerLeftFrames1 = playerPinkLeftFrames;
+        }
+
+        int[] finalPlayerLeftFrames = playerLeftFrames1;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Set the player's view to the next frame in the animation sequence
-                playerView.setImageDrawable(getResources().getDrawable(playerLeftFrames[currentFrameIndex], getApplicationContext().getTheme()));
+                playerView.setImageDrawable(getResources().getDrawable(finalPlayerLeftFrames[currentFrameIndex], getApplicationContext().getTheme()));
 
                 // Increment the frame index, looping back to the first frame if at the end
                 currentFrameIndex = (currentFrameIndex + 1) % playerFrames.length;
