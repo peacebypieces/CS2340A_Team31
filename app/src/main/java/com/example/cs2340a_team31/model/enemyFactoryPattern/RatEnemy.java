@@ -3,7 +3,8 @@ package com.example.cs2340a_team31.model.enemyFactoryPattern;
 import com.example.cs2340a_team31.model.Player;
 /**
  * This class represents a RatEnemy in the game. It extends the Enemy class.
- * The RatEnemy has specific characteristics such as size, movement speed, damage, health, and enemy points.
+ * The RatEnemy has specific characteristics such as size,
+ * movement speed, damage, health, and enemy points.
  */
 public class RatEnemy extends Enemy {
     /**
