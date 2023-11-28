@@ -1,6 +1,7 @@
 package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -71,11 +72,28 @@ public class GameActivity extends AppCompatActivity {
     private boolean isMovingRight = false;
     private boolean isMovingLeft = false;
 
+    private MediaPlayer mediaPlayerMusic;
+    private MediaPlayer mediaPlayerHurt;
+    private MediaPlayer mediaPlayerSlash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
+
+        // Create and start the MediaPlayer
+        mediaPlayerMusic = MediaPlayer.create(this, R.raw.background_music2);
+        mediaPlayerHurt = MediaPlayer.create(this, R.raw.cat_hurt);
+        mediaPlayerSlash = MediaPlayer.create(this, R.raw.sword_slash);
+        mediaPlayerMusic.start();
+
+        // Set a completion listener to restart the audio when it ends
+        mediaPlayerMusic.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                restartBackgroundAudio();
+            }
+        });
 
 
         // Initialize the ViewModel
@@ -223,6 +241,7 @@ public class GameActivity extends AppCompatActivity {
         enemyDamage.setText("Player Damage: " + ((int) viewModel.getPlayer().getAttackDamage()));
 
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
+            mediaPlayerSlash.start();
             TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
             Player player = viewModel.getPlayer();
             List<Enemy> enemies = viewModel.getEnemy();
@@ -361,6 +380,11 @@ public class GameActivity extends AppCompatActivity {
                             setEnemyLocation();
                             setWeaponLocation();
 
+                            if (viewModel.getPlayer().isHurt()) {
+                                mediaPlayerHurt.start();
+                                viewModel.getPlayer().setHurt(false);
+                            }
+
                             playerHealth.setText("Health:" + ((int) player.getHealth()));
 
 
@@ -496,7 +520,7 @@ public class GameActivity extends AppCompatActivity {
         scaleWeapon(weaponView);
 
         switch (weaponType) {
-        case "wood":
+        case "wooden":
             weaponView.setImageResource(R.drawable.wood_sword);
             break;
         case "stone":
@@ -679,6 +703,36 @@ public class GameActivity extends AppCompatActivity {
             isMovingLeft = false;
             isAnimating = false;
             stopPlayerLeftMovementAnimation();
+        }
+    }
+
+    // MUSIC
+    private void restartBackgroundAudio() {
+        if (mediaPlayerMusic != null) {
+            mediaPlayerMusic.stop();
+            mediaPlayerMusic.release();
+        }
+
+        // Create and start the MediaPlayer again
+        mediaPlayerMusic = MediaPlayer.create(this, R.raw.background_music2);
+        mediaPlayerMusic.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        viewModel.getPlayer().setHurt(false);
+        super.onDestroy();
+        if (mediaPlayerMusic != null) {
+            mediaPlayerMusic.stop();
+            mediaPlayerMusic.release();
+        }
+        if (mediaPlayerHurt != null) {
+            mediaPlayerHurt.stop();
+            mediaPlayerHurt.release();
+        }
+        if (mediaPlayerSlash != null) {
+            mediaPlayerSlash.stop();
+            mediaPlayerSlash.release();
         }
     }
 }
