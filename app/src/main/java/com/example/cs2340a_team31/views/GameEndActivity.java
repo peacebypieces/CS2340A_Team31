@@ -1,6 +1,7 @@
 package com.example.cs2340a_team31.views;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import java.util.LinkedList;
 
 import com.example.cs2340a_team31.model.*;
 public class GameEndActivity extends AppCompatActivity {
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,18 @@ public class GameEndActivity extends AppCompatActivity {
             gameLayout.setBackgroundResource(R.drawable.losebackground);
             TextView endText = findViewById(R.id.winText);
             endText.setText("Ouch! You died!");
+            mediaPlayer = MediaPlayer.create(this, R.raw.lose_background_music);
+        } else {
+            mediaPlayer = MediaPlayer.create(this, R.raw.win_background_music);
         }
+        mediaPlayer.start();
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
 
         TextView[] textViews = new TextView[5];
 
@@ -87,6 +100,14 @@ public class GameEndActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
     }
 
 
