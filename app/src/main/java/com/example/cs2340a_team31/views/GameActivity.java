@@ -236,6 +236,8 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }
+
+        // this powerup does stuff
         ArrayList<PowerUp> powers = viewModel.getPowerUps();
         for (int i = 0; i < powerUpViews.size(); i++) {
             if (powers.get(i).getStatus()) {
