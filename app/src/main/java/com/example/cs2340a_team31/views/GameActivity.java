@@ -49,18 +49,24 @@ public class GameActivity extends AppCompatActivity {
     private boolean isGreenCat;
     private boolean isBlueCat;
     private boolean isPinkCat;
-    private int[] playerFrames = {R.drawable.astrokitty_green, R.drawable.astrokitty_green2, R.drawable.astrokitty_green3};
-    private int[] playerLeftFrames = {R.drawable.astrokitty_greenleft1, R.drawable.astrokitty_greenleft2, R.drawable.astrokitty_greenleft3};
+    private int[] playerFrames = {R.drawable.astrokitty_green,
+        R.drawable.astrokitty_green2, R.drawable.astrokitty_green3};
+    private int[] playerLeftFrames = {R.drawable.astrokitty_greenleft1,
+        R.drawable.astrokitty_greenleft2, R.drawable.astrokitty_greenleft3};
 
-    private int[] playerBlueFrames = {R.drawable.astrokitty_blue, R.drawable.astrokitty_blue2, R.drawable.astrokitty_blue3};
-    private int[] playerBlueLeftFrames = {R.drawable.astrokitty_blueleft1, R.drawable.astrokitty_blueleft2, R.drawable.astrokitty_blueleft3};
+    private int[] playerBlueFrames = {R.drawable.astrokitty_blue,
+        R.drawable.astrokitty_blue2, R.drawable.astrokitty_blue3};
+    private int[] playerBlueLeftFrames = {R.drawable.astrokitty_blueleft1,
+        R.drawable.astrokitty_blueleft2, R.drawable.astrokitty_blueleft3};
 
-    private int[] playerPinkFrames = {R.drawable.astrokitty_pink, R.drawable.astrokitty_pink2, R.drawable.astrokitty_pink3};
-    private int[] playerPinkLeftFrames = {R.drawable.astrokitty_pinkleft1, R.drawable.astrokitty_pinkleft2, R.drawable.astrokitty_pinkleft3};
+    private int[] playerPinkFrames = {R.drawable.astrokitty_pink,
+        R.drawable.astrokitty_pink2, R.drawable.astrokitty_pink3};
+    private int[] playerPinkLeftFrames = {R.drawable.astrokitty_pinkleft1,
+        R.drawable.astrokitty_pinkleft2, R.drawable.astrokitty_pinkleft3};
 
     private int currentFrameIndex = 0;
     private Handler handler;
-    private final int FRAME_DELAY = 200;
+    private final int frameDelay = 200;
     private boolean isAnimating = false; // To keep track of animation status
     private boolean isMovingRight = false;
     private boolean isMovingLeft = false;
@@ -192,18 +198,24 @@ public class GameActivity extends AppCompatActivity {
             viewModel.setRoomChanged();
         }
         switch (keyCode) {
-            case KeyEvent.KEYCODE_DPAD_RIGHT:
-                setPlayerView();
-                stopMoveLeft();
-                moveRight();
-                setPlayerView();
-                return true;
-            case KeyEvent.KEYCODE_DPAD_LEFT:
-                setPlayerView();
-                stopMoveRight();
-                moveLeft();
-                setPlayerView();
-                return true;
+        case KeyEvent.KEYCODE_DPAD_RIGHT:
+            setPlayerView();
+            stopMoveLeft();
+            moveRight();
+            setPlayerView();
+            break;
+        case KeyEvent.KEYCODE_DPAD_LEFT:
+            setPlayerView();
+            stopMoveRight();
+            moveLeft();
+            setPlayerView();
+            break;
+        default:
+            setPlayerView();
+            stopMoveRight();
+            stopMoveLeft();
+            setPlayerView();
+            break;
             // Handle other key events as needed
 
         }
@@ -219,7 +231,7 @@ public class GameActivity extends AppCompatActivity {
                 Enemy enemy = enemies.get(i);
                 if (enemy.isAlive()) {
                     if (player.isCollided(enemy)) {
-                  //      weaponView.setVisibility(View.VISIBLE);
+                        // weaponView.setVisibility(View.VISIBLE);
                         player.attack(enemy);
                         if (enemy.getHealth() <= 0) {
                             enemy.kill();
@@ -229,9 +241,9 @@ public class GameActivity extends AppCompatActivity {
                         }
                         enemyhealth.setText("Enemy HP: " + ((int) enemy.getHealth()));
                         break;
-                    } else {
-                      //  weaponView.setVisibility(View.INVISIBLE);
-                    }
+                    } //else {
+                    //  weaponView.setVisibility(View.INVISIBLE);
+                    //}
                 }
             }
 
@@ -573,7 +585,9 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Set the player's view to the next frame in the animation sequence
-                playerView.setImageDrawable(getResources().getDrawable(finalPlayerRightFrames[currentFrameIndex], getApplicationContext().getTheme()));
+                playerView.setImageDrawable(getResources().
+                    getDrawable(finalPlayerRightFrames[currentFrameIndex],
+                            getApplicationContext().getTheme()));
 
                 // Increment the frame index, looping back to the first frame if at the end
                 currentFrameIndex = (currentFrameIndex + 1) % playerFrames.length;
@@ -581,7 +595,7 @@ public class GameActivity extends AppCompatActivity {
                 // Repeat the animation by calling this method recursively with a delay
                 startPlayerAnimation();
             }
-        }, FRAME_DELAY);
+        }, frameDelay);
     }
     private void startPlayerLeftAnimation() {
         int[] playerLeftFrames1 = null;
@@ -598,7 +612,9 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Set the player's view to the next frame in the animation sequence
-                playerView.setImageDrawable(getResources().getDrawable(finalPlayerLeftFrames[currentFrameIndex], getApplicationContext().getTheme()));
+                playerView.setImageDrawable(getResources().
+                    getDrawable(finalPlayerLeftFrames[currentFrameIndex],
+                            getApplicationContext().getTheme()));
 
                 // Increment the frame index, looping back to the first frame if at the end
                 currentFrameIndex = (currentFrameIndex + 1) % playerFrames.length;
@@ -606,7 +622,7 @@ public class GameActivity extends AppCompatActivity {
                 // Repeat the animation by calling this method recursively with a delay
                 startPlayerLeftAnimation();
             }
-        }, FRAME_DELAY);
+        }, frameDelay);
     }
     // Method to start the player's movement animation loop
     private void startPlayerLeftMovementAnimation() {
