@@ -28,7 +28,7 @@ public class SprintFiveTest {
 
     //#1 Kenny Nguyen
     @Test
-    public void testInitialization() {
+    public void testInitialization() { //testInitialization
         player = Player.getPlayer();
         player.setHealth(100);
 
@@ -44,7 +44,7 @@ public class SprintFiveTest {
     }
     //#2 Kenny Nguyen
     @Test
-    public void testInitializationHealthPowerUpDecorator() {
+    public void testInitializationHealthPowerUpDecorator() { //testInitializationHealthPowerUpDecorator
         HealthPowerUp healthPow = new HealthPowerUp(player, 100,100,100);
         player = Player.getPlayer();
         player.setHealth(100);
@@ -56,7 +56,7 @@ public class SprintFiveTest {
     }
     //#3 Thomas Wang
     @Test
-    public void testInitializationAttackPowerUpDecorator() {
+    public void testInitializationAttackPowerUpDecorator() { //testInitializationAttackPowerUpDecorator
         AttackPowerUp attackPow = new AttackPowerUp(player, 100,100,100);
         player = Player.getPlayer();
         player.setHealth(100);
@@ -68,7 +68,7 @@ public class SprintFiveTest {
     }
     //#4 thomas Wang
     @Test
-    public void testInitializationShieldPowerUpDecorator() {
+    public void testInitializationShieldPowerUpDecorator() { //testInitializationShieldPowerUpDecorator
         ShieldPowerUp Pow = new ShieldPowerUp(player, 100,100,100);
         player = Player.getPlayer();
         player.setHealth(100);
@@ -81,7 +81,7 @@ public class SprintFiveTest {
 
     //#5 Tran Ha
     @Test
-    public void testHealthPowOnPlayer() {
+    public void testHealthPowOnPlayer() { //testHealthPowOnPlayer
         player = Player.getPlayer();
         player.setHealth(100);
         HealthPowerUp healthPow = new HealthPowerUp(player, 100,100,100);
@@ -96,7 +96,7 @@ public class SprintFiveTest {
     }
     //#6 Tran Ha
     @Test
-    public void testAttackPowOnPlayer() {
+    public void testAttackPowOnPlayer() { //testAttackPowOnPlayer
         player = Player.getPlayer();
         player.setHealth(100);
         AttackPowerUp attackPow = new AttackPowerUp(player, 100,100,100);
@@ -110,7 +110,7 @@ public class SprintFiveTest {
     }
     //#7 Hoangyen Nguyen
     @Test
-    public void testShieldPowOnPlayer() {
+    public void testShieldPowOnPlayer() { //testShieldPowOnPlayer
         player = Player.getPlayer();
         player.setHealth(100);
         ShieldPowerUp shieldPow = new ShieldPowerUp(player, 100,100,100);
@@ -124,7 +124,7 @@ public class SprintFiveTest {
     }
     //#8 Hoangyen Nguyen
     @Test
-    public void testStoneWeapon() {
+    public void testStoneWeapon() { //testStoneWeapon
         player = Player.getPlayer();
         player.setHealth(100);
         GameViewModel view = new GameViewModel();
@@ -138,7 +138,7 @@ public class SprintFiveTest {
     }
     // #9 Shahbin Hossain
     @Test
-    public void testGoldWeapon() {
+    public void testGoldWeapon() { //testGoldWeapon
         player = Player.getPlayer();
         player.setHealth(100);
         GameViewModel view = new GameViewModel();
@@ -153,7 +153,7 @@ public class SprintFiveTest {
 
     // #10 Shahbin Hossain
     @Test
-    public void testDiamondWeapon() {
+    public void testDiamondWeapon() { //testDiamondWeapon
         player = Player.getPlayer();
         player.setHealth(100);
         GameViewModel view = new GameViewModel();
@@ -168,7 +168,7 @@ public class SprintFiveTest {
 
     //#11 Joshua Johnson
     @Test
-    public void testNetheriteWeapon() {
+    public void testNetheriteWeapon() { //testNetheriteWeapon
         player = Player.getPlayer();
         player.setHealth(100);
         GameViewModel view = new GameViewModel();
@@ -183,7 +183,7 @@ public class SprintFiveTest {
 
     //#12 Joshua Johnson
     @Test
-    public void testRedstoneWeapon() {
+    public void testRedstoneWeapon() { //testRedstoneWeapon
         player = Player.getPlayer();
         player.setHealth(100);
         GameViewModel view = new GameViewModel();
