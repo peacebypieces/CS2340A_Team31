@@ -18,7 +18,7 @@ public class Player implements PlayerSubject {
     private List<PlayerObserver> observers = new ArrayList<>();
     private List<EnemyObserver> enemyObservers = new ArrayList<>();
 
-
+    private boolean hurt;
 
     private double x;
     private double y;
@@ -153,6 +153,14 @@ public class Player implements PlayerSubject {
         this.x = x;
     }
 
+    public void setHurt(boolean hurt) {
+        this.hurt = hurt;
+    }
+
+    public boolean isHurt() {
+        return hurt;
+    }
+
     public void setName(String name) {
         if (validateName(name)) {
             this.name = name.replaceAll("\\s", "");
@@ -271,6 +279,7 @@ public class Player implements PlayerSubject {
     }
 
     public void notifyCollision(double damage) {
+        hurt = true;
         health -= damage / shield;
         System.out.println("Player HP: " + health);
     }
