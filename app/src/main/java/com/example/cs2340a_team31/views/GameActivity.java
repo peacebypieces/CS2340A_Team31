@@ -75,6 +75,9 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayerMusic;
     private MediaPlayer mediaPlayerHurt;
     private MediaPlayer mediaPlayerSlash;
+    private MediaPlayer mediaPlayerDoor;
+    private MediaPlayer mediaPlayerLose;
+    private MediaPlayer mediaPlayerWin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,9 @@ public class GameActivity extends AppCompatActivity {
         mediaPlayerMusic = MediaPlayer.create(this, R.raw.background_music2);
         mediaPlayerHurt = MediaPlayer.create(this, R.raw.cat_hurt);
         mediaPlayerSlash = MediaPlayer.create(this, R.raw.sword_slash);
+        mediaPlayerDoor = MediaPlayer.create(this, R.raw.door);
+        mediaPlayerWin = MediaPlayer.create(this, R.raw.trumpet);
+        mediaPlayerLose = MediaPlayer.create(this, R.raw.womp);
         mediaPlayerMusic.start();
 
         // Set a completion listener to restart the audio when it ends
@@ -364,6 +370,8 @@ public class GameActivity extends AppCompatActivity {
 
                             // Check if health is 0 and go to losing end screen if so
                             if (Player.getPlayer().getHealth() <= 0) {
+                                mediaPlayerLose.start();
+
                                 viewModel.setPlayerData();
                                 keepRunning = false;
                                 Intent intent = new Intent(GameActivity.this,
@@ -402,6 +410,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void changeRoomBackground() {
+        mediaPlayerDoor.start();
+
         int currentRoomNum = viewModel.getCurrentRoomNum();
         List<Enemy> enemies = viewModel.getEnemy();
         switch (currentRoomNum) {
@@ -417,6 +427,7 @@ public class GameActivity extends AppCompatActivity {
             gameLayout.setBackgroundResource(R.drawable.room4);
             break;
         default:
+            mediaPlayerWin.start();
             Intent intent = new Intent(GameActivity.this,
                     GameEndActivity.class);
             intent.putExtra("LOST", false);
@@ -734,6 +745,19 @@ public class GameActivity extends AppCompatActivity {
             mediaPlayerSlash.stop();
             mediaPlayerSlash.release();
         }
+        if (mediaPlayerWin != null) {
+            mediaPlayerWin.stop();
+            mediaPlayerWin.release();
+        }
+        if (mediaPlayerLose != null) {
+            mediaPlayerLose.stop();
+            mediaPlayerLose.release();
+        }
+        if (mediaPlayerDoor != null) {
+            mediaPlayerDoor.stop();
+            mediaPlayerDoor.release();
+        }
+
     }
 }
 
