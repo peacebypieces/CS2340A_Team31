@@ -57,6 +57,7 @@ public class Player implements PlayerSubject {
         this.movementSpeedY = 25.0;
         this.attackDamage = 5.0;
         shield = 1;
+        hurt = false;
     }
 
     /*

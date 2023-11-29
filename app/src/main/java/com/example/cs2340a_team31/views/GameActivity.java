@@ -79,6 +79,8 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayerLose;
     private MediaPlayer mediaPlayerWin;
 
+    private int weaponViewCounter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,6 +203,7 @@ public class GameActivity extends AppCompatActivity {
             onKeyDown(KeyEvent.KEYCODE_DPAD_RIGHT, event);
         });
 
+        weaponView.bringToFront();
         attack.bringToFront();
         upArrow.bringToFront();
         downArrow.bringToFront();
@@ -235,10 +238,10 @@ public class GameActivity extends AppCompatActivity {
             setPlayerView();
             break;
         default:
-            setPlayerView();
+            /*setPlayerView();
             stopMoveRight();
             stopMoveLeft();
-            setPlayerView();
+            setPlayerView();*/
             break;
             // Handle other key events as needed
 
@@ -248,6 +251,10 @@ public class GameActivity extends AppCompatActivity {
 
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             mediaPlayerSlash.start();
+            if (weaponView.getVisibility() == View.INVISIBLE) {
+                weaponView.setVisibility(View.VISIBLE);
+                weaponViewCounter = 0;
+            }
             TextView enemyhealth = findViewById(R.id.enemyHealthDisplay);
             Player player = viewModel.getPlayer();
             List<Enemy> enemies = viewModel.getEnemy();
@@ -256,7 +263,6 @@ public class GameActivity extends AppCompatActivity {
                 Enemy enemy = enemies.get(i);
                 if (enemy.isAlive()) {
                     if (player.isCollided(enemy)) {
-                        // weaponView.setVisibility(View.VISIBLE);
                         player.attack(enemy);
                         if (enemy.getHealth() <= 0) {
                             enemy.kill();
@@ -266,9 +272,7 @@ public class GameActivity extends AppCompatActivity {
                         }
                         enemyhealth.setText("Enemy HP: " + ((int) enemy.getHealth()));
                         break;
-                    } //else {
-                    //  weaponView.setVisibility(View.INVISIBLE);
-                    //}
+                    }
                 }
             }
 
@@ -368,6 +372,7 @@ public class GameActivity extends AppCompatActivity {
                     public void run() {
                         if (keepRunning) {
 
+
                             // Check if health is 0 and go to losing end screen if so
                             if (Player.getPlayer().getHealth() <= 0) {
                                 mediaPlayerLose.start();
@@ -392,6 +397,14 @@ public class GameActivity extends AppCompatActivity {
                                 mediaPlayerHurt.start();
                                 viewModel.getPlayer().setHurt(false);
                             }
+
+                            if (weaponView.getVisibility() == View.VISIBLE) {
+                                weaponViewCounter++;
+                                if (weaponViewCounter == 10) {
+                                    weaponView.setVisibility(View.INVISIBLE);
+                                }
+                            }
+
 
                             playerHealth.setText("Health:" + ((int) player.getHealth()));
 
@@ -731,7 +744,6 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        viewModel.getPlayer().setHurt(false);
         super.onDestroy();
         if (mediaPlayerMusic != null) {
             mediaPlayerMusic.stop();

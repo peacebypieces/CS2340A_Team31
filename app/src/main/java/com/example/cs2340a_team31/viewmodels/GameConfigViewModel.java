@@ -8,7 +8,7 @@ public class GameConfigViewModel extends ViewModel {
     private String playerName;
     private double startingHealth = 250;
     private double enemyDamage = 1;
-    private int score = 100;
+    private int score = 0;
     private String selectedCharacter;
   
     public void handleStartButtonClick(String playerName,
@@ -20,11 +20,11 @@ public class GameConfigViewModel extends ViewModel {
         if (selectedDifficulty == R.id.radioMedium) {
             startingHealth = 500;
             enemyDamage = 1.5;
-            score = 200;
+            score = 0;
         } else if (selectedDifficulty == R.id.radioHard) {
             startingHealth = 1000;
             enemyDamage = 2;
-            score = 300;
+            score = 0;
         }
 
         // Handle selected character and set the character's identifier
