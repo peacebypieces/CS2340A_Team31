@@ -41,6 +41,7 @@ public class GameStartActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (mediaPlayer != null) {
+            mediaPlayer.stop();
             mediaPlayer.release();
         }
     }

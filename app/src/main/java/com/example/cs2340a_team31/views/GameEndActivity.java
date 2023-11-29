@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 import com.example.cs2340a_team31.model.*;
 public class GameEndActivity extends AppCompatActivity {
-    MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

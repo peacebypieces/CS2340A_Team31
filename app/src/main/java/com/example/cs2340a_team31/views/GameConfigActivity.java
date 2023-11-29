@@ -56,6 +56,7 @@ public class GameConfigActivity extends AppCompatActivity {
                 intent.putExtra("SCORE", viewModel.getScore());
 
                 startActivity(intent);
+                finish();
             } else {
                 // Player's name is empty or only contains whitespaces
                 Toast.makeText(GameConfigActivity.this, "Please enter a valid name",
@@ -68,6 +69,7 @@ public class GameConfigActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (mediaPlayer != null) {
+            mediaPlayer.stop();
             mediaPlayer.release();
         }
     }
