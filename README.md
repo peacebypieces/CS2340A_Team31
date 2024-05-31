@@ -1,4 +1,4 @@
-# Cosmic Crawler
+# Cosmic Crawlers
 Dungeon-crawler game written in Java using Android Studio for CS2340 Fall 2023. <br>
 
 ## Team: <br>
